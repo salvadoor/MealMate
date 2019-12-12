@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "227157840709",
+    "firebase_url": "https://mealmate-45489.firebaseio.com",
+    "project_id": "mealmate-45489",
+    "storage_bucket": "mealmate-45489.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227157840709:android:fbb8cafd5f80cf1fe3e42c",
+        "android_client_info": {
+          "package_name": "com.srg.mealmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227157840709-q7midfur1l60subkal0hi80a1gocht7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUrb1h5UmDuOXEaqA4llKa-iZEAbCwczY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227157840709-q7midfur1l60subkal0hi80a1gocht7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
