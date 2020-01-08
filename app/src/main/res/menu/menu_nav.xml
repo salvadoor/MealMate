@@ -18,18 +18,18 @@
             android:id="@+id/nav_grocery_list"
             android:icon="@drawable/list_icon"
             android:title="@string/nav_grocery_list" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings_icon"
+            android:title="@string/nav_settings" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/account_icon"
+            android:title="@string/nav_login" />
     </group>
 
     <item android:title="@string/nav_misc" >
         <menu>
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/settings_icon"
-                android:title="@string/nav_settings" />
-            <item
-                android:id="@+id/nav_login"
-                android:icon="@drawable/account_icon"
-                android:title="@string/nav_login" />
             <item
                 android:id="@+id/nav_support"
                 android:icon="@drawable/support_icon"

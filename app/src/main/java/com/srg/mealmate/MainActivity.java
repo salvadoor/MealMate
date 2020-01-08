@@ -19,6 +19,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState==null){
+            // start a RecipeSearchFragment
+            Fragment f = new RecipeSearchFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.content_frame, f);
+            ft.commit();
+        }
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -32,12 +40,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        // start a RecipeSearchFragment
-        Fragment f = new RecipeSearchFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_frame, f);
-        ft.commit();
     }
 
     @Override
@@ -47,14 +49,33 @@ public class MainActivity extends AppCompatActivity
         Intent intent = null;
 
         switch (id) {
-            case R.id.nav_search:
-                frag = new RecipeSearchFragment();
-                break;
             case R.id.nav_saved_recipes:
                 frag = new SavedRecipesFragment();
+                getSupportActionBar().setTitle(R.string.nav_saved_recipes);
+                break;
+            case R.id.nav_meal_plan:
+                frag = new MealPlanFragment();
+                getSupportActionBar().setTitle(R.string.nav_meal_plan);
+                break;
+            case R.id.nav_grocery_list:
+                frag = new GroceryListFragment();
+                getSupportActionBar().setTitle(R.string.nav_grocery_list);
+                break;
+            case R.id.nav_settings:
+                frag = new SettingsFragment();
+                getSupportActionBar().setTitle(R.string.nav_settings);
+                break;
+            case R.id.nav_login:
+                frag = new LoginFragment();
+                getSupportActionBar().setTitle(R.string.nav_login);
+                break;
+            case R.id.nav_about:
+                frag = new AboutFragment();
+                getSupportActionBar().setTitle(R.string.nav_about);
                 break;
             default:
                 frag = new RecipeSearchFragment();
+                getSupportActionBar().setTitle(R.string.nav_search);
         }
 
         if (frag != null) {

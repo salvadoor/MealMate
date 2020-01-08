@@ -27,4 +27,26 @@
 
     <string name="nav_open_drawer">Open Navigation Drawer</string>
     <string name="nav_close_drawer">Close Navigation Drawer</string>
+
+
+    <!-- Text for weekly views-->
+    <string name="nav_previous">Prev</string>
+    <string name="nav_next">Next</string>
+
+
+    <!-- Login/Register -->
+    <string name="ask_username">Enter Username</string>
+    <string name="hint_username">myEmail@email.com</string>
+    <string name="ask_pwd">Enter Password</string>
+    <string name="hint_pwd">**********</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+
+    <!-- About Information -->
+    <string name="app_info">Assistant for Planning Meals</string>
+    <string name="last_updated">Last Updated Jan 9th, 2020</string>
+    <string name="developed_by">Developed by Salvador Rodriguez Gomez</string>
+    <string name="school_info">BS in Computer Science at St Mary\'s University</string>
+    <string name="class_info">CS4395: Senior Project</string>
+
 </resources>
