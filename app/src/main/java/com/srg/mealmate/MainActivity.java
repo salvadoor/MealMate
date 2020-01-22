@@ -13,13 +13,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
                           implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseAuth mAuth;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState==null){
+        if (savedInstanceState == null) {
             // start a RecipeSearchFragment
             Fragment f = new RecipeSearchFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+      //  user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -61,13 +69,22 @@ public class MainActivity extends AppCompatActivity
                 frag = new GroceryListFragment();
                 getSupportActionBar().setTitle(R.string.nav_grocery_list);
                 break;
-            case R.id.nav_settings:
-                frag = new SettingsFragment();
-                getSupportActionBar().setTitle(R.string.nav_settings);
-                break;
-            case R.id.nav_login:
+            case R.id.nav_account:
+                if(user!=null){
+                    frag = new SettingsFragment();
+                    getSupportActionBar().setTitle(R.string.nav_account);
+                } else{
+                    frag = new LoginFragment();
+                    getSupportActionBar().setTitle(R.string.nav_login);
+                }
+                /*  if user is signed in, open account settings
+                    frag = new SettingsFragment();
+                    getSupportActionBar().setTitle(R.string.nav_account);
+                 */
+                /* else, redirect to login
                 frag = new LoginFragment();
                 getSupportActionBar().setTitle(R.string.nav_login);
+                 */
                 break;
             case R.id.nav_about:
                 frag = new AboutFragment();
@@ -92,12 +109,24 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else{
+        } else {
             super.onBackPressed();
         }
     }
+
+    public void userSignedIn() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        getSupportActionBar().setTitle(R.string.nav_account);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, new SettingsFragment());
+        ft.commit();
+
+
+    }
+
 }

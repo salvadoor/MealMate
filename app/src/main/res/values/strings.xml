@@ -19,7 +19,7 @@
     <string name="nav_meal_plan">Meal Plan</string>
     <string name="nav_grocery_list">Grocery List</string>
     <string name="nav_misc">Support</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_account"> Account and Settings </string>
     <string name="nav_login">Login/Register</string>
     <string name="nav_log_out">Log Out</string>
     <string name="nav_support">Support</string>
@@ -28,7 +28,10 @@
     <string name="nav_open_drawer">Open Navigation Drawer</string>
     <string name="nav_close_drawer">Close Navigation Drawer</string>
 
-
+    <!-- Saved Recipes -->
+    <string name="select_favorites">Favorites</string>
+    <string name="select_my_recipes">My Recipes</string>
+    
     <!-- Text for weekly views-->
     <string name="nav_previous">Prev</string>
     <string name="nav_next">Next</string>
