@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Meal Mate</string>
-    <string name="email_holder">Select Account and Settings to login</string>
+    <string name="app_name">  Meal Mate</string>
+    <string name="email_holder">  Select Account and Settings to login</string>
 
     <string name="title_activity_welcome">Welcome</string>
 
@@ -44,6 +44,12 @@
     <string name="hint_pwd">**********</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
+
+    <!-- Settings -->
+    <string name="settings_header">Account Settings</string>
+    <string name="login_subheader"> Login Information</string>
+    <string name="preferences_subheader"> Preferences</string>
+    <string name="data_subheader"> Data</string>
 
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>
