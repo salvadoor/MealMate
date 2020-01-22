@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,14 +42,22 @@ public class MainActivity extends AppCompatActivity
         // set drawer toggle and register activity as a listener for navigation view
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, toolbar, R.string.nav_open_drawer, R.string.nav_close_drawer);
+                drawer, toolbar, R.string.nav_open_drawer, R.string.nav_close_drawer){
+                    public void onDrawerOpened(View drawerView){
+                        super.onDrawerOpened(drawerView);
+
+                        if(user!=null) {
+                            setEmailHeader();
+                        }
+                    }
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
-      //  user = FirebaseAuth.getInstance().getCurrentUser();
+
     }
 
     @Override
@@ -125,8 +135,11 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, new SettingsFragment());
         ft.commit();
+    }
 
-
+    private void setEmailHeader(){
+        TextView user_email = (TextView)findViewById(R.id.header_email);
+        user_email.setText(user.getEmail());
     }
 
 }

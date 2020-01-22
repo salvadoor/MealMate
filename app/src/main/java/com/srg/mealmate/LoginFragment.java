@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,60 +26,49 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private View view;
-    private Button btn_register;
-    private Button btn_login;
-    private EditText email, password;
+    private Button btn_login, btn_register;
+    private EditText emailField, passwordField;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
-
+        // Inflate the layout for this fragment and set view for fragment
         view = inflater.inflate(R.layout.fragment_login, container, false);
         init();
-        // Inflate the layout for this fragment
+
         return view;
     }
 
     private void init(){
-        email = view.findViewById(R.id.edit_user);
-        password = view.findViewById(R.id.edit_pwd);
-
+        // onClickListeners for Login and Register Buttons
         btn_register = view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String emailText = email.getText().toString();
-                String passwordText = password.getText().toString();
-
-                if(emailText.isEmpty()){
-                    email.setError("No Email entered");
-                    email.requestFocus();
+                if(fieldEmpty()){
+                    // oen or both fields are empty
+                    return;
                 }
-                if(passwordText.isEmpty()){
-                    password.setError("No Password entered");
-                    password.requestFocus();
-                }
+                String email = emailField.getText().toString();
+                String password = passwordField.getText().toString();
 
-                mAuth.createUserWithEmailAndPassword(emailText, passwordText)
+                mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     Log.d(TAG, "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    // FirebaseUser user = mAuth.getCurrentUser();
+                                    shortToast("New user created");
                                     ((MainActivity)getActivity()).userSignedIn();
-                                   // userSignedIn();
-                                   // updateUI(user);
                                 } else{
                                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(getActivity(), "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                    // updateUI(null);
+                                    shortToast("Authentication Failed");
                                 }
                             }
                         });
@@ -92,25 +79,22 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String emailText = email.getText().toString();
-                String passwordText = password.getText().toString();
+                if(fieldEmpty()){
+                    // one or both fields are empty
+                    return;
+                }
+                String email = emailField.getText().toString();
+                String password = passwordField.getText().toString();
 
-                if(emailText.isEmpty()){
-                    email.setError("No Email entered");
-                    email.requestFocus();
-                }
-                if(passwordText.isEmpty()){
-                    password.setError("No Password entered");
-                    password.requestFocus();
-                }
-                mAuth.signInWithEmailAndPassword(emailText, passwordText)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    userSignedIn();
+                                    shortToast("Logged in");
+                                    ((MainActivity)getActivity()).userSignedIn();
                                 } else{
-                                    Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
+                                    shortToast("Login Failed");
                                 }
                             }
                         });
@@ -119,14 +103,34 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void userSignedIn(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        SettingsFragment fragment2 = new SettingsFragment();
-        ft.addToBackStack(null);
-        ft.hide(LoginFragment.this);
-        ft.add(android.R.id.content, fragment2);
-        ft.commit();
+    private boolean fieldEmpty(){
+        // Check if email or password field is empty
+        // return true if one or both fields is empty and create a Toast
+        // return false if no fields are empty
+        emailField = view.findViewById(R.id.edit_user);
+        passwordField = view.findViewById(R.id.edit_pwd);
+
+       if(isEmpty(emailField)){
+           shortToast("Please enter your email");
+           return true;
+       } else if(isEmpty(passwordField)){
+           shortToast("Please enter a password");
+           return true;
+       }
+       return false;
+    }
+
+    private boolean isEmpty(EditText et){
+        // check if EditText is empty or only contains whitespace
+        // returns true if EditText is empty, false if not empty/whitespace
+        return et.getText().toString().trim().length() == 0;
+    }
+
+
+    private void shortToast(String message){
+        // make short toast to Parent Activity
+        // message is string for toast
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
 }
