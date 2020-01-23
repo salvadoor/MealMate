@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,10 +46,7 @@ public class MainActivity extends AppCompatActivity
                 drawer, toolbar, R.string.nav_open_drawer, R.string.nav_close_drawer){
                     public void onDrawerOpened(View drawerView){
                         super.onDrawerOpened(drawerView);
-
-                        if(user!=null) {
-                            setEmailHeader();
-                        }
+                        setEmailHeader(user!=null);
                     }
         };
         drawer.addDrawerListener(toggle);
@@ -87,14 +85,6 @@ public class MainActivity extends AppCompatActivity
                     frag = new LoginFragment();
                     getSupportActionBar().setTitle(R.string.nav_login);
                 }
-                /*  if user is signed in, open account settings
-                    frag = new SettingsFragment();
-                    getSupportActionBar().setTitle(R.string.nav_account);
-                 */
-                /* else, redirect to login
-                frag = new LoginFragment();
-                getSupportActionBar().setTitle(R.string.nav_login);
-                 */
                 break;
             case R.id.nav_about:
                 frag = new AboutFragment();
@@ -137,9 +127,25 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private void setEmailHeader(){
-        TextView user_email = (TextView)findViewById(R.id.header_email);
-        user_email.setText(user.getEmail());
+    public void userSignedOut(){
+        FirebaseAuth.getInstance().signOut();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+
+        getSupportActionBar().setTitle(R.string.nav_login);
+        FragmentTransaction ft  = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, new LoginFragment());
+        ft.commit();
+    }
+
+    private void setEmailHeader(boolean signedIn){
+        TextView user_email = findViewById(R.id.header_email);
+
+        if(signedIn) {
+            user_email.setText(user.getEmail());
+        } else{
+            user_email.setText(R.string.email_holder);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -28,6 +28,7 @@ public class LoginFragment extends Fragment {
     private View view;
     private Button btn_login, btn_register;
     private EditText emailField, passwordField;
+    private long lastClickTime = 0;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -39,21 +40,21 @@ public class LoginFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         // Inflate the layout for this fragment and set view for fragment
         view = inflater.inflate(R.layout.fragment_login, container, false);
-        init();
+        setListeners();
 
         return view;
     }
 
-    private void init(){
+    private void setListeners(){
         // onClickListeners for Login and Register Buttons
         btn_register = view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(fieldEmpty()){
-                    // oen or both fields are empty
-                    return;
-                }
+                // prevent multiple successive clicks and make sure both fields are filled
+                if(!canAcceptClick() || fieldEmpty()){ return; }
+
+                // if conditions met, run onClick code
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
@@ -79,10 +80,10 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(fieldEmpty()){
-                    // one or both fields are empty
-                    return;
-                }
+                // prevent multiple successive clicks and make sure both fields are filled
+                if(!canAcceptClick() || fieldEmpty()){ return; }
+
+                // if conditions met, run onClick code
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
@@ -93,6 +94,7 @@ public class LoginFragment extends Fragment {
                                 if(task.isSuccessful()){
                                     shortToast("Logged in");
                                     ((MainActivity)getActivity()).userSignedIn();
+
                                 } else{
                                     shortToast("Login Failed");
                                 }
@@ -130,7 +132,17 @@ public class LoginFragment extends Fragment {
     private void shortToast(String message){
         // make short toast to Parent Activity
         // message is string for toast
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText((MainActivity)getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean canAcceptClick(){
+        // prevent quick double clicking from filling queue with button clicks
+        if(SystemClock.elapsedRealtime() - lastClickTime < 1000){
+            return false;
+        }
+        lastClickTime = SystemClock.elapsedRealtime();
+
+        return true;
     }
 
 }
