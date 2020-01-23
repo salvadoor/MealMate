@@ -1,10 +1,6 @@
 <resources>
-    <string name="app_name">  Meal Mate</string>
-    <string name="email_holder">  Select Account Settings to login or register</string>
-
-    <string name="title_activity_welcome">Welcome</string>
-
-    <string name="welcome_hint">Tap Anywhere to Begin</string>
+    <string name="app_name">  MealMate</string>
+    <string name="email_holder">  Select Account Settings to SignIn or Register</string>
 
     <string name="search_hint">Enter Search Phrase Here</string>
     <string name="search_btn_text">SEARCH</string>

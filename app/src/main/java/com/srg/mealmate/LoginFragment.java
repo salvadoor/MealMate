@@ -1,6 +1,7 @@
 /*
  * "LoginFragment.java"
  * Layout:  "fragment_login.xml"
+ *
  * Fragment used to login an existing user or create a new user
  * upon login, call userSignedIn() from parent, MainActivity
  *
