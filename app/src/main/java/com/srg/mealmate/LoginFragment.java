@@ -1,3 +1,11 @@
+/*
+ * "LoginFragment.java"
+ * Layout:  "fragment_login.xml"
+ * Fragment used to login an existing user or create a new user
+ * upon login, call userSignedIn() from parent, MainActivity
+ *
+ * Last Modified: 01.23.2019 12:13pm
+ */
 package com.srg.mealmate;
 
 
@@ -26,7 +34,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private View view;
-    private Button btn_login, btn_register;
+  //  private Button btn_login, btn_register;
     private EditText emailField, passwordField;
     private long lastClickTime = 0;
 
@@ -46,7 +54,11 @@ public class LoginFragment extends Fragment {
     }
 
     private void setListeners(){
-        // onClickListeners for Login and Register Buttons
+        // set onClickListeners for Login and Register Buttons
+        Button btn_login, btn_register;
+
+        // onClickListener for Register Button
+        // create new user and authenticate them, redirect to account settings
         btn_register = view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -63,19 +75,20 @@ public class LoginFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    Log.d(TAG, "createUserWithEmail:success");
-                                    // FirebaseUser user = mAuth.getCurrentUser();
-                                    shortToast("New user created");
+                                    Log.d(TAG, SR(R.string.createUser_success));
+                                    shortToast(SR(R.string.register_pass));
                                     ((MainActivity)getActivity()).userSignedIn();
                                 } else{
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    shortToast("Authentication Failed");
+                                    Log.w(TAG, SR(R.string.createUser_failure), task.getException());
+                                    shortToast(SR(R.string.register_fail));
                                 }
                             }
                         });
             }
         });
 
+        // onClickListener for Login Button,
+        // authenticate user and redirect to account settings upon success
         btn_login = view.findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -87,16 +100,18 @@ public class LoginFragment extends Fragment {
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
+                // Attempt to sign in and authenticate user
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    shortToast("Logged in");
+                                    Log.d(TAG, SR(R.string.signIn_success));
+                                    shortToast(SR(R.string.login_pass));
                                     ((MainActivity)getActivity()).userSignedIn();
-
                                 } else{
-                                    shortToast("Login Failed");
+                                    Log.w(TAG, SR(R.string.signIn_failure));
+                                    shortToast(SR(R.string.login_fail));
                                 }
                             }
                         });
@@ -113,10 +128,10 @@ public class LoginFragment extends Fragment {
         passwordField = view.findViewById(R.id.edit_pwd);
 
        if(isEmpty(emailField)){
-           shortToast("Please enter your email");
+           shortToast(SR(R.string.warning_email));
            return true;
        } else if(isEmpty(passwordField)){
-           shortToast("Please enter a password");
+           shortToast(SR(R.string.warning_pwd));
            return true;
        }
        return false;
@@ -128,11 +143,10 @@ public class LoginFragment extends Fragment {
         return et.getText().toString().trim().length() == 0;
     }
 
-
     private void shortToast(String message){
         // make short toast to Parent Activity
         // message is string for toast
-        Toast.makeText((MainActivity)getActivity(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     private boolean canAcceptClick(){
@@ -140,9 +154,16 @@ public class LoginFragment extends Fragment {
         if(SystemClock.elapsedRealtime() - lastClickTime < 1000){
             return false;
         }
+        // else record click time and accept click
         lastClickTime = SystemClock.elapsedRealtime();
-
         return true;
+    }
+
+    private String SR(int id){
+        // S.R. = String Resource
+        // return string for resource with id resourceID
+        // helps shorten and simplify code
+        return getResources().getString(id);
     }
 
 }

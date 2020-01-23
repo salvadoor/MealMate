@@ -55,15 +55,28 @@
     <string name="email_label">Email: </string>
     <string name="pwd_label">Password: </string>
     <string name="btn_reset_pwd"> Reset Password</string>
-    <string name="notify_email"> Email Sent</string>
 
     <string name="pref1_instruction">Select number of weeks to save for grocery lists and plans</string>
 
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>
-    <string name="last_updated">Last Updated Jan 9th, 2020</string>
+    <string name="last_updated">Last Updated Jan 23rd, 2020</string>
     <string name="developed_by">Developed by Salvador Rodriguez Gomez</string>
     <string name="school_info">BS in Computer Science at St Mary\'s University</string>
     <string name="class_info">CS4395: Senior Project</string>
 
+    <string name="notify_email"> Email Sent</string>
+    <string name="warning_email"> Please Enter Your Email</string>
+    <string name="warning_pwd"> Please Enter a Password</string>
+
+    <string name="login_pass"> Signed In</string>
+    <string name="login_fail"> Sign In Failed</string>
+    <string name="register_pass"> New User Created</string>
+    <string name="register_fail"> Registration Failed</string>
+
+    <!-- Debug strings -->
+    <string name="createUser_success">createUserWithEmail:success</string>
+    <string name="createUser_failure">createUserWithEmail:failure</string>
+    <string name="signIn_success">signInWithEmail:success</string>
+    <string name="signIn_failure">signInWithEmail:failure</string>
 </resources>
