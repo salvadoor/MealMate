@@ -12,6 +12,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="placeholder">Placeholder</string>
+
 
     <!-- Menu Items -->
     <string name="nav_search">Search Recipes</string>
@@ -50,6 +52,12 @@
     <string name="login_subheader"> Login Information</string>
     <string name="preferences_subheader"> Preferences</string>
     <string name="data_subheader"> Data</string>
+
+    <string name="email_label">Email: </string>
+    <string name="pwd_label">Password: </string>
+    <string name="btn_reset_pwd"> Reset Password</string>
+
+    <string name="pref1_instruction">Select number of weeks to save for grocery lists and plans</string>
 
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>
