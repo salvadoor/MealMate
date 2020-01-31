@@ -7,6 +7,7 @@ public class Preferences {
 
     public int getWeeks(){
         return weeks;
+        
     }
 
 

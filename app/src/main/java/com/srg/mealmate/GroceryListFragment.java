@@ -4,16 +4,26 @@ package com.srg.mealmate;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import io.opencensus.tags.Tag;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -25,6 +35,8 @@ public class GroceryListFragment extends Fragment {
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
     private int weeksSaved;
+   // String[] items = {"2 Avacados", "6 foods", "Test Item 3"};
+    private ArrayList<GroceryItem> items = new ArrayList<>();
 
 
     public GroceryListFragment() {
@@ -46,6 +58,16 @@ public class GroceryListFragment extends Fragment {
         }
 
         setListeners();
+        initMockItems();
+        initRecyclerView();
+        /*
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.itemx, items);
+
+        ListView lv = view.findViewById(R.id.grocery_list);
+        lv.setAdapter(adapter);
+        */
+
+
 
         return view;
     }
@@ -99,6 +121,23 @@ public class GroceryListFragment extends Fragment {
         weeksFromCurr+= direction;
 
         return true;
+    }
+
+    private void initMockItems(){
+        items.add(new GroceryItem(2, "Avacados"));
+        items.add(new GroceryItem(5, "Apples"));
+        items.add(new GroceryItem(1, "Loaf of bread"));
+        items.add(new GroceryItem(2, "lemons"));
+        items.add(new GroceryItem(6, "pairs", true));
+    }
+
+    private void initRecyclerView(){
+        Log.d(TAG, "initRecyclerView: init recyclerview");
+        RecyclerView rv = view.findViewById(R.id.grocery_list);
+        GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), items);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //rv.setLayoutManager(new RelativeLayoutManager(getActivity()));
     }
 
 }
