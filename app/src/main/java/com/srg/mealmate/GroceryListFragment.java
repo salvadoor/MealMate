@@ -11,17 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import io.opencensus.tags.Tag;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -31,13 +27,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class GroceryListFragment extends Fragment {
     private View view;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
     private int weeksSaved;
    // String[] items = {"2 Avacados", "6 foods", "Test Item 3"};
-    private ArrayList<GroceryItem> items = new ArrayList<>();
-
+    // private ArrayList<GroceryItem> items = new ArrayList<>();
+   private ArrayList<GroceryItem> items;
 
     public GroceryListFragment() {
         // Required empty public constructor
@@ -47,6 +43,8 @@ public class GroceryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_grocery_list, container, false);
 
@@ -56,20 +54,27 @@ public class GroceryListFragment extends Fragment {
             // If pref is 5, there are 5//2 weeks saved before and  after the current week
             weeksSaved = (new Preferences().getWeeks()) / 2;
         }
+        if(bundle!=null){
+            items.add((GroceryItem)bundle.getSerializable("item"));
+        }
+      //  loadGroceryList();
 
-        setListeners();
-        initMockItems();
-        initRecyclerView();
-        /*
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.itemx, items);
+        initNavClickListeners();
+        initOnClickListeners();
+      //  initMockItems();
+       // initRecyclerView();
 
-        ListView lv = view.findViewById(R.id.grocery_list);
-        lv.setAdapter(adapter);
-        */
-
-
-
+       // saveGroceryList();
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // save Sunday date for week currently in view
+        
+        // save Grocery List(s)
+        saveGroceryList();
     }
 
     private void setCurrentWeek(){
@@ -85,10 +90,12 @@ public class GroceryListFragment extends Fragment {
         c.add(Calendar.DATE, offset);
         weekText = "Week of " + dateFormat.format(c.getTime());
         tv.setText(weekText);
+        // Load corresponding Grocery List
+        loadGroceryList(dateFormat.format(c.getTime()));
     }
 
 
-    private void setListeners(){
+    private void initNavClickListeners(){
         Button btn_prev, btn_next;
 
         btn_prev = view.findViewById(R.id.btn_prev);
@@ -132,12 +139,39 @@ public class GroceryListFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
+        Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), items);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //rv.setLayoutManager(new RelativeLayoutManager(getActivity()));
+    }
+
+    private void initOnClickListeners(){
+        Button btn_add;
+
+        btn_add = view.findViewById(R.id.btn_new_item);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).newItem();
+            }
+        });
+    }
+
+    private void loadGroceryList(String sundayDate) {
+        // get file that corresponds to current week
+        GroceryListFile.setFilename(sundayDate);
+        // retrieve list
+        items = GroceryListFile.readList(getActivity());
+        if(items.isEmpty()){
+            initMockItems();
+        }
+        // start RecyclerView
+        initRecyclerView();
+    }
+
+    private void saveGroceryList(){
+        GroceryListFile.writeList(items, getActivity());
     }
 
 }

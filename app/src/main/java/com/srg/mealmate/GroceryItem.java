@@ -7,7 +7,9 @@
  */
 package com.srg.mealmate;
 
-public class GroceryItem {
+import java.io.Serializable;
+
+public class GroceryItem implements Serializable {
     private Boolean isChecked;
     private int quantity;
     private String item;

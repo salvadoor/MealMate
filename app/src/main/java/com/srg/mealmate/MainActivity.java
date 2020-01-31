@@ -96,9 +96,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (frag != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, frag);
-            ft.commit();
+            setFragment(frag);
         } else {
             // start activity
         }
@@ -122,9 +120,7 @@ public class MainActivity extends AppCompatActivity
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         getSupportActionBar().setTitle(R.string.nav_account);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, new SettingsFragment());
-        ft.commit();
+        setFragment(new SettingsFragment());
     }
 
     public void userSignedOut(){
@@ -133,9 +129,7 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
 
         getSupportActionBar().setTitle(R.string.nav_login);
-        FragmentTransaction ft  = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, new LoginFragment());
-        ft.commit();
+        setFragment(new LoginFragment());
     }
 
     private void setEmailHeader(boolean signedIn){
@@ -146,6 +140,33 @@ public class MainActivity extends AppCompatActivity
         } else{
             user_email.setText(R.string.email_holder);
         }
+    }
+
+    public void newItem(){
+        getSupportActionBar().setTitle("New Grocery Item");
+        setFragment(new AddGroceryItemFragment());
+    }
+    public void addItem(String name, int n){
+        GroceryItem newItem = new GroceryItem(n, name);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item", newItem);
+
+        getSupportActionBar().setTitle(R.string.nav_grocery_list);
+        Fragment f = new GroceryListFragment();
+        f.setArguments(bundle);
+        setFragment(f);
+    }
+
+    public void cancelItem(){
+        getSupportActionBar().setTitle(R.string.nav_grocery_list);
+        setFragment(new GroceryListFragment());
+    }
+
+    private void setFragment(Fragment f){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, f);
+        ft.commit();
     }
 
 }
