@@ -164,7 +164,7 @@ public class LoginFragment extends Fragment {
         // S.R. = String Resource
         // return string for resource with id resourceID
         // helps shorten and simplify code
-        return getResources().getString(id);
+        return getActivity().getResources().getString(id);
     }
 
 }

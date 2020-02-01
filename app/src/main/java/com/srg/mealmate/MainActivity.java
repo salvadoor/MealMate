@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
                           implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private Fragment frag = null;
+    private Fragment frag2 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Fragment frag = null;
         Intent intent = null;
 
         switch (id) {
@@ -144,7 +145,16 @@ public class MainActivity extends AppCompatActivity
 
     public void newItem(){
         getSupportActionBar().setTitle("New Grocery Item");
-        setFragment(new AddGroceryItemFragment());
+
+        // setFragment(new AddGroceryItemFragment());
+        /*
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.content_frame, new AddGroceryItemFragment());
+        ft.detach(frag);
+        ft.commit();
+        */
+        frag2 = new AddGroceryItemFragment();
+        detachFragment(frag, frag2);
     }
     public void addItem(String name, int n){
         GroceryItem newItem = new GroceryItem(n, name);
@@ -153,9 +163,15 @@ public class MainActivity extends AppCompatActivity
         bundle.putSerializable("item", newItem);
 
         getSupportActionBar().setTitle(R.string.nav_grocery_list);
+
+        /*
         Fragment f = new GroceryListFragment();
         f.setArguments(bundle);
         setFragment(f);
+         */
+        frag.setArguments(bundle);
+
+        attachFragment(frag, frag2);
     }
 
     public void cancelItem(){
@@ -168,5 +184,22 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.content_frame, f);
         ft.commit();
     }
+
+    private void detachFragment(Fragment f1, Fragment f2){
+        // add f2 and detach f1
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.content_frame, f2);
+        ft.detach(f1);
+        ft.commit();
+    }
+
+    private void attachFragment(Fragment f1, Fragment f2){
+        // re-attach f1 and remove f2
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.attach(f1);
+        ft.remove(f2);
+        ft.commit();
+    }
+
 
 }
