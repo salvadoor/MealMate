@@ -48,8 +48,8 @@ public class GroceryItem implements Serializable {
         return item;
     }
 
-    public void setChecked(Boolean checked) {
-        isChecked = checked;
+    public void setChecked(Boolean tf) {
+        isChecked = tf;
     }
 
     public void setQuantity(int quantity) {

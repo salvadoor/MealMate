@@ -54,6 +54,13 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             @Override
             public void onClick(View view){
                 Log.d(TAG, "onClick:clicked on: " + items.get(position).getItem());
+                if(items.get(position).getChecked()){
+                    items.get(position).setChecked(false);
+                } else{
+                    items.get(position).setChecked(true);
+                }
+                notifyDataSetChanged();
+
 
                 Toast.makeText(mContext, items.get(position).getItem(), Toast.LENGTH_SHORT).show();
             }
@@ -80,5 +87,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             parentLayout = itemView.findViewById(R.id.grocery_item);
         }
     }
+
+
 }
 

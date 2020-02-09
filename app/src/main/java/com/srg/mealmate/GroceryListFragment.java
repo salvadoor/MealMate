@@ -94,6 +94,11 @@ public class GroceryListFragment extends Fragment {
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), items);
+
+
+        // Trying stuff here, feb 8th
+
+
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
