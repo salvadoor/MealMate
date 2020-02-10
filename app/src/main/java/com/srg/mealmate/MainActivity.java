@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             // start a RecipeSearchFragment
-            Fragment f = new RecipeSearchFragment();
+            frag = new RecipeSearchFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.content_frame, f);
+            ft.add(R.id.content_frame, frag);
             ft.commit();
         }
 
@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if(frag!=null && frag2!=null) {
+            attachFragment(frag, frag2);
         } else {
             super.onBackPressed();
         }
@@ -176,7 +178,10 @@ public class MainActivity extends AppCompatActivity
 
     public void cancelItem(){
         getSupportActionBar().setTitle(R.string.nav_grocery_list);
-        setFragment(new GroceryListFragment());
+
+        //setFragment(new GroceryListFragment());
+
+        attachFragment(frag, frag2);
     }
 
     private void setFragment(Fragment f){
@@ -199,6 +204,16 @@ public class MainActivity extends AppCompatActivity
         ft.attach(f1);
         ft.remove(f2);
         ft.commit();
+    }
+
+    public void viewRecipeDetails(Recipe recipe){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("recipe", recipe);
+
+        frag2 = new RecipeDetailsFragment();
+        frag2.setArguments(bundle);
+
+        detachFragment(frag, frag2);
     }
 
 

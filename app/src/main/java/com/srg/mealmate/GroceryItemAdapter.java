@@ -1,6 +1,7 @@
 package com.srg.mealmate;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
-
     private static final String TAG = "GroceryItemAdapter";
 
     private ArrayList<GroceryItem> items = new ArrayList<>();
@@ -65,6 +66,20 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 Toast.makeText(mContext, items.get(position).getItem(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view){
+                 do_Dialog(position);
+                /*
+                if(delete){
+                    items.remove(position);
+                    notifyDataSetChanged();
+                }
+                */
+                return true;
+            }
+        });
     }
 
     @Override
@@ -88,6 +103,34 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         }
     }
 
+    public void do_Dialog(final int pos){
+        //Boolean  delete;
 
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
+        builder1.setMessage("Delete this item?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(mContext, items.get(pos).getItem() + " Deleted", Toast.LENGTH_SHORT).show();
+                        items.remove(pos);
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
 }
 
