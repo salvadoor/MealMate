@@ -44,8 +44,10 @@
     <string name="btn_register">REGISTER</string>
 
     <!-- Recipe Details -->
-    <string name="ingredients_subheader">Ingredients:</string>
+    <string name="ingredients_subheader">Ingredients</string>
     <string name="instructions_subheader">Instructions</string>
+    <string name="fav_recipe">Add Recipe to Favorites</string>
+    <string name="nav_nutrition"> View Basic Nutrition Information</string>
 
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>

@@ -5,39 +5,59 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:padding="16dp"
     tools:context=".RecipeDetailsFragment">
     <TextView
         android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textSize="30sp"
         android:text="@string/placeholder"/>
 
     <TextView
         android:id="@+id/detail_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="@string/placeholder"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_nutrition"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fav_recipe" />
 
     <TextView
         android:id="@+id/detail_header_ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textSize="20sp"
         android:text="@string/ingredients_subheader"/>
 
-    <TextView
+    <ListView
         android:id="@+id/detail_ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="false"
-        android:text="@string/placeholder"/>
+        android:divider="@null"/>
 
     <TextView
         android:id="@+id/detail_header_instructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textSize="20sp"
         android:text="@string/instructions_subheader"/>
+
+    <ListView
+        android:id="@+id/detail_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"/>
 
 </LinearLayout>
