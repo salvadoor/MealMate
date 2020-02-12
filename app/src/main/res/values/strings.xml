@@ -17,7 +17,6 @@
     <string name="nav_saved_recipes">Saved Recipes</string>
     <string name="nav_meal_plan">Meal Plan</string>
     <string name="nav_grocery_list">Grocery List</string>
-    <string name="nav_add_grocery_item">Add Item</string>
     <string name="nav_misc">Support</string>
     <string name="nav_account"> Account Settings </string>
     <string name="nav_login">Login/Register</string>
@@ -50,8 +49,13 @@
     <string name="instructions_subheader">Instructions</string>
     <string name="recipe_menu">View Menu</string>
     <string name="fav_recipe">Save Recipe</string>
-    <string name="nav_nutrition"> View Nutrition</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="nav_nutrition"> View Nutrition for Recipe</string>
+    <string name="add_to_plan">Add Recipe to Meal Plan</string>
 
+
+    <!-- GroceryList -->
+    <string name="nav_new_grocery">Add New Grocery</string>
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>
     <string name="ask_item_units">Select the Units to Use</string>

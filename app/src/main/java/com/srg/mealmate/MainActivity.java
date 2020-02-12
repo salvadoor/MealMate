@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity
     public void newItem(){
         // Detach GroceryListFragment and add new AddGroceryItemFragment
         frag2 = new AddGroceryItemFragment();
-        detachFragment(frag, frag2, R.string.nav_add_grocery_item);
+        detachFragment(frag, frag2, R.string.nav_new_grocery);
     }
 
     public void addItem(String name, int n){

@@ -12,9 +12,8 @@
  *
  * TO DO:
  *  setup buttons and listeners
- * use StringBuilder instead of += for strings
  *
- * Last Modified: 02.12.2020 3:43pm
+ * Last Modified: 02.12.2020 04:42pm
  */
 package com.srg.mealmate;
 
@@ -59,10 +58,13 @@ public class RecipeDetailsFragment extends Fragment {
 
         // set text for TextViews based on recipe's data
         init_layout_text();
+        /*
         // create PopupMenu
         init_popupMenu();
         // set OnClickListener(s)
         init_OnClickListener();
+
+         */
 
         return view;
     }
@@ -92,21 +94,21 @@ public class RecipeDetailsFragment extends Fragment {
     private String getStringOfIngredients(){
         // string with each formatted ingredient string separated by newline character
         // return the string
-        String txt_ingredients = "";
+        StringBuilder str = new StringBuilder();
         String ingredient_string;
 
         ingredients = recipe.getIngredients();
 
         for(int i=0; i<ingredients.size(); i++){
             ingredient_string = getIngredientDetailString(recipe.getIngredients().get(i));
-            txt_ingredients += ingredient_string;
+            str.append(ingredient_string);
 
             if(i!=ingredients.size()-1){
-                txt_ingredients += "\n";
+                str.append("\n");
             }
         }
 
-        return txt_ingredients;
+        return str.toString();
     }
 
 
@@ -114,23 +116,25 @@ public class RecipeDetailsFragment extends Fragment {
         // create string with each step labels and instructions separated by newline characters
         // return the string
         ArrayList<String> instructions = recipe.getInstructions();
-        String txt_instructions = "";
+        StringBuilder str = new StringBuilder();
 
         for(int i=0; i<instructions.size();i++){
-            txt_instructions += "Step " + (i+1) + ":\n " + instructions.get(i);
-            if(i!=instructions.size()-1){
-                txt_instructions += "\n";
-            }
+            str.append("Step ")
+                    .append(i+1)
+                    .append("\n")
+                    .append(instructions.get(i))
+                    .append("\n");
         }
 
-        return  txt_instructions;
+        return  str.toString();
     }
 
 
     private String getIngredientDetailString(HashMap ingredient){
         // format string that gives ingredient amount, units, and name
         // return the formatted string
-        String full_details, amount, units, name;
+        StringBuilder full_details = new StringBuilder();
+        String amount, units, name;
 
         amount = ingredient.get("amount").toString();
         units = ingredient.get("units").toString();
@@ -141,12 +145,16 @@ public class RecipeDetailsFragment extends Fragment {
             units = units + "s";
         }
 
-        full_details = " * " + amount + " " + units + " " + name;
+        full_details.append(" * ")
+                .append(amount)
+                .append(units)
+                .append(" ")
+                .append(name);
 
-        return full_details;
+        return full_details.toString();
     }
 
-
+/*
     private void init_popupMenu(){
         // create new PopupMenu and bind to view for menu button
         popupMenu = new PopupMenu(getContext(), view.findViewById(R.id.btn_recipe_menu));
@@ -167,5 +175,7 @@ public class RecipeDetailsFragment extends Fragment {
         });
 
     }
+
+ */
 
 }

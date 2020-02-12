@@ -44,13 +44,13 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="@string/placeholder"/>
-
+<!--
         <Button
             android:id="@+id/btn_recipe_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/recipe_menu"/>
-
+-->
         <TextView
             android:id="@+id/detail_header_ingredients"
             android:layout_width="match_parent"
@@ -78,6 +78,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/placeholder"/>
+
+        <Button
+            android:id="@+id/btn_view_nutrition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/nav_nutrition" />
+
+        <Button
+            android:id="@+id/btn_save_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/fav_recipe"/>
+
+        <Button
+            android:id="@+id/btn_add_to_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_to_plan"/>
 
     </LinearLayout>
 
