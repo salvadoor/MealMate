@@ -13,9 +13,11 @@
 
     <!-- Menu Items -->
     <string name="nav_search">Search Recipes</string>
+    <string name="nav_recipe_details">View Recipe</string>
     <string name="nav_saved_recipes">Saved Recipes</string>
     <string name="nav_meal_plan">Meal Plan</string>
     <string name="nav_grocery_list">Grocery List</string>
+    <string name="nav_add_grocery_item">Add Item</string>
     <string name="nav_misc">Support</string>
     <string name="nav_account"> Account Settings </string>
     <string name="nav_login">Login/Register</string>

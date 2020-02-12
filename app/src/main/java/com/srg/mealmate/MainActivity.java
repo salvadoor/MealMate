@@ -25,12 +25,13 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private Fragment frag = null;
     private Fragment frag2 = null;
+    private String actionBarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            // start a RecipeSearchFragment
+            // start a RecipeSearchFragment - default view to display
             frag = new RecipeSearchFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.content_frame, frag);
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
+        // set Action Bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,8 +64,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        // change Action Bar title, and navigate to new Fragment on item press
         int id = item.getItemId();
-        Intent intent = null;
+        // Intent intent = null;
 
         switch (id) {
             case R.id.nav_saved_recipes:
@@ -97,9 +100,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (frag != null) {
+            // set Fragment
             setFragment(frag);
-        } else {
-            // start activity
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -110,16 +112,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        // close nav drawer on back
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if(frag!=null && frag2!=null) {
+            // re-attach frag on back when in frag2
             attachFragment(frag, frag2);
-        } else {
+        } else { // normal back button function
             super.onBackPressed();
         }
     }
 
     public void userSignedIn() {
+        // set user and navigate to Settings
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         getSupportActionBar().setTitle(R.string.nav_account);
@@ -127,71 +132,65 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void userSignedOut(){
+        // Sign Out user
         FirebaseAuth.getInstance().signOut();
+        // make sure user value is updated to reflect no user signed in
         user = FirebaseAuth.getInstance().getCurrentUser();
         Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
 
+        // navigate back to Login
         getSupportActionBar().setTitle(R.string.nav_login);
         setFragment(new LoginFragment());
     }
 
     private void setEmailHeader(boolean signedIn){
+        // Set Email header for user
         TextView user_email = findViewById(R.id.header_email);
 
-        if(signedIn) {
+        if(signedIn) { // set user's email as header
             user_email.setText(user.getEmail());
-        } else{
+        } else{ // set login/register instructions as header if no user
             user_email.setText(R.string.email_holder);
         }
     }
 
     public void newItem(){
-        getSupportActionBar().setTitle("New Grocery Item");
-
-        // setFragment(new AddGroceryItemFragment());
-        /*
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_frame, new AddGroceryItemFragment());
-        ft.detach(frag);
-        ft.commit();
-        */
+        // Detach GroceryListFragment and add new AddGroceryItemFragment
         frag2 = new AddGroceryItemFragment();
-        detachFragment(frag, frag2);
+        detachFragment(frag, frag2, R.string.nav_add_grocery_item);
     }
-    public void addItem(String name, int n){
-        GroceryItem newItem = new GroceryItem(n, name);
 
+    public void addItem(String name, int n){
+        GroceryItem newItem = new GroceryItem(n, name); // new GroceryItem
+
+        // save GroceryItem in Bundle as a serialized object
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", newItem);
-
-        getSupportActionBar().setTitle(R.string.nav_grocery_list);
-
-        /*
-        Fragment f = new GroceryListFragment();
-        f.setArguments(bundle);
-        setFragment(f);
-         */
+        // pass bundle back to grocery list
         frag.setArguments(bundle);
 
+        // Re-attach GroceryListFragment
         attachFragment(frag, frag2);
     }
 
     public void cancelItem(){
-        getSupportActionBar().setTitle(R.string.nav_grocery_list);
-
-        //setFragment(new GroceryListFragment());
-
+        // Re-attach GroceryListFragment
         attachFragment(frag, frag2);
     }
 
     private void setFragment(Fragment f){
+        // Inflate Fragment f, replaces current Fragment
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, f);
         ft.commit();
     }
 
-    private void detachFragment(Fragment f1, Fragment f2){
-        // add f2 and detach f1
+    private void detachFragment(Fragment f1, Fragment f2, int newTitle){
+        // add Fragment f2 and detach Fragment f1
+        // save f1's title and set f2's title
+        actionBarTitle = getSupportActionBar().getTitle().toString();
+        getSupportActionBar().setTitle(newTitle);
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.content_frame, f2);
         ft.detach(f1);
@@ -200,6 +199,9 @@ public class MainActivity extends AppCompatActivity
 
     private void attachFragment(Fragment f1, Fragment f2){
         // re-attach f1 and remove f2
+        // set Action Bar title back to f1's title
+        getSupportActionBar().setTitle(actionBarTitle);
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.attach(f1);
         ft.remove(f2);
@@ -207,13 +209,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void viewRecipeDetails(Recipe recipe){
+        // put recipe in a bundle as a serialized object
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
 
+        // create new RecipeDetails Fragment and pass bundle
         frag2 = new RecipeDetailsFragment();
         frag2.setArguments(bundle);
 
-        detachFragment(frag, frag2);
+        // detach RecipeSearchFragment and add/inflate RecipeDetails
+        detachFragment(frag, frag2, R.string.nav_recipe_details);
     }
 
 

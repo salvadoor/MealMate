@@ -15,10 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RecipeDetailsFragment extends Fragment {
     private View view;
     private Recipe recipe;
