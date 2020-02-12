@@ -48,8 +48,9 @@
     <!-- Recipe Details -->
     <string name="ingredients_subheader">Ingredients</string>
     <string name="instructions_subheader">Instructions</string>
-    <string name="fav_recipe">Add Recipe to Favorites</string>
-    <string name="nav_nutrition"> View Basic Nutrition Information</string>
+    <string name="recipe_menu">View Menu</string>
+    <string name="fav_recipe">Save Recipe</string>
+    <string name="nav_nutrition"> View Nutrition</string>
 
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>

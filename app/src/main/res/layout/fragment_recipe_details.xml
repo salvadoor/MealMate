@@ -1,63 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    "fragment_recipe_details.xml"
+     Used for RecipeDetailsFragment
+
+     Layout Contains:
+        Scrollview as root layout
+            used to allow scrolling for recipes with
+            long list of ingredients/instructions
+        LinearLayout for all views
+        TextViews to display recipe name and source
+        TextViews to label subheadings for and display
+            recipe ingredients and instructions
+        Buttons for recipe actions
+
+    All TextViews contain placeholder text that is changed to recipe
+        info when layout is inflated
+
+     Last Modified: 02.12.2020 03:57pm
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:padding="16dp"
     tools:context=".RecipeDetailsFragment">
-    <TextView
-        android:id="@+id/detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:text="@string/placeholder"/>
 
-    <TextView
-        android:id="@+id/detail_source"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/placeholder"/>
+        android:layout_width="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nav_nutrition"/>
+        <TextView
+            android:id="@+id/detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="@string/placeholder"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fav_recipe" />
+        <TextView
+            android:id="@+id/detail_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/placeholder"/>
 
-    <TextView
-        android:id="@+id/detail_header_ingredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="@string/ingredients_subheader"/>
+        <Button
+            android:id="@+id/btn_recipe_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recipe_menu"/>
 
-    <ListView
-        android:id="@+id/detail_ingredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"/>
+        <TextView
+            android:id="@+id/detail_header_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/ingredients_subheader"/>
 
-    <TextView
-        android:id="@+id/detail_header_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="@string/instructions_subheader"/>
+        <TextView
+            android:id="@+id/detail_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"/>
 
-    <ListView
-        android:id="@+id/detail_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"/>
+        <TextView
+            android:id="@+id/detail_header_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/instructions_subheader"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/detail_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"/>
+
+    </LinearLayout>
+
+</ScrollView>

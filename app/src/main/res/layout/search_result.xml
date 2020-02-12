@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "search_result.xml"
+     Used repeatedly for RecyclerView
+
+     Layout Contains:
+        name of recipe
+        source of recipe
+        divider to visually separate it from other results
+
+     Last Modified: 02.12.2020 03:51pm
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/search_result">
-
 
     <TextView
         android:id="@+id/result_name"
@@ -11,14 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textStyle="bold"
-        android:text="Recipe Name" />
+        android:text="@string/placeholder" />
 
     <TextView
         android:id="@+id/result_source"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="From: example.com" />
+        android:text="@string/placeholder" />
 
     <View
         android:id="@+id/divider"
@@ -26,4 +36,5 @@
         android:layout_height="4dp"
         android:layout_marginTop="12dp"
         android:background="?android:attr/listDivider" />
+
 </LinearLayout>

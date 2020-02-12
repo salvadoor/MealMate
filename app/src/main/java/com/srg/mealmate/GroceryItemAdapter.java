@@ -1,3 +1,14 @@
+/*
+ * "GroceryItemAdapter.java"
+ *
+ * Custom RecycleView Adapter
+ * Create and bind views for grocery items
+ *
+ * TO DO:
+ *  change dialog strings from hard-coded strings to resource strings
+ *
+ * Last Modified: 02.12.2020 04:11pm
+ */
 package com.srg.mealmate;
 
 import android.content.Context;
@@ -17,11 +28,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+
 public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
     private static final String TAG = "GroceryItemAdapter";
-
     private ArrayList<GroceryItem> items = new ArrayList<>();
     private Context mContext;
+
 
     public GroceryItemAdapter(Context context, ArrayList<GroceryItem> items) {
         this.items = items;
@@ -54,6 +66,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                // check/uncheck selected grocery item
                 Log.d(TAG, "onClick:clicked on: " + items.get(position).getItem());
                 if(items.get(position).getChecked()){
                     items.get(position).setChecked(false);
@@ -61,22 +74,14 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                     items.get(position).setChecked(true);
                 }
                 notifyDataSetChanged();
-
-
-                Toast.makeText(mContext, items.get(position).getItem(), Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View view){
+                // show deletion confirmation prompt on item long click
                  do_Dialog(position);
-                /*
-                if(delete){
-                    items.remove(position);
-                    notifyDataSetChanged();
-                }
-                */
                 return true;
             }
         });
@@ -87,10 +92,10 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         return items.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView checkBox;
-        TextView quantity;
-        TextView name;
+        TextView quantity, name;
         LinearLayout parentLayout;
 
         public ViewHolder(View itemView){
@@ -103,9 +108,9 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         }
     }
 
-    public void do_Dialog(final int pos){
-        //Boolean  delete;
 
+    private void do_Dialog(final int pos){
+        // create and show dialog to delete a grocery item
         AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
         builder1.setMessage("Delete this item?");
         builder1.setCancelable(true);

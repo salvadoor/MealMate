@@ -3,9 +3,10 @@
  * Layout:  "fragment_login.xml"
  *
  * Fragment used to login an existing user or create a new user
- * upon login, call userSignedIn() from parent, MainActivity
+ * upon login/register, call userSignedIn() from parent, MainActivity
+ *  and redirect to Account Settings
  *
- * Last Modified: 01.23.2019 12:13pm
+ * Last Modified: 01.23.2020 12:13pm
  */
 package com.srg.mealmate;
 
@@ -39,9 +40,11 @@ public class LoginFragment extends Fragment {
     private EditText emailField, passwordField;
     private long lastClickTime = 0;
 
+
     public LoginFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +56,7 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
+
 
     private void setListeners(){
         // set onClickListeners for Login and Register Buttons
@@ -121,6 +125,7 @@ public class LoginFragment extends Fragment {
 
     }
 
+
     private boolean fieldEmpty(){
         // Check if email or password field is empty
         // return true if one or both fields is empty and create a Toast
@@ -138,17 +143,20 @@ public class LoginFragment extends Fragment {
        return false;
     }
 
+
     private boolean isEmpty(EditText et){
         // check if EditText is empty or only contains whitespace
         // returns true if EditText is empty, false if not empty/whitespace
         return et.getText().toString().trim().length() == 0;
     }
 
+
     private void shortToast(String message){
         // make short toast to Parent Activity
         // message is string for toast
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
+
 
     private boolean canAcceptClick(){
         // prevent quick double clicking from filling queue with button clicks
