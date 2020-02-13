@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "grocery_item.xml"
+    Used repeatedly for RecyclerView
 
+    Layout Contains:
+    image of checked or unchecked box
+    text showing item name, quantity and units
+
+    image and text is added programmatically
+    text placeholder serves as outline of item text format
+
+    Last Modified: 02.13.2020 03:21pm
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="48dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:id="@+id/grocery_item">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
     <ImageView
         android:id="@+id/checkbox_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:src="@drawable/plus_icon" />
+        android:src="@drawable/checkbox_outline" />
 
     <TextView
         android:id="@+id/grocery_item_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/btn_add_new_item" />
+        android:text="@string/grocery_item_outline" />
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_divider"/>
 
 </LinearLayout>
 

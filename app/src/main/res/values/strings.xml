@@ -5,9 +5,6 @@
     <string name="search_hint">Enter Search Phrase Here</string>
     <string name="search_btn_text">SEARCH</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="placeholder">Placeholder</string>
 
 
@@ -56,6 +53,7 @@
 
     <!-- GroceryList -->
     <string name="nav_new_grocery">Add New Grocery Item</string>
+    <string name="grocery_item_outline">Quantity(Units) - Grocery Item</string>
     <string name="btn_add_new_item">PRESS HERE TO ADD NEW GROCERY ITEM</string>
 
     <!-- Create new grocery item -->
@@ -101,4 +99,5 @@
     <string name="createUser_failure">createUserWithEmail:failure</string>
     <string name="signIn_success">signInWithEmail:success</string>
     <string name="signIn_failure">signInWithEmail:failure</string>
+
 </resources>

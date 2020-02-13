@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".AddGroceryItemFragment">
 
     <TextView
@@ -38,13 +39,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_name" />
 
-    <EditText
-        android:id="@+id/edit_units"
+    <Spinner
+        android:id="@+id/spinner_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Units"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_units" />
@@ -57,7 +55,7 @@
         android:text="@string/ask_item_quantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_units" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_units" />
 
     <EditText
         android:id="@+id/edit_quantity"

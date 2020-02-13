@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    "unit_item.xml"
+     Used for units spinner
+
+     Layout Contains:
+        used instead of default spinner layout
+        customized text size, 20sp
+
+     Last Modified: 02.13.2020 01:09pm
+-->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:textSize="20sp" />

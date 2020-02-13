@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class MainActivity extends AppCompatActivity
                           implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         // set Action Bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.nav_search);
 
         // set drawer toggle and register activity as a listener for navigation view
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -190,8 +191,8 @@ public class GroceryListFragment extends Fragment {
     }
 
     private void initOnClickListeners(){
-        // OnClickListener for button to add new item
-        LinearLayout btn_new_item;
+        // OnClickListener for 'button' to add new item
+        ImageView btn_new_item;
 
         btn_new_item = view.findViewById(R.id.btn_new_item);
         btn_new_item.setOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    "horizontal_divider.xml"
+     simple horizontal divider
+     width fills parent and height is 4dp
+
+     Created for easy reuse because this same divider is used in several places
+
+     Last Modified: 02.13.2020 02:13pm
+-->
+<View
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/colorPrimary" />

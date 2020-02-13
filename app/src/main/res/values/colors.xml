@@ -6,5 +6,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary25t">#60000000</color>
+    <color name="colorPrimary25t">#80000000</color>
+
+    <color name="t10">#10000000</color>
 </resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    "grocery_header.xml"
+     same overall layout as grocery_item.xml
+
+     Layout Contains:
+        list_check_icon
+        text to show how items are formatted
+        list_add_icon to add new item
+
+     Last Modified: 02.13.2020 03:20pm
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:id="@+id/grocery_item">
+
+    <ImageView
+        android:id="@+id/checkbox_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center"
+        android:src="@drawable/list_check_icon" />
+
+    <TextView
+        android:id="@+id/grocery_item_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".7"
+        android:textStyle="bold"
+        android:text="@string/grocery_item_outline" />
+
+    <ImageView
+        android:id="@+id/btn_new_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".3"
+        android:src="@drawable/list_add_icon"/>
+
+</LinearLayout>

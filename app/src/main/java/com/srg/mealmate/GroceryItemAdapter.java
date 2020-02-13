@@ -117,7 +117,12 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(mContext, items.get(pos).getItem() + " Deleted", Toast.LENGTH_SHORT).show();
+                        StringBuilder str = new StringBuilder();
+                        str.append("'")
+                                .append(items.get(pos).getItem())
+                                .append("'")
+                                .append(" Deleted");
+                        Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();
                         items.remove(pos);
                         notifyDataSetChanged();
                         dialog.cancel();

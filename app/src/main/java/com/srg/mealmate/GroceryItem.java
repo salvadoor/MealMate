@@ -70,15 +70,13 @@ public class GroceryItem implements Serializable {
         StringBuilder full_details = new StringBuilder();
         String units;
 
-        if(this.quantity > 1 && this.units.length()!=0 && this.units!="whole"){
-            units = this.units + "s";
-        } else{
-            units = this.units;
+        full_details.append(this.quantity);
+        if(this.units!="") {
+            full_details.append("(")
+                    .append(this.units)
+                    .append(")");
         }
-
-        full_details.append(this.quantity)
-                .append(units)
-                .append(" x ")
+        full_details.append("  -  ")
                 .append(this.item);
 
         return full_details.toString();

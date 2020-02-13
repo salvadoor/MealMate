@@ -8,16 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AddGroceryItemFragment extends Fragment {
     private View view;
+    private Spinner spinner;
+    private static String[] unitOptions = {"whole/other", "ounce", "teaspoon", "tablespoon", "pinch"};
+
 
     public AddGroceryItemFragment() {
         // Required empty public constructor
@@ -30,10 +33,22 @@ public class AddGroceryItemFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
 
+        initSpinner();
         initOnClickListeners();
 
         return view;
     }
+
+
+    private void initSpinner(){
+        spinner = view.findViewById(R.id.spinner_units);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.unit_item,unitOptions);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+    }
+
 
     private void initOnClickListeners(){
         Button btn_add, btn_cancel;
@@ -43,13 +58,16 @@ public class AddGroceryItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText itemQuantity = view.findViewById(R.id.edit_quantity);
-                EditText itemUnits = view.findViewById(R.id.edit_units);
                 EditText itemName = view.findViewById(R.id.edit_name);
 
                 if(!fieldEmpty()){
                     int quantity = Integer.parseInt(itemQuantity.getText().toString());
                     String name = itemName.getText().toString();
-                    String units = itemUnits.getText().toString();
+                   // String units = itemUnits.getText().toString();
+                    String units = spinner.getSelectedItem().toString();
+                    if(units=="whole/other"){
+                        units = "";
+                    }
 
                     ((MainActivity)getActivity()).addItem(quantity, units, name);
                 }
@@ -66,15 +84,15 @@ public class AddGroceryItemFragment extends Fragment {
         });
     }
 
+
     private boolean fieldEmpty(){
         // return true if one or both fields is empty and create a Toast
         // return false if no fields are empty
         EditText itemName = view.findViewById(R.id.edit_name);
         EditText itemQuantity = view.findViewById(R.id.edit_quantity);
 
-        if(isEmpty(itemName)){
-            return true;
-        } else if(isEmpty(itemQuantity)){
+
+        if(isEmpty(itemName) || isEmpty(itemQuantity) || spinner.getSelectedItem()==null){
             return true;
         }
         return false;
