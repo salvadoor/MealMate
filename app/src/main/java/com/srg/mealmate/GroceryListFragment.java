@@ -33,6 +33,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -45,6 +46,7 @@ public class GroceryListFragment extends Fragment {
     private int weeksSaved;
     private ArrayList<GroceryItem> items = null;
     private Boolean dataStored = false; // true when fragment is not destroyed and then re-inflated
+    private HashMap<String, Double> itemHash;
 
     public GroceryListFragment() {
         // Required empty public constructor
@@ -53,29 +55,19 @@ public class GroceryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle bundle = getArguments(); // Get any arguments passed via a bundle(GroceryItem)
+        // Get any arguments passed via a bundle(GroceryItem)
+        Bundle bundle = getArguments();
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_grocery_list, container, false);
 
-        // If pref is 5, there are 5//2 weeks saved before and  after the current week
-        weeksSaved = (new Preferences().getWeeks()) / 2;
-
-        if(dataStored){
-            // if dataStored == true, then variables such as the c Calendar object already have defined values
-            //set week based on current c, week will be last viewed week before fragment was detached
-            setWeek(0);
-
-        } else{
-            // else initialize week tracking variables and set current week
-            weeksFromCurr = 0;
-            setCurrentWeek();
-        }
-
         if(bundle!=null){ // if bundle contains a GroceryItem, add it to the current list
             items.add((GroceryItem)bundle.getSerializable("item"));
         }
-        // initialize onClickListeners
+
+        // initialize important components
+        init_weekData();
+        init_hashMap();
         initNavClickListeners();
         initOnClickListeners();
 
@@ -107,15 +99,31 @@ public class GroceryListFragment extends Fragment {
 
     private void initMockItems(){
         // For initial Testing and Development, populate grocery list
-        items.add(new GroceryItem(2, "whole", "Avacados"));
-        items.add(new GroceryItem(5, "whole", "Apples"));
-        items.add(new GroceryItem(1, "whole", "Loaf of bread"));
-        items.add(new GroceryItem(2, "whole", "lemons"));
-        items.add(new GroceryItem(6, "whole", "pairs", true));
+        items.add(new GroceryItem(2, "whole", "Avacado"));
+        items.add(new GroceryItem(5, "whole", "Apple"));
+        items.add(new GroceryItem(1, "whole", "Loaf of Bread"));
+        items.add(new GroceryItem(2, "whole", "Lemon"));
     }
 
 //----------------------------------------------------------------------------------
 // Methods to deal with setting the week and retrieving corresponding list
+    private void init_weekData(){
+        // If pref is 5, there are 5//2 weeks saved before and  after the current week
+        weeksSaved = (new Preferences().getWeeks()) / 2;
+
+        if(dataStored){
+            // if dataStored == true, then variables such as the c Calendar object already have defined values
+            //set week based on current c, week will be last viewed week before fragment was detached
+            setWeek(0);
+
+        } else{
+            // else initialize week tracking variables and set current week
+            weeksFromCurr = 0;
+            setCurrentWeek();
+        }
+    }
+
+
     private void setCurrentWeek(){
         // set Initial Calendar and then set current week
         c = Calendar.getInstance();
@@ -123,6 +131,7 @@ public class GroceryListFragment extends Fragment {
         // All dates will reference a Sunday
         setWeek(0);
     }
+
 
     private void setLastViewedWeek(String date){
         // set week based on formatted date string ("MM-dd")
@@ -133,6 +142,7 @@ public class GroceryListFragment extends Fragment {
         }
         setWeek(0);
     }
+
 
     private void setWeek(int offset){
         String weekText;
@@ -149,6 +159,7 @@ public class GroceryListFragment extends Fragment {
         // Load corresponding Grocery List
         loadGroceryList(dateFormat.format(c.getTime()));
     }
+
 
     private Boolean isWeekSaved(int direction){
         // Check if week navigation will go out of bounds, return boolean
@@ -190,6 +201,7 @@ public class GroceryListFragment extends Fragment {
         });
     }
 
+
     private void initOnClickListeners(){
         // OnClickListener for 'button' to add new item
         ImageView btn_new_item;
@@ -199,7 +211,7 @@ public class GroceryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // call newItem() from MainActivity
-                ((MainActivity)getActivity()).newItem();
+                ((MainActivity)getActivity()).newItem(itemHash);
             }
         });
     }
@@ -219,9 +231,23 @@ public class GroceryListFragment extends Fragment {
         initRecyclerView();
     }
 
+
     private void saveGroceryList(){
         // save current Grocery List
         GroceryListFile.writeList(items, getActivity());
+    }
+
+
+    private void init_hashMap(){
+        itemHash = new HashMap<>();
+        for(int i=0; i < items.size();i++){
+            itemHash.put(items.get(i).getItem(), items.get(i).getQuantity());
+        }
+    }
+
+
+    private void remove_hashPair(){
+
     }
 
 }

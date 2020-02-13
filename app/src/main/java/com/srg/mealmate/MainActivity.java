@@ -24,6 +24,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity
                           implements NavigationView.OnNavigationItemSelectedListener {
@@ -184,9 +186,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void newItem(){
+    public void newItem(HashMap<String, Double> hashMap){
+        // set hashMap as a bundle to pass
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("hashMap", hashMap);
         // Detach GroceryListFragment and add new AddGroceryItemFragment
         frag2 = new AddGroceryItemFragment();
+        frag2.setArguments(bundle);
         detachFragment(frag, frag2, R.string.nav_new_grocery);
     }
 

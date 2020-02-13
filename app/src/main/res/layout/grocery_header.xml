@@ -32,6 +32,7 @@
         android:layout_gravity="center"
         android:layout_weight=".7"
         android:textStyle="bold"
+        android:textSize="14sp"
         android:text="@string/grocery_item_outline" />
 
     <ImageView

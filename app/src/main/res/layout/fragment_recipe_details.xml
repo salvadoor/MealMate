@@ -35,14 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:text="@string/placeholder"/>
 
         <TextView
             android:id="@+id/detail_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="@string/placeholder"/>
 
         <ImageView
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="@string/ingredients_subheader"/>
 
         <include layout="@layout/horizontal_divider"/>
@@ -68,6 +68,7 @@
             android:id="@+id/detail_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:text="@string/placeholder"/>
 
         <TextView
@@ -75,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="@string/instructions_subheader"/>
 
         <include layout="@layout/horizontal_divider"/>
@@ -84,6 +85,7 @@
             android:id="@+id/detail_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:text="@string/placeholder"/>
 
         <Button

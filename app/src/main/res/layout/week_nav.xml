@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@color/t10"
         android:textColor="@color/white"
+        android:textSize="14sp"
         android:text="@string/nav_previous"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:background="@color/t10"
         android:textColor="@color/white"
+        android:textSize="14sp"
         android:text="@string/nav_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +41,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="Week of 1/5"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintStart_toEndOf="@+id/btn_prev"
         app:layout_constraintTop_toTopOf="parent"

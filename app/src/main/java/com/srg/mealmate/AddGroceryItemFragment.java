@@ -15,10 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 
 public class AddGroceryItemFragment extends Fragment {
     private View view;
     private Spinner spinner;
+    private HashMap<String, Double> hashMap = new HashMap<>();
     private static String[] unitOptions = {"whole/other", "ounce", "teaspoon", "tablespoon", "pinch"};
 
 
@@ -30,8 +33,13 @@ public class AddGroceryItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
+
+        if(bundle!=null){ //HashMap passed
+            hashMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
+        }
 
         initSpinner();
         initOnClickListeners();
@@ -69,7 +77,11 @@ public class AddGroceryItemFragment extends Fragment {
                         units = "";
                     }
 
-                    ((MainActivity)getActivity()).addItem(quantity, units, name);
+                    if(hashMap.containsKey(name)){
+                        Toast.makeText(getActivity(), "Already in List", Toast.LENGTH_SHORT).show();
+                    } else {
+                        ((MainActivity) getActivity()).addItem(quantity, units, name);
+                    }
                 }
             }
         });
