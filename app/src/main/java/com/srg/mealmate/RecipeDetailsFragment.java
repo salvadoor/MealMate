@@ -13,7 +13,7 @@
  * TO DO:
  *  setup buttons and listeners
  *
- * Last Modified: 02.12.2020 04:42pm
+ * Last Modified: 02.12.2020 08:03pm
  */
 package com.srg.mealmate;
 
@@ -23,7 +23,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -148,34 +147,10 @@ public class RecipeDetailsFragment extends Fragment {
         full_details.append(" * ")
                 .append(amount)
                 .append(units)
-                .append(" ")
+                .append(" x ")
                 .append(name);
 
         return full_details.toString();
     }
-
-/*
-    private void init_popupMenu(){
-        // create new PopupMenu and bind to view for menu button
-        popupMenu = new PopupMenu(getContext(), view.findViewById(R.id.btn_recipe_menu));
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.menu_recipe, popupMenu.getMenu());
-    }
-
-
-    private void init_OnClickListener(){
-        // set OnClickListeners
-        // show popmenu when menu button is clicked
-        Button btn_menu = view.findViewById(R.id.btn_recipe_menu);
-        btn_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupMenu.show();
-            }
-        });
-
-    }
-
- */
 
 }

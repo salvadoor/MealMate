@@ -55,7 +55,9 @@
 
 
     <!-- GroceryList -->
-    <string name="nav_new_grocery">Add New Grocery</string>
+    <string name="nav_new_grocery">Add New Grocery Item</string>
+    <string name="btn_add_new_item">PRESS HERE TO ADD NEW GROCERY ITEM</string>
+
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>
     <string name="ask_item_units">Select the Units to Use</string>

@@ -7,7 +7,7 @@
  * use ArrayList of GroceryItem objects for lists
  * use Calendar to keep track of weeks
  *
- * Last Modified: 02.01.2020 02:35pm
+ * Last Modified: 02.12.2020 05:25pm
  */
 package com.srg.mealmate;
 
@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -105,11 +106,11 @@ public class GroceryListFragment extends Fragment {
 
     private void initMockItems(){
         // For initial Testing and Development, populate grocery list
-        items.add(new GroceryItem(2, "Avacados"));
-        items.add(new GroceryItem(5, "Apples"));
-        items.add(new GroceryItem(1, "Loaf of bread"));
-        items.add(new GroceryItem(2, "lemons"));
-        items.add(new GroceryItem(6, "pairs", true));
+        items.add(new GroceryItem(2, "whole", "Avacados"));
+        items.add(new GroceryItem(5, "whole", "Apples"));
+        items.add(new GroceryItem(1, "whole", "Loaf of bread"));
+        items.add(new GroceryItem(2, "whole", "lemons"));
+        items.add(new GroceryItem(6, "whole", "pairs", true));
     }
 
 //----------------------------------------------------------------------------------
@@ -190,7 +191,7 @@ public class GroceryListFragment extends Fragment {
 
     private void initOnClickListeners(){
         // OnClickListener for button to add new item
-        Button btn_new_item;
+        LinearLayout btn_new_item;
 
         btn_new_item = view.findViewById(R.id.btn_new_item);
         btn_new_item.setOnClickListener(new View.OnClickListener() {

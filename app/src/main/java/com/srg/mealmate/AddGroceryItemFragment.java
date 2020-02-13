@@ -42,14 +42,16 @@ public class AddGroceryItemFragment extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText itemName = view.findViewById(R.id.edit_name);
                 EditText itemQuantity = view.findViewById(R.id.edit_quantity);
+                EditText itemUnits = view.findViewById(R.id.edit_units);
+                EditText itemName = view.findViewById(R.id.edit_name);
 
                 if(!fieldEmpty()){
-                    String name = itemName.getText().toString();
                     int quantity = Integer.parseInt(itemQuantity.getText().toString());
+                    String name = itemName.getText().toString();
+                    String units = itemUnits.getText().toString();
 
-                    ((MainActivity)getActivity()).addItem(name, quantity);
+                    ((MainActivity)getActivity()).addItem(quantity, units, name);
                 }
             }
         });

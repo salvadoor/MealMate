@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity
         detachFragment(frag, frag2, R.string.nav_new_grocery);
     }
 
-    public void addItem(String name, int n){
-        GroceryItem newItem = new GroceryItem(n, name); // new GroceryItem
+    public void addItem(double quantity, String units, String name){
+        GroceryItem newItem = new GroceryItem(quantity, units, name); // new GroceryItem
 
         // save GroceryItem in Bundle as a serialized object
         Bundle bundle = new Bundle();

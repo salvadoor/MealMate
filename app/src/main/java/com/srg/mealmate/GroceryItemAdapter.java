@@ -60,8 +60,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             holder.checkBox.setImageResource(R.drawable.checkbox_outline);
         }
 
-        holder.quantity.setText(items.get(position).getQuantityString());
-        holder.name.setText(items.get(position).getItem());
+        holder.details.setText(items.get(position).getGroceryDetailString());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -95,15 +94,14 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView checkBox;
-        TextView quantity, name;
+        TextView details;
         LinearLayout parentLayout;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             checkBox = itemView.findViewById(R.id.checkbox_img);
-            quantity = itemView.findViewById(R.id.item_quantity);
-            name = itemView.findViewById(R.id.item_name);
+            details = itemView.findViewById(R.id.grocery_item_details);
             parentLayout = itemView.findViewById(R.id.grocery_item);
         }
     }
@@ -137,5 +135,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
+
 }
 
