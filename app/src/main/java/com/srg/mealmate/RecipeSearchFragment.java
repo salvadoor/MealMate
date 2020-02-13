@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -32,10 +33,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class RecipeSearchFragment extends Fragment {
     private static final String TAG = "RecipeFragmentSearch";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    // private ArrayList<SearchResult> results = new ArrayList<>();
     private ArrayList<Recipe> results = new ArrayList<>();
     private View view;
-    // SearchResultAdapter adapter;
+
 
 
     public RecipeSearchFragment() {
@@ -49,26 +49,13 @@ public class RecipeSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_recipe_search, container, false);
 
-
-       // results = new ArrayList<>();
-        //initMockItems();
         initRecyclerView();
 
         init_empty_search();
 
-
-
-
         return view;
     }
 
-    private void initMockItems(){
-        // For initial Testing and Development, populate grocery list
-      //  results.add(new SearchResult("1", "Avacados", "wdcvfv"));
-      //  results.add(new SearchResult("1", "Avacados", "wdcvfv"));
-      //  results.add(new SearchResult("1", "Avacados", "wdcvfv"));
-
-    }
     private void initRecyclerView(){
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
@@ -92,17 +79,13 @@ public class RecipeSearchFragment extends Fragment {
                                 String name = document.getString("title");
                                 String source = document.getString("source");
                                 String id = document.getId();
-
-                                //----
+                                String imgURL = document.getString("imageURL");
                                 ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
                                 String category = document.getString("category");
                                 ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
-                              //  Toast.makeText(getActivity(), ingredients.get(0).get("name").toString(), Toast.LENGTH_SHORT);
-                                //-----
-                                //SearchResult sr = new SearchResult(name, source, id, ingredients);
-                                //results.add(sr);
+
                                 Recipe newResult = new Recipe(name, source, id, ingredients,
-                                        category, instructions);
+                                        category, instructions, imgURL);
                                 results.add(newResult);
 
                                 initRecyclerView();

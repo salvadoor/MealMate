@@ -13,11 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         // bind ViewHolder and set text and click listener based on the individual recipe result
         Log.d(TAG,"onBindViewHolder:called");
 
+        Picasso.get().load(results.get(position).getImgURL()).into(holder.result_image);
         holder.result_name.setText(results.get(position).getName());
         holder.result_source.setText(results.get(position).getSource());
 
@@ -67,11 +71,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView result_name, result_source;
+        ImageView result_image;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            result_image = itemView.findViewById(R.id.result_image);
             result_name = itemView.findViewById(R.id.result_name);
             result_source = itemView.findViewById(R.id.result_source);
             parentLayout = itemView.findViewById(R.id.search_result);

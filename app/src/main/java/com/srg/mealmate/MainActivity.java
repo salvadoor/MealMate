@@ -8,10 +8,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -123,6 +128,29 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        // Override method to auto-hide soft keyboard
+        // auto-hide when focus is shifted away from an EditText
+        // if screen touch/click
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            // if an EditText is already in focus
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+
+        return super.dispatchTouchEvent( event );
+    }
+
+
     public void userSignedIn() {
         // set user and navigate to Settings
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,6 +206,9 @@ public class MainActivity extends AppCompatActivity
         attachFragment(frag, frag2);
     }
 
+
+//---------------------------------------------------------------------------
+// Following three Methods deal with setting and inflating a Fragment
     private void setFragment(Fragment f){
         // Inflate Fragment f, replaces current Fragment
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -185,8 +216,11 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
+
     private void detachFragment(Fragment f1, Fragment f2, int newTitle){
         // add Fragment f2 and detach Fragment f1
+        // detaching f1 instead of removing so that data is not deleted
+        // allows f1 to be re-attached instead of recreating it
         // save f1's title and set f2's title
         actionBarTitle = getSupportActionBar().getTitle().toString();
         getSupportActionBar().setTitle(newTitle);
@@ -196,6 +230,7 @@ public class MainActivity extends AppCompatActivity
         ft.detach(f1);
         ft.commit();
     }
+
 
     private void attachFragment(Fragment f1, Fragment f2){
         // re-attach f1 and remove f2
@@ -207,8 +242,17 @@ public class MainActivity extends AppCompatActivity
         ft.remove(f2);
         ft.commit();
     }
+//---------------------------------------------------------------------------
+
 
     public void viewRecipeDetails(Recipe recipe){
+        /* pass Recipe to RecipeDetailsFragment and inflate
+           Method is called by several Fragments:
+                RecipeSearch
+                SavedRecipes
+                MealPlan
+         */
+
         // put recipe in a bundle as a serialized object
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
@@ -220,6 +264,5 @@ public class MainActivity extends AppCompatActivity
         // detach RecipeSearchFragment and add/inflate RecipeDetails
         detachFragment(frag, frag2, R.string.nav_recipe_details);
     }
-
 
 }

@@ -13,7 +13,7 @@
  * TO DO:
  *  setup buttons and listeners
  *
- * Last Modified: 02.12.2020 08:03pm
+ * Last Modified: 02.13.2020 11:42pm
  */
 package com.srg.mealmate;
 
@@ -26,8 +26,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,8 +58,8 @@ public class RecipeDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
 
-        // set text for TextViews based on recipe's data
-        init_layout_text();
+        // set TextViews and ImageView based on recipe's data
+        init_layout();
         /*
         // create PopupMenu
         init_popupMenu();
@@ -69,9 +72,13 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
 
-    private void init_layout_text(){
+    private void init_layout(){
         // set text for all the TextViews based on data from recipe
         TextView nameTV, sourceTV, ingredientsTV, instructionsTV;
+        ImageView imageView;
+
+        imageView = view.findViewById(R.id.detail_image);
+        Picasso.get().load(recipe.getImgURL()).into(imageView);
 
         // set Recipe name and source text
         nameTV = view.findViewById(R.id.detail_title);
@@ -146,8 +153,9 @@ public class RecipeDetailsFragment extends Fragment {
 
         full_details.append(" * ")
                 .append(amount)
+                .append(" ")
                 .append(units)
-                .append(" x ")
+                .append(" - ")
                 .append(name);
 
         return full_details.toString();
