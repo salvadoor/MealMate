@@ -69,7 +69,7 @@ public class AddGroceryItemFragment extends Fragment {
                 EditText itemName = view.findViewById(R.id.edit_name);
 
                 if(!fieldEmpty()){
-                    int quantity = Integer.parseInt(itemQuantity.getText().toString());
+                    double quantity = Double.parseDouble(itemQuantity.getText().toString());
                     String name = itemName.getText().toString();
                    // String units = itemUnits.getText().toString();
                     String units = spinner.getSelectedItem().toString();

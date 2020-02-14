@@ -39,6 +39,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class GroceryListFragment extends Fragment {
+    private static final String TAG = "GroceryListFragment";
     private View view;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private Calendar c;
@@ -47,6 +48,7 @@ public class GroceryListFragment extends Fragment {
     private ArrayList<GroceryItem> items = null;
     private Boolean dataStored = false; // true when fragment is not destroyed and then re-inflated
     private HashMap<String, Double> itemHash;
+
 
     public GroceryListFragment() {
         // Required empty public constructor
@@ -61,13 +63,19 @@ public class GroceryListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_grocery_list, container, false);
 
-        if(bundle!=null){ // if bundle contains a GroceryItem, add it to the current list
-            items.add((GroceryItem)bundle.getSerializable("item"));
+        if(bundle!=null){
+            Log.d(TAG,"bundle!=null");
+            // if bundle contains a GroceryItem, add it to the current list
+            if(bundle.getSerializable("item")!=null) {
+                Log.d(TAG,"Adding bundle item");
+                items.add((GroceryItem) bundle.getSerializable("item"));
+                bundle.remove("item");
+            }
+
         }
 
         // initialize important components
         init_weekData();
-        init_hashMap();
         initNavClickListeners();
         initOnClickListeners();
 
@@ -83,6 +91,7 @@ public class GroceryListFragment extends Fragment {
         saveGroceryList();
     }
 
+
     private void initRecyclerView(){
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
@@ -96,6 +105,7 @@ public class GroceryListFragment extends Fragment {
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
+
 
     private void initMockItems(){
         // For initial Testing and Development, populate grocery list
@@ -224,11 +234,12 @@ public class GroceryListFragment extends Fragment {
         GroceryListFile.setFilename(sundayDate);
         // retrieve list
         items = GroceryListFile.readList(getActivity());
-        if(items.isEmpty()){
-           // initMockItems();
-        }
+
+        //create HashMap
+        init_hashMap();
         // start RecyclerView
         initRecyclerView();
+
     }
 
 
@@ -240,7 +251,9 @@ public class GroceryListFragment extends Fragment {
 
     private void init_hashMap(){
         itemHash = new HashMap<>();
+
         for(int i=0; i < items.size();i++){
+            Log.d(TAG,"item count" + items.size());
             itemHash.put(items.get(i).getItem(), items.get(i).getQuantity());
         }
     }

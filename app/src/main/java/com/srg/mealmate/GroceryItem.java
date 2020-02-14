@@ -3,7 +3,7 @@
  *
  * Data Structure for items in grocery list
  *
- * Last Modified: 02.12.2020 08:01pm
+ * Last Modified: 02.14.2020 12:11pm
  */
 package com.srg.mealmate;
 
@@ -70,7 +70,12 @@ public class GroceryItem implements Serializable {
         StringBuilder full_details = new StringBuilder();
         String units;
 
-        full_details.append(this.quantity);
+        if(this.quantity%1!=0){
+            full_details.append(this.quantity);
+        } else {
+            full_details.append((int)this.quantity);
+        }
+
         if(this.units!="") {
             full_details.append("(")
                     .append(this.units)
