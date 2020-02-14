@@ -40,13 +40,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class GroceryListFragment extends Fragment {
     private static final String TAG = "GroceryListFragment";
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private View view;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
     private int weeksSaved;
     private ArrayList<GroceryItem> items = null;
-    private Boolean dataStored = false; // true when fragment is not destroyed and then re-inflated
+    private Boolean dataStored = false; //initial false,  true when fragment is not destroyed and then re-inflated
     private HashMap<String, Double> itemHash;
 
 
@@ -96,7 +96,7 @@ public class GroceryListFragment extends Fragment {
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
-        GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), items);
+        GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), getActivity(), items);
 
 
         // Trying stuff here, feb 8th
@@ -222,6 +222,7 @@ public class GroceryListFragment extends Fragment {
             public void onClick(View view) {
                 // call newItem() from MainActivity
                 ((MainActivity)getActivity()).newItem(itemHash);
+
             }
         });
     }

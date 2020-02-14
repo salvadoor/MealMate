@@ -56,6 +56,10 @@
     <string name="grocery_item_outline">Quantity(Units) - Grocery Item</string>
     <string name="btn_add_new_item">PRESS HERE TO ADD NEW GROCERY ITEM</string>
 
+    <!-- Edit item -->
+    <string name="btn_save_changes">Save Changes</string>
+    <string name="btn_delete_item">Delete Item</string>
+
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>
     <string name="ask_item_units">Select the Units to Use</string>
@@ -80,7 +84,7 @@
 
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>
-    <string name="last_updated">Last Updated Jan 31st, 2020</string>
+    <string name="last_updated">Last Updated Feb 14th, 2020</string>
     <string name="developed_by">Developed by Salvador Rodriguez Gomez</string>
     <string name="school_info">St Mary\'s University</string>
     <string name="class_info">CS4395: Senior Project</string>
@@ -94,10 +98,14 @@
     <string name="register_pass"> New User Created</string>
     <string name="register_fail"> Registration Failed</string>
 
+
     <!-- Debug strings -->
     <string name="createUser_success">createUserWithEmail:success</string>
     <string name="createUser_failure">createUserWithEmail:failure</string>
     <string name="signIn_success">signInWithEmail:success</string>
     <string name="signIn_failure">signInWithEmail:failure</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

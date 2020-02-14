@@ -6,10 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -186,12 +186,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void showEditDialog(){
+        FragmentManager fm = getSupportFragmentManager();
+        EditItemDialogFragment editItemDialog = new EditItemDialogFragment();
+        editItemDialog.show(fm, "fragment_edit_item");
+    }
+
+
     public void newItem(HashMap<String, Double> hashMap){
         // set hashMap as a bundle to pass
         Bundle bundle = new Bundle();
         bundle.putSerializable("hashMap", hashMap);
-        // Detach GroceryListFragment and add new AddGroceryItemFragment
-        frag2 = new AddGroceryItemFragment();
+        // Detach GroceryListFragment and add new AddItemFragment
+        frag2 = new AddItemFragment();
         frag2.setArguments(bundle);
         detachFragment(frag, frag2, R.string.nav_new_grocery);
     }

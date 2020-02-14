@@ -11,6 +11,7 @@
  */
 package com.srg.mealmate;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -33,11 +34,13 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
     private static final String TAG = "GroceryItemAdapter";
     private ArrayList<GroceryItem> items = new ArrayList<>();
     private Context mContext;
+    private Activity activity;
 
 
-    public GroceryItemAdapter(Context context, ArrayList<GroceryItem> items) {
+    public GroceryItemAdapter(Context context, Activity activity, ArrayList<GroceryItem> items) {
         this.items = items;
         this.mContext = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -80,7 +83,10 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             @Override
             public boolean onLongClick(View view){
                 // show deletion confirmation prompt on item long click
-                 do_Dialog(position);
+
+                //do_Dialog(position); // deletion dialog
+                ((MainActivity)activity).showEditDialog();
+
                 return true;
             }
         });

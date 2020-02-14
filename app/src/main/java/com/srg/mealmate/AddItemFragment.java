@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,14 +17,15 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 
-public class AddGroceryItemFragment extends Fragment {
+public class AddItemFragment extends Fragment {
     private View view;
     private Spinner spinner;
     private HashMap<String, Double> hashMap = new HashMap<>();
-    private static String[] unitOptions = {"whole/other", "ounce", "teaspoon", "tablespoon", "pinch"};
+    //private static String[] unitOptions = {"other", "ounce", "teaspoon", "tablespoon", "pinch", "pound", "cup"};
+    private static final String[] unitOptions = {"other", "oz", "tsp", "tbsp", "pinch", "lb", "cup", "loaf", "package"};
 
 
-    public AddGroceryItemFragment() {
+    public AddItemFragment() {
         // Required empty public constructor
     }
 
@@ -35,7 +35,7 @@ public class AddGroceryItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
+        view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
         if(bundle!=null){ //HashMap passed
             hashMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
@@ -73,7 +73,7 @@ public class AddGroceryItemFragment extends Fragment {
                     String name = itemName.getText().toString();
                    // String units = itemUnits.getText().toString();
                     String units = spinner.getSelectedItem().toString();
-                    if(units=="whole/other"){
+                    if(units=="other"){
                         units = "";
                     }
 
