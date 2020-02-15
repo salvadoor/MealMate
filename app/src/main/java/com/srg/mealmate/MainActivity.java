@@ -186,9 +186,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void showEditDialog(){
+    public void showEditDialog(GroceryItem item){
         FragmentManager fm = getSupportFragmentManager();
-        EditItemDialogFragment editItemDialog = new EditItemDialogFragment();
+        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(item);
+
+
         editItemDialog.show(fm, "fragment_edit_item");
     }
 

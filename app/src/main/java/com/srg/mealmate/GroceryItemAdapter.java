@@ -69,7 +69,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             @Override
             public void onClick(View view){
                 // check/uncheck selected grocery item
-                Log.d(TAG, "onClick:clicked on: " + items.get(position).getItem());
+                Log.d(TAG, "onClick:clicked on: " + items.get(position).getName());
                 if(items.get(position).getChecked()){
                     items.get(position).setChecked(false);
                 } else{
@@ -85,7 +85,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 // show deletion confirmation prompt on item long click
 
                 //do_Dialog(position); // deletion dialog
-                ((MainActivity)activity).showEditDialog();
+                ((MainActivity)activity).showEditDialog(items.get(position));
 
                 return true;
             }
@@ -125,7 +125,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                     public void onClick(DialogInterface dialog, int id) {
                         StringBuilder str = new StringBuilder();
                         str.append("'")
-                                .append(items.get(pos).getItem())
+                                .append(items.get(pos).getName())
                                 .append("'")
                                 .append(" Deleted");
                         Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();

@@ -60,6 +60,9 @@
     <string name="btn_save_changes">Save Changes</string>
     <string name="btn_delete_item">Delete Item</string>
 
+    <string name="edit_label">Edit </string>
+    <string name="units_label">Units: </string>
+
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>
     <string name="ask_item_units">Select the Units to Use</string>

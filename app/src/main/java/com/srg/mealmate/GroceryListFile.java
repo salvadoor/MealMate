@@ -1,6 +1,7 @@
 package com.srg.mealmate;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,14 +12,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class GroceryListFile {
+    private static final String TAG = "GroceryListFile";
 
-    public static String filename;
+    public static String filename = "";
 
     public static void setFilename(String sundayDate){
         filename = sundayDate + "_list.dat";
     }
 
     public static void writeList(ArrayList<GroceryItem> items, Context context){
+        Log.d(TAG, "writeList");
+        Log.d(TAG, "filename="+filename);
         try{
             FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);

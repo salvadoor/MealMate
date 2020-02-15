@@ -13,7 +13,7 @@ public class GroceryItem implements Serializable {
     private Boolean isChecked;
     private double quantity;
     private String units;
-    private String item;
+    private String name;
 /*
     public static final GroceryItem[] items = {
         new GroceryItem(2, "Avacados"),
@@ -23,14 +23,14 @@ public class GroceryItem implements Serializable {
     public GroceryItem(double quantity, String units, String item){
         this.quantity = quantity;
         this.units = units;
-        this.item = item;
+        this.name = item;
         this.isChecked = false;
     }
 
     public GroceryItem(double quantity, String units, String item, Boolean checked){
         this.quantity = quantity;
         this.units = units;
-        this.item = item;
+        this.name = item;
         this.isChecked = checked;
     }
 
@@ -49,8 +49,8 @@ public class GroceryItem implements Serializable {
 
     public String getUnits(){ return units;}
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
     public void setChecked(Boolean tf) {
@@ -82,7 +82,7 @@ public class GroceryItem implements Serializable {
                     .append(")");
         }
         full_details.append("  -  ")
-                .append(this.item);
+                .append(this.name);
 
         return full_details.toString();
     }

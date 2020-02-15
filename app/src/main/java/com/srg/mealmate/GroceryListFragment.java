@@ -14,7 +14,6 @@ package com.srg.mealmate;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +33,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 
 public class GroceryListFragment extends Fragment {
     private static final String TAG = "GroceryListFragment";
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private View view;
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
@@ -236,6 +232,7 @@ public class GroceryListFragment extends Fragment {
         // retrieve list
         items = GroceryListFile.readList(getActivity());
 
+
         //create HashMap
         init_hashMap();
         // start RecyclerView
@@ -255,7 +252,7 @@ public class GroceryListFragment extends Fragment {
 
         for(int i=0; i < items.size();i++){
             Log.d(TAG,"item count" + items.size());
-            itemHash.put(items.get(i).getItem(), items.get(i).getQuantity());
+            itemHash.put(items.get(i).getName(), items.get(i).getQuantity());
         }
     }
 
