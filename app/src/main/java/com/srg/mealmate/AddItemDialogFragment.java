@@ -14,13 +14,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class AddItemDialogFragment extends DialogFragment {
     private View view;
     private Spinner spinner;
-    private HashMap<String, Double> hashMap = new HashMap<>();
+    private ArrayList<GroceryItem> items;
+    private HashMap<String, Double> itemMap = new HashMap<>();
     private static final String[] unitOptions = {"other", "oz", "tsp", "tbsp", "pinch", "lb", "cup", "loaf", "package"};
 
 
@@ -29,11 +31,12 @@ public class AddItemDialogFragment extends DialogFragment {
     }
 
 
-    public static AddItemDialogFragment newInstance(HashMap hashMap){
+    public static AddItemDialogFragment newInstance(HashMap hashMap, ArrayList<GroceryItem> list){
         AddItemDialogFragment frag = new AddItemDialogFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("hashMap", hashMap);
+        bundle.putSerializable("items", list);
         frag.setArguments(bundle);
 
         return frag;
@@ -48,7 +51,8 @@ public class AddItemDialogFragment extends DialogFragment {
         view = inflater.inflate(R.layout.fragment_add_item_dialog, container, false);
 
         Bundle bundle = getArguments();
-        hashMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
+        itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
+        items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
 
         initSpinner();
         initOnClickListeners();
@@ -86,10 +90,23 @@ public class AddItemDialogFragment extends DialogFragment {
                         units = "";
                     }
 
-                    if(hashMap.containsKey(name)){
+                    if(itemMap.containsKey(name)){
                         Toast.makeText(getActivity(), "Already in List", Toast.LENGTH_SHORT).show();
+                        int index = 0;
+
+                        for(int i=0; i<items.size();i++){
+                            if (items.get(i).getName()==name) {
+                                //get index for item already in list
+                                index = i;
+                                break;
+                            }
+                        }
+                        // dismiss AddItem and show Dialog to edit the item 
+                        dismiss();
+                        ((MainActivity) getActivity()).showEditDialog(index, items);
                     } else {
-                        ((MainActivity) getActivity()).addItem(quantity, units, name);
+                        items.add(new GroceryItem(quantity, units, name));
+                        //((MainActivity) getActivity()).addItem(quantity, units, name);
                         dismiss();
                     }
                 }
@@ -100,8 +117,6 @@ public class AddItemDialogFragment extends DialogFragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
-                // ((MainActivity)getActivity()).cancelItem();
                 dismiss();
             }
         });

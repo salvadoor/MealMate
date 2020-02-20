@@ -198,24 +198,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void newItem(HashMap<String, Double> hashMap){
+    public void newItem(HashMap<String, Double> hashMap, ArrayList<GroceryItem> items){
         // create new AddItemDialogFragment and pass data, show DialogFragment
         // pass hashmap of items in grocery list
         FragmentManager fm = getSupportFragmentManager();
-        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap);
+        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap, items);
 
         addItemDialog.show(fm, "fragment_add_item_dialog");
-    }
-
-
-    public void addItem(double quantity, String units, String name){
-        GroceryItem newItem = new GroceryItem(quantity, units, name); // new GroceryItem
-
-        // save new GroceryItem in Bundle as a serialized object
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("item", newItem);
-        // pass bundle back to grocery list
-        frag.setArguments(bundle);
     }
 
 

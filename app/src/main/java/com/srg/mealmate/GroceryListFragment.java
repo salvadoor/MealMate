@@ -88,13 +88,6 @@ public class GroceryListFragment extends Fragment {
                 if(hasFocus) {
                     Log.d(TAG, "has Focus: true");
 
-                    Bundle bundle = getArguments();
-
-                    if(bundle!=null && bundle.getSerializable("item")!=null){
-                        items.add((GroceryItem) bundle.getSerializable("item"));
-                        bundle.remove("item");
-                    }
-
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -227,7 +220,7 @@ public class GroceryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // call newItem() from MainActivity
-                ((MainActivity)getActivity()).newItem(itemHash);
+                ((MainActivity)getActivity()).newItem(itemHash, items);
 
             }
         });
