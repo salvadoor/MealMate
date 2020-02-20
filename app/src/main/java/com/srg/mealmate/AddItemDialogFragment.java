@@ -3,7 +3,7 @@ package com.srg.mealmate;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,29 +17,38 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 
-public class AddItemFragment extends Fragment {
+public class AddItemDialogFragment extends DialogFragment {
     private View view;
     private Spinner spinner;
     private HashMap<String, Double> hashMap = new HashMap<>();
-    //private static String[] unitOptions = {"other", "ounce", "teaspoon", "tablespoon", "pinch", "pound", "cup"};
     private static final String[] unitOptions = {"other", "oz", "tsp", "tbsp", "pinch", "lb", "cup", "loaf", "package"};
 
 
-    public AddItemFragment() {
+    public AddItemDialogFragment() {
         // Required empty public constructor
+    }
+
+
+    public static AddItemDialogFragment newInstance(HashMap hashMap){
+        AddItemDialogFragment frag = new AddItemDialogFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("hashMap", hashMap);
+        frag.setArguments(bundle);
+
+        return frag;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
-        if(bundle!=null){ //HashMap passed
-            hashMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
-        }
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_add_item_dialog, container, false);
+
+        Bundle bundle = getArguments();
+        hashMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
 
         initSpinner();
         initOnClickListeners();
@@ -71,7 +80,7 @@ public class AddItemFragment extends Fragment {
                 if(!fieldEmpty()){
                     double quantity = Double.parseDouble(itemQuantity.getText().toString());
                     String name = itemName.getText().toString();
-                   // String units = itemUnits.getText().toString();
+                    // String units = itemUnits.getText().toString();
                     String units = spinner.getSelectedItem().toString();
                     if(units=="other"){
                         units = "";
@@ -81,6 +90,7 @@ public class AddItemFragment extends Fragment {
                         Toast.makeText(getActivity(), "Already in List", Toast.LENGTH_SHORT).show();
                     } else {
                         ((MainActivity) getActivity()).addItem(quantity, units, name);
+                        dismiss();
                     }
                 }
             }
@@ -91,7 +101,8 @@ public class AddItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).cancelItem();
+                // ((MainActivity)getActivity()).cancelItem();
+                dismiss();
             }
         });
     }

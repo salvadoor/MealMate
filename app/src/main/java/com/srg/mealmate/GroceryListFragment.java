@@ -61,17 +61,6 @@ public class GroceryListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_grocery_list, container, false);
 
-        if(bundle!=null){
-            Log.d(TAG,"bundle!=null");
-            // if bundle contains a GroceryItem, add it to the current list
-            if(bundle.getSerializable("item")!=null) {
-                Log.d(TAG,"Adding bundle item");
-                items.add((GroceryItem) bundle.getSerializable("item"));
-                bundle.remove("item");
-            }
-
-        }
-
         // initialize important components
         init_weekData();
         init_NavClickListeners();
@@ -98,6 +87,14 @@ public class GroceryListFragment extends Fragment {
             public void onWindowFocusChanged(final boolean hasFocus) {
                 if(hasFocus) {
                     Log.d(TAG, "has Focus: true");
+
+                    Bundle bundle = getArguments();
+
+                    if(bundle!=null && bundle.getSerializable("item")!=null){
+                        items.add((GroceryItem) bundle.getSerializable("item"));
+                        bundle.remove("item");
+                    }
+
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -110,10 +107,6 @@ public class GroceryListFragment extends Fragment {
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
         adapter = new GroceryItemAdapter(getActivity(), getActivity(), items);
-
-
-        // Trying stuff here, feb 8th
-
 
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

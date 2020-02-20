@@ -45,7 +45,7 @@ public class EditItemDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_edit_item, container, false);
+        view = inflater.inflate(R.layout.fragment_edit_item_dialog, container, false);
 
         Bundle bundle = getArguments();
         itemIndex = bundle.getInt("itemIndex");

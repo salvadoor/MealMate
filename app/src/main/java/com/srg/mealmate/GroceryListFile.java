@@ -36,14 +36,13 @@ public class GroceryListFile {
     }
 
     public static ArrayList<GroceryItem> readList(Context context){
-        ArrayList<GroceryItem> items = null;
+        ArrayList<GroceryItem> items = new ArrayList<>();
 
         try{
             FileInputStream fis = context.openFileInput(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
             items = (ArrayList<GroceryItem>) ois.readObject();
         } catch(FileNotFoundException e){
-            items = new ArrayList<>();
             e.printStackTrace();
         } catch(IOException e){
             e.printStackTrace();

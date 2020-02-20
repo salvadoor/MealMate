@@ -188,40 +188,34 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showEditDialog(int position, ArrayList<GroceryItem> items){
+        // create new EditItemDialogFragment and pass data, show DialogFragment
+        // pass item position in arraylist and arraylist of items
         FragmentManager fm = getSupportFragmentManager();
         EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(position, items);
 
 
-        editItemDialog.show(fm, "fragment_edit_item");
+        editItemDialog.show(fm, "fragment_edit_item_dialog");
     }
 
 
     public void newItem(HashMap<String, Double> hashMap){
-        // set hashMap as a bundle to pass
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("hashMap", hashMap);
-        // Detach GroceryListFragment and add new AddItemFragment
-        frag2 = new AddItemFragment();
-        frag2.setArguments(bundle);
-        detachFragment(frag, frag2, R.string.nav_new_grocery);
+        // create new AddItemDialogFragment and pass data, show DialogFragment
+        // pass hashmap of items in grocery list
+        FragmentManager fm = getSupportFragmentManager();
+        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap);
+
+        addItemDialog.show(fm, "fragment_add_item_dialog");
     }
+
 
     public void addItem(double quantity, String units, String name){
         GroceryItem newItem = new GroceryItem(quantity, units, name); // new GroceryItem
 
-        // save GroceryItem in Bundle as a serialized object
+        // save new GroceryItem in Bundle as a serialized object
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", newItem);
         // pass bundle back to grocery list
         frag.setArguments(bundle);
-
-        // Re-attach GroceryListFragment
-        attachFragment(frag, frag2);
-    }
-
-    public void cancelItem(){
-        // Re-attach GroceryListFragment
-        attachFragment(frag, frag2);
     }
 
 
