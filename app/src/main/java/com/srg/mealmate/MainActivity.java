@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -186,9 +187,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void showEditDialog(GroceryItem item){
+    public void showEditDialog(int position, ArrayList<GroceryItem> items){
         FragmentManager fm = getSupportFragmentManager();
-        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(item);
+        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(position, items);
 
 
         editItemDialog.show(fm, "fragment_edit_item");

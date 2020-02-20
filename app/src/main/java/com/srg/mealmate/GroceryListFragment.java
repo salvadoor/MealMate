@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,9 +42,10 @@ public class GroceryListFragment extends Fragment {
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
     private int weeksSaved;
-    private ArrayList<GroceryItem> items = null;
+    private ArrayList<GroceryItem> items = new ArrayList<>();
     private Boolean dataStored = false; //initial false,  true when fragment is not destroyed and then re-inflated
     private HashMap<String, Double> itemHash;
+    private GroceryItemAdapter adapter;
 
 
     public GroceryListFragment() {
@@ -72,8 +74,9 @@ public class GroceryListFragment extends Fragment {
 
         // initialize important components
         init_weekData();
-        initNavClickListeners();
-        initOnClickListeners();
+        init_NavClickListeners();
+        init_OnClickListeners();
+        init_FocusChangeListener();
 
         dataStored = true;
 
@@ -88,11 +91,25 @@ public class GroceryListFragment extends Fragment {
     }
 
 
-    private void initRecyclerView(){
+    private void init_FocusChangeListener(){
+        // listener used to update recyclerview after an EditItem or AddItem dialog fragment is closed
+        view.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
+            @Override
+            public void onWindowFocusChanged(final boolean hasFocus) {
+                if(hasFocus) {
+                    Log.d(TAG, "has Focus: true");
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+
+    private void init_RecyclerView(){
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
-        GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), getActivity(), items);
+        adapter = new GroceryItemAdapter(getActivity(), getActivity(), items);
 
 
         // Trying stuff here, feb 8th
@@ -181,7 +198,7 @@ public class GroceryListFragment extends Fragment {
 
 //----------------------------------------------------------------------------------
 // Methods to set OnClickListeners for buttons
-    private void initNavClickListeners(){
+    private void init_NavClickListeners(){
         // set OnClickListeners for prev and next buttons
         // These buttons will change the week being viewed
         Button btn_prev, btn_next;
@@ -208,7 +225,7 @@ public class GroceryListFragment extends Fragment {
     }
 
 
-    private void initOnClickListeners(){
+    private void init_OnClickListeners(){
         // OnClickListener for 'button' to add new item
         ImageView btn_new_item;
 
@@ -236,7 +253,7 @@ public class GroceryListFragment extends Fragment {
         //create HashMap
         init_hashMap();
         // start RecyclerView
-        initRecyclerView();
+        init_RecyclerView();
 
     }
 
@@ -259,6 +276,10 @@ public class GroceryListFragment extends Fragment {
 
     private void remove_hashPair(){
 
+    }
+
+    public void dataChanged(){
+        adapter.notifyDataSetChanged();
     }
 
 }

@@ -54,38 +54,39 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG,"onBindViewHolder:called");
+        Log.d(TAG, "onBindViewHolder:called");
         Boolean checked = items.get(position).getChecked();
 
-        if(checked){
+        if (checked) {
             holder.checkBox.setImageResource(R.drawable.checked_box);
-        } else{
+        } else {
             holder.checkBox.setImageResource(R.drawable.checkbox_outline);
         }
 
         holder.details.setText(items.get(position).getGroceryDetailString());
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 // check/uncheck selected grocery item
                 Log.d(TAG, "onClick:clicked on: " + items.get(position).getName());
-                if(items.get(position).getChecked()){
+                if (items.get(position).getChecked()) {
                     items.get(position).setChecked(false);
-                } else{
+                } else {
                     items.get(position).setChecked(true);
                 }
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
+                notifyItemChanged(position);
             }
         });
 
-        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener(){
+        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view){
+            public boolean onLongClick(View view) {
                 // show deletion confirmation prompt on item long click
 
                 //do_Dialog(position); // deletion dialog
-                ((MainActivity)activity).showEditDialog(items.get(position));
+                ((MainActivity) activity).showEditDialog(position, items);
 
                 return true;
             }
@@ -98,53 +99,18 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView checkBox;
         TextView details;
         LinearLayout parentLayout;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView) {
             super(itemView);
 
             checkBox = itemView.findViewById(R.id.checkbox_img);
             details = itemView.findViewById(R.id.grocery_item_details);
             parentLayout = itemView.findViewById(R.id.grocery_item);
         }
-    }
-
-
-    private void do_Dialog(final int pos){
-        // create and show dialog to delete a grocery item
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
-        builder1.setMessage("Delete this item?");
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        StringBuilder str = new StringBuilder();
-                        str.append("'")
-                                .append(items.get(pos).getName())
-                                .append("'")
-                                .append(" Deleted");
-                        Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();
-                        items.remove(pos);
-                        notifyDataSetChanged();
-                        dialog.cancel();
-                    }
-                });
-
-        builder1.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
     }
 
 }

@@ -8,25 +8,33 @@ import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class EditItemDialogFragment extends DialogFragment {
     private View view;
     private TextView nameTV, unitsTV;
     private EditText quantityET;
+    private GroceryItem item;
+    private int itemIndex;
+    private ArrayList<GroceryItem> items;
 
 
     public EditItemDialogFragment() {
         // Required empty public constructor
     }
 
-    public static EditItemDialogFragment newInstance(GroceryItem item){
+    public static EditItemDialogFragment newInstance(int itemIndex, ArrayList<GroceryItem> items){
         EditItemDialogFragment frag = new EditItemDialogFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("item", item);
+        bundle.putInt("itemIndex", itemIndex);
+        bundle.putSerializable("items", items);
         frag.setArguments(bundle);
 
         return frag;
@@ -40,8 +48,18 @@ public class EditItemDialogFragment extends DialogFragment {
         view = inflater.inflate(R.layout.fragment_edit_item, container, false);
 
         Bundle bundle = getArguments();
-        GroceryItem item = (GroceryItem) bundle.getSerializable("item");
+        itemIndex = bundle.getInt("itemIndex");
+        items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
+        item = items.get(itemIndex);
 
+        init_fields();
+        init_OnClickListeners();
+
+        return view;
+    }
+
+
+    private void init_fields(){
         String itemUnits = item.getUnits();
 
         StringBuilder itemName = new StringBuilder();
@@ -59,8 +77,41 @@ public class EditItemDialogFragment extends DialogFragment {
 
         quantityET = view.findViewById(R.id.edit_quantity);
         quantityET.setHint(item.getQuantityString());
+    }
 
-        return view;
+
+    private void init_OnClickListeners(){
+        // set OnClick for save and delete buttons
+        Button btn_save, btn_delete;
+
+        btn_save = view.findViewById(R.id.btn_save_changes);
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Double newQuantity;
+                EditText quantityET = view.findViewById(R.id.edit_quantity);
+
+                try{
+                    newQuantity = Double.parseDouble(quantityET.getText().toString());
+                    item.setQuantity(newQuantity);
+                    Toast.makeText(getActivity(), "Item edited", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                } catch (Exception e){
+                    Toast.makeText(getActivity(), "Error: Changes not saved", Toast.LENGTH_SHORT).show();
+                    // do a toast
+                }
+            }
+        });
+
+        btn_delete = view.findViewById(R.id.btn_delete_item);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                items.remove(itemIndex);
+                Toast.makeText(getActivity(), "Item removed", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+        });
     }
 
 }
