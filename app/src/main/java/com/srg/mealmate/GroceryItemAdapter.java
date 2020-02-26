@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
@@ -35,12 +36,17 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
     private ArrayList<GroceryItem> items = new ArrayList<>();
     private Context mContext;
     private Activity activity;
+    private HashMap<String, Double> itemHash;
 
 
-    public GroceryItemAdapter(Context context, Activity activity, ArrayList<GroceryItem> items) {
+    public GroceryItemAdapter(Context context,
+                              Activity activity,
+                              ArrayList<GroceryItem> items,
+                              HashMap itemHash) {
         this.items = items;
         this.mContext = context;
         this.activity = activity;
+        this.itemHash = itemHash;
     }
 
     @NonNull
@@ -86,7 +92,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 // show deletion confirmation prompt on item long click
 
                 //do_Dialog(position); // deletion dialog
-                ((MainActivity) activity).showEditDialog(position, items);
+                ((MainActivity) activity).showEditDialog(position, items, itemHash);
 
                 return true;
             }

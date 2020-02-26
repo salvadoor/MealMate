@@ -187,22 +187,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void showEditDialog(int position, ArrayList<GroceryItem> items){
+    public void showEditDialog(int position, ArrayList<GroceryItem> items, HashMap itemHash){
         // create new EditItemDialogFragment and pass data, show DialogFragment
         // pass item position in arraylist and arraylist of items
         FragmentManager fm = getSupportFragmentManager();
-        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(position, items);
+        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(position, items, itemHash);
 
 
         editItemDialog.show(fm, "fragment_edit_item_dialog");
     }
 
 
-    public void newItem(HashMap<String, Double> hashMap, ArrayList<GroceryItem> items){
+    public void newItem(HashMap<String, Double> hashMap, ArrayList<GroceryItem> items, HashMap itemHash){
         // create new AddItemDialogFragment and pass data, show DialogFragment
         // pass hashmap of items in grocery list
         FragmentManager fm = getSupportFragmentManager();
-        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap, items);
+        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap, items, itemHash);
 
         addItemDialog.show(fm, "fragment_add_item_dialog");
     }

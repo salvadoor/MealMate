@@ -23,6 +23,7 @@ public class AddItemDialogFragment extends DialogFragment {
     private Spinner spinner;
     private ArrayList<GroceryItem> items;
     private HashMap<String, Double> itemMap = new HashMap<>();
+    private HashMap<String, Double> itemHash;
     private static final String[] unitOptions = {"other", "oz", "tsp", "tbsp", "pinch", "lb", "cup", "loaf", "package"};
 
 
@@ -31,12 +32,15 @@ public class AddItemDialogFragment extends DialogFragment {
     }
 
 
-    public static AddItemDialogFragment newInstance(HashMap hashMap, ArrayList<GroceryItem> list){
+    public static AddItemDialogFragment newInstance(HashMap hashMap,
+                                                    ArrayList<GroceryItem> list,
+                                                    HashMap itemHash){
         AddItemDialogFragment frag = new AddItemDialogFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("hashMap", hashMap);
         bundle.putSerializable("items", list);
+        bundle.putSerializable("hashmap", itemHash);
         frag.setArguments(bundle);
 
         return frag;
@@ -53,6 +57,7 @@ public class AddItemDialogFragment extends DialogFragment {
         Bundle bundle = getArguments();
         itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
         items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
+        itemHash = (HashMap<String, Double>) bundle.getSerializable("hashmap");
 
         initSpinner();
         initOnClickListeners();
@@ -95,16 +100,17 @@ public class AddItemDialogFragment extends DialogFragment {
                         int index = 0;
 
                         for(int i=0; i<items.size();i++){
-                            if (items.get(i).getName()==name) {
+                            if (items.get(i).getName().equals(name)) {
                                 //get index for item already in list
                                 index = i;
                                 break;
                             }
                         }
-                        // dismiss AddItem and show Dialog to edit the item 
+                        // dismiss AddItem and show Dialog to edit the item
                         dismiss();
-                        ((MainActivity) getActivity()).showEditDialog(index, items);
+                        ((MainActivity) getActivity()).showEditDialog(index, items, itemHash);
                     } else {
+                        itemHash.put(name, quantity);
                         items.add(new GroceryItem(quantity, units, name));
                         //((MainActivity) getActivity()).addItem(quantity, units, name);
                         dismiss();

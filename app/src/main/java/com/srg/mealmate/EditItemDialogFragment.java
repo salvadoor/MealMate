@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class EditItemDialogFragment extends DialogFragment {
@@ -23,18 +24,22 @@ public class EditItemDialogFragment extends DialogFragment {
     private GroceryItem item;
     private int itemIndex;
     private ArrayList<GroceryItem> items;
+    private HashMap<String, Double> itemHash;
 
 
     public EditItemDialogFragment() {
         // Required empty public constructor
     }
 
-    public static EditItemDialogFragment newInstance(int itemIndex, ArrayList<GroceryItem> items){
+    public static EditItemDialogFragment newInstance(int itemIndex,
+                                                     ArrayList<GroceryItem> items,
+                                                     HashMap itemHash){
         EditItemDialogFragment frag = new EditItemDialogFragment();
 
         Bundle bundle = new Bundle();
         bundle.putInt("itemIndex", itemIndex);
         bundle.putSerializable("items", items);
+        bundle.putSerializable("hashmap", itemHash);
         frag.setArguments(bundle);
 
         return frag;
@@ -50,6 +55,8 @@ public class EditItemDialogFragment extends DialogFragment {
         Bundle bundle = getArguments();
         itemIndex = bundle.getInt("itemIndex");
         items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
+        itemHash = (HashMap<String, Double>) bundle.getSerializable("hashmap");
+
         item = items.get(itemIndex);
 
         init_fields();
@@ -108,6 +115,8 @@ public class EditItemDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 items.remove(itemIndex);
+                itemHash.remove(item.getName());
+
                 Toast.makeText(getActivity(), "Item removed", Toast.LENGTH_SHORT).show();
                 dismiss();
             }

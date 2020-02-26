@@ -99,7 +99,7 @@ public class GroceryListFragment extends Fragment {
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.grocery_list);
-        adapter = new GroceryItemAdapter(getActivity(), getActivity(), items);
+        adapter = new GroceryItemAdapter(getActivity(), getActivity(), items, itemHash);
 
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -220,7 +220,7 @@ public class GroceryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // call newItem() from MainActivity
-                ((MainActivity)getActivity()).newItem(itemHash, items);
+                ((MainActivity)getActivity()).newItem(itemHash, items, itemHash);
 
             }
         });
