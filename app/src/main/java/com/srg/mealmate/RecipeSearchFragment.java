@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,18 +27,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RecipeSearchFragment extends Fragment {
     private static final String TAG = "RecipeFragmentSearch";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Recipe> results = new ArrayList<>();
+    private ArrayList<RecipeSearchMapping> searchMap = new ArrayList<>();
+    private Boolean dataPreserved = false;
     private View view;
-
 
 
     public RecipeSearchFragment() {
@@ -50,8 +49,15 @@ public class RecipeSearchFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_recipe_search, container, false);
 
         initRecyclerView();
+        if(!dataPreserved){
+            init_empty_search();
+        }
 
-        init_empty_search();
+        searchMap = RecipeSearchMapFile.readList(getActivity());
+
+        init_clickListener();
+
+        dataPreserved = true;
 
         return view;
     }
@@ -68,6 +74,7 @@ public class RecipeSearchFragment extends Fragment {
 
     public void init_empty_search(){
         db.collection("recipes")
+                .limit(20)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -84,6 +91,9 @@ public class RecipeSearchFragment extends Fragment {
                                 String category = document.getString("category");
                                 ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
 
+                                // searchMap.add(new RecipeSearchMapping(name, id));
+                                // RecipeSearchMapFile.writeList(searchMap, getActivity());
+
                                 Recipe newResult = new Recipe(name, source, id, ingredients,
                                         category, instructions, imgURL);
                                 results.add(newResult);
@@ -95,6 +105,61 @@ public class RecipeSearchFragment extends Fragment {
                         }
                     }
                 });
+
+    }
+
+
+    private void init_clickListener(){
+        Button search_btn = view.findViewById(R.id.searchBtn);
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText searchET = view.findViewById(R.id.searchTxt);
+                String searchString = searchET.getText().toString();
+
+                results = new ArrayList<>();
+
+                for(int i=0; i < searchMap.size(); i++){
+                    if(searchMap.get(i).getName().contains(searchString)){
+                        retrieveRecipe(searchMap.get(i).getId());
+                    }
+                }
+
+
+            }
+        });
+    }
+
+
+    private void retrieveRecipe(String id){
+
+        db.collection("recipes")
+                .document(id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        Log.d(TAG, document.getData().toString());
+
+
+                        String name = document.getString("title");
+                        String source = document.getString("source");
+                        String id = document.getId();
+                        String imgURL = document.getString("imageURL");
+                        ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
+                        String category = document.getString("category");
+                        ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
+
+                        Recipe newResult = new Recipe(name, source, id, ingredients,
+                                category, instructions, imgURL);
+
+                        results.add(newResult);
+                        initRecyclerView();
+                    }
+                });
+
 
     }
 

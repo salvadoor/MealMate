@@ -43,7 +43,7 @@ public class GroceryListFragment extends Fragment {
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
     private int weeksSaved;
     private ArrayList<GroceryItem> items = new ArrayList<>();
-    private Boolean dataStored = false; //initial false,  true when fragment is not destroyed and then re-inflated
+    private Boolean dataPreserved = false; //initial false,  true when fragment is not destroyed and then re-inflated
     private HashMap<String, Double> itemHash;
     private GroceryItemAdapter adapter;
 
@@ -67,7 +67,7 @@ public class GroceryListFragment extends Fragment {
         init_OnClickListeners();
         init_FocusChangeListener();
 
-        dataStored = true;
+        dataPreserved = true;
 
         return view;
     }
@@ -120,7 +120,7 @@ public class GroceryListFragment extends Fragment {
         // If pref is 5, there are 5//2 weeks saved before and  after the current week
         weeksSaved = (new Preferences().getWeeks()) / 2;
 
-        if(dataStored){
+        if(dataPreserved){
             // if dataStored == true, then variables such as the c Calendar object already have defined values
             //set week based on current c, week will be last viewed week before fragment was detached
             setWeek(0);
