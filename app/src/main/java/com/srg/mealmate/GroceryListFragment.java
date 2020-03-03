@@ -157,7 +157,7 @@ public class GroceryListFragment extends Fragment {
         String weekText;
         TextView tv = view.findViewById(R.id.txt_current);
         // save current Grocery List if it exists
-        if(items!=null) {
+        if(!items.isEmpty()) {
             saveGroceryList();
         }
         // change week, ex: go back a week if offset = -7
@@ -230,6 +230,7 @@ public class GroceryListFragment extends Fragment {
 //----------------------------------------------------------------------------------
 // Methods to deal with reading and writing data using the GroceryListFile class
     private void loadGroceryList(String sundayDate) {
+        Log.d(TAG, "Loading Grocery List");
         // get file that corresponds to current week
         GroceryListFile.setFilename(sundayDate);
         // retrieve list
@@ -246,6 +247,7 @@ public class GroceryListFragment extends Fragment {
 
     private void saveGroceryList(){
         // save current Grocery List
+        Log.d(TAG, "Saving Grocery List");
         GroceryListFile.writeList(items, getActivity());
     }
 
