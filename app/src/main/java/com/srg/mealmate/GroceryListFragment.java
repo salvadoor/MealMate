@@ -260,12 +260,4 @@ public class GroceryListFragment extends Fragment {
     }
 
 
-    private void remove_hashPair(){
-
-    }
-
-    public void dataChanged(){
-        adapter.notifyDataSetChanged();
-    }
-
 }

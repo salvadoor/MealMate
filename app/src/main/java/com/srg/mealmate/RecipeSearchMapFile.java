@@ -49,4 +49,5 @@ public class RecipeSearchMapFile {
 
         return searchMap;
     }
+
 }

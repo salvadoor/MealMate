@@ -27,6 +27,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 
 public class RecipeSearchFragment extends Fragment {
     private static final String TAG = "RecipeFragmentSearch";
@@ -50,10 +52,9 @@ public class RecipeSearchFragment extends Fragment {
 
         initRecyclerView();
         if(!dataPreserved){
-            init_empty_search();
+            loadSearchMap();
+            searchRecipes("");
         }
-
-        searchMap = RecipeSearchMapFile.readList(getActivity());
 
         init_clickListener();
 
@@ -61,6 +62,41 @@ public class RecipeSearchFragment extends Fragment {
 
         return view;
     }
+
+
+    private void loadSearchMap(){
+        searchMap = RecipeSearchMapFile.readList(getActivity());
+
+        if(searchMap.isEmpty()){
+            Log.d(TAG, "searchMap is empty");
+            refreshSearchMap();
+            searchMap = RecipeSearchMapFile.readList(getActivity());
+        }
+    }
+
+
+    private void refreshSearchMap(){
+        db.collection("recipes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                // Log.d(TAG, document.getId() + " => " + document.getData());
+                                String name = document.getString("title").toLowerCase();
+                                String id = document.getId();
+
+                                searchMap.add(new RecipeSearchMapping(name, id));
+                                RecipeSearchMapFile.writeList(searchMap, getActivity());
+                            }
+                        } else{
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
 
     private void initRecyclerView(){
         // create RecyclerView
@@ -72,42 +108,6 @@ public class RecipeSearchFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    public void init_empty_search(){
-        db.collection("recipes")
-                .limit(20)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            results = new ArrayList<>();
-                            for(QueryDocumentSnapshot document: task.getResult()){
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.getString("title");
-                                String source = document.getString("source");
-                                String id = document.getId();
-                                String imgURL = document.getString("imageURL");
-                                ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
-                                String category = document.getString("category");
-                                ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
-
-                                // searchMap.add(new RecipeSearchMapping(name, id));
-                                // RecipeSearchMapFile.writeList(searchMap, getActivity());
-
-                                Recipe newResult = new Recipe(name, source, id, ingredients,
-                                        category, instructions, imgURL);
-                                results.add(newResult);
-
-                                initRecyclerView();
-                            }
-                        } else{
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-    }
-
 
     private void init_clickListener(){
         Button search_btn = view.findViewById(R.id.searchBtn);
@@ -116,8 +116,8 @@ public class RecipeSearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText searchET = view.findViewById(R.id.searchTxt);
-                String searchString = searchET.getText().toString();
-
+                String searchString = searchET.getText().toString().toLowerCase();
+                /*
                 results = new ArrayList<>();
 
                 for(int i=0; i < searchMap.size(); i++){
@@ -125,12 +125,24 @@ public class RecipeSearchFragment extends Fragment {
                         retrieveRecipe(searchMap.get(i).getId());
                     }
                 }
-
+                */
+                searchRecipes(searchString);
 
             }
         });
     }
 
+
+    private void searchRecipes(String searchString){
+        Log.d(TAG, "Searching for: '" + searchString + "'");
+        results = new ArrayList<>();
+
+        for(int i=0; i < searchMap.size(); i++){
+            if(searchMap.get(i).getName().contains(searchString)){
+                retrieveRecipe(searchMap.get(i).getId());
+            }
+        }
+    }
 
     private void retrieveRecipe(String id){
 
@@ -142,7 +154,6 @@ public class RecipeSearchFragment extends Fragment {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         DocumentSnapshot document = task.getResult();
                         Log.d(TAG, document.getData().toString());
-
 
                         String name = document.getString("title");
                         String source = document.getString("source");

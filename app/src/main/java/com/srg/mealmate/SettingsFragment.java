@@ -18,6 +18,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -28,8 +34,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class SettingsFragment extends Fragment {
     private FirebaseUser user;
     private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View view;
-    private Button btn_reset_pwd, btn_logout;
+    private Button btn_reset_pwd, btn_logout, btn_refresh;
+    private ArrayList<RecipeSearchMapping> searchMap = new ArrayList<>();
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -54,6 +62,9 @@ public class SettingsFragment extends Fragment {
 
     private void setListeners(){
         btn_logout = view.findViewById(R.id.btn_logout);
+        btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
+        btn_refresh = view.findViewById(R.id.btn_refresh);
+
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +72,6 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
         btn_reset_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +93,38 @@ public class SettingsFragment extends Fragment {
                         });
             }
         });
+
+        btn_refresh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(getActivity(), "Refreshing", Toast.LENGTH_SHORT).show();
+                refresh_searchMap();
+            }
+        });
+
     }
 
+
+    private void refresh_searchMap(){
+        db.collection("recipes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String name = document.getString("title").toLowerCase();
+                                String id = document.getId();
+
+                                searchMap.add(new RecipeSearchMapping(name, id));
+                                RecipeSearchMapFile.writeList(searchMap, getActivity());
+                            }
+                        } else{
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
 
 }
