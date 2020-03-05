@@ -57,7 +57,7 @@
     <!-- GroceryList -->
     <string name="nav_new_grocery">Add New Grocery Item</string>
     <string name="grocery_item_outline">Quantity(Units) - Grocery Item</string>
-    <string name="btn_add_new_item">PRESS HERE TO ADD NEW GROCERY ITEM</string>
+    <string name="btn_add_new_item">ADD NEW GROCERY ITEM</string>
 
     <!-- Edit item -->
     <string name="btn_save_changes">Save Changes</string>

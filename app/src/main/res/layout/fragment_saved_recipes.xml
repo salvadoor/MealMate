@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/folder_tabs"
-
         android:layout_above="@id/new_buttons"/>
 
     <LinearLayout

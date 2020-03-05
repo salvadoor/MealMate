@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GroceryListFragment" >
+
+    <LinearLayout
+        android:id="@+id/nav_and_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/week_nav" />
+
+        <include layout="@layout/grocery_header"/>
+
+        <include layout="@layout/horizontal_divider"/>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/grocery_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_new_item"
+        android:layout_below="@id/nav_and_header" />
+
+    <ImageView
+        android:id="@+id/btn_new_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:layout_weight=".33"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/outline_add_white" />
+
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/btn_new_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".33"
+            android:src="@drawable/outline_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="start"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+
+            android:text="@string/btn_add_new_item" />
+
+    </LinearLayout>
+-->
+
+</RelativeLayout>
+
+<!--
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -22,3 +95,4 @@
         android:paddingBottom="8dp"/>
 
 </LinearLayout>
+-->
