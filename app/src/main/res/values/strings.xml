@@ -28,6 +28,9 @@
     <string name="select_favorites">Favorites</string>
     <string name="select_my_recipes">My Recipes</string>
 
+    <string name="btn_new_folder">New Folder</string>
+    <string name="btn_new_recipe">New Recipe</string>
+
     <!-- Text for weekly views-->
     <string name="nav_previous">Prev</string>
     <string name="nav_next">Next</string>

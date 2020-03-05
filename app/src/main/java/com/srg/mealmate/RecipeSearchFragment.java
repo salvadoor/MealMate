@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,8 +24,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class RecipeSearchFragment extends Fragment {
@@ -65,12 +61,12 @@ public class RecipeSearchFragment extends Fragment {
 
 
     private void loadSearchMap(){
-        searchMap = RecipeSearchMapFile.readList(getActivity());
+        searchMap = RecipeSearchMapIO.readList(getActivity());
 
         if(searchMap.isEmpty()){
             Log.d(TAG, "searchMap is empty");
             refreshSearchMap();
-            searchMap = RecipeSearchMapFile.readList(getActivity());
+            searchMap = RecipeSearchMapIO.readList(getActivity());
         }
     }
 
@@ -88,7 +84,7 @@ public class RecipeSearchFragment extends Fragment {
                                 String id = document.getId();
 
                                 searchMap.add(new RecipeSearchMapping(name, id));
-                                RecipeSearchMapFile.writeList(searchMap, getActivity());
+                                RecipeSearchMapIO.writeList(searchMap, getActivity());
                             }
                         } else{
                             Log.w(TAG, "Error getting documents.", task.getException());

@@ -11,8 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class RecipeSearchMapFile {
-    private static final String TAG = "RecipeSearchMapFile";
+public class RecipeSearchMapIO {
+    private static final String TAG = "RecipeSearchMapIO";
 
     private static String filename = "RecipeSearchMap.dat";
 

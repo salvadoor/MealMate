@@ -228,13 +228,13 @@ public class GroceryListFragment extends Fragment {
 
 
 //----------------------------------------------------------------------------------
-// Methods to deal with reading and writing data using the GroceryListFile class
+// Methods to deal with reading and writing data using the GroceryListIO class
     private void loadGroceryList(String sundayDate) {
         Log.d(TAG, "Loading Grocery List");
         // get file that corresponds to current week
-        GroceryListFile.setFilename(sundayDate);
+        GroceryListIO.setFilename(sundayDate);
         // retrieve list
-        items = GroceryListFile.readList(getActivity());
+        items = GroceryListIO.readList(getActivity());
 
 
         //create HashMap
@@ -248,7 +248,7 @@ public class GroceryListFragment extends Fragment {
     private void saveGroceryList(){
         // save current Grocery List
         Log.d(TAG, "Saving Grocery List");
-        GroceryListFile.writeList(items, getActivity());
+        GroceryListIO.writeList(items, getActivity());
     }
 
 

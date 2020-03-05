@@ -4,17 +4,25 @@ package com.srg.mealmate;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.ArrayList;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SavedRecipesFragment extends Fragment {
+    private ArrayList<RecipeFolder> folders = new ArrayList<>();
     private View view;
 
 
@@ -30,6 +38,16 @@ public class SavedRecipesFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_saved_recipes, container, false);
 
         init_click_listeners();
+
+        // TESTING-------------------------------------
+        if(folders.isEmpty()){
+            for(int i=0; i < 20; i++) {
+                folders.add(new RecipeFolder("Desserts", "saved"));
+            }
+        }
+
+        initRecyclerView();
+        //-----------------------------------------------
 
         return view;
     }
@@ -59,5 +77,17 @@ public class SavedRecipesFragment extends Fragment {
             }
         });
     }
+
+
+    private void initRecyclerView(){
+        // create RecyclerView
+        Log.d(TAG, "initRecyclerView: init rv");
+        RecyclerView rv = view.findViewById(R.id.folder_list);
+        RecipeFolderAdapter adapter = new RecipeFolderAdapter(folders, getActivity());
+
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
 
 }

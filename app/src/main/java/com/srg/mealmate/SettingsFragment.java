@@ -23,7 +23,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -118,7 +117,7 @@ public class SettingsFragment extends Fragment {
                                 String id = document.getId();
 
                                 searchMap.add(new RecipeSearchMapping(name, id));
-                                RecipeSearchMapFile.writeList(searchMap, getActivity());
+                                RecipeSearchMapIO.writeList(searchMap, getActivity());
                             }
                         } else{
                             Log.w(TAG, "Error getting documents.", task.getException());
