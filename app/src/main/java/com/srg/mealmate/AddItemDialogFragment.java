@@ -96,7 +96,10 @@ public class AddItemDialogFragment extends DialogFragment {
                     }
 
                     if(itemMap.containsKey(name)){
-                        Toast.makeText(getActivity(), "Already in List", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),
+                                "Already in List",
+                                Toast.LENGTH_SHORT)
+                                .show();
                         int index = 0;
 
                         for(int i=0; i<items.size();i++){

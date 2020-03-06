@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    tools:context=".AddItemDialogFragment">
+    tools:context=".SaveRecipeDialogFragment">
 
     <TextView
         android:id="@+id/add_item_header"
@@ -18,52 +18,20 @@
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:text="@string/nav_new_grocery" />
+        android:text="@string/nav_save_recipe" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="8dp"
-        android:text="@string/ask_item_name" />
-
-    <EditText
-        android:id="@+id/edit_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="10"
-        android:inputType="textCapWords"
-        android:hint="@string/hint_item_name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"
-        android:text="@string/ask_item_units" />
+        android:text="@string/ask_save_folder" />
 
     <Spinner
-        android:id="@+id/spinner_units"
+        android:id="@+id/spinner_folders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"
-        android:text="@string/ask_item_quantity" />
-
-    <EditText
-        android:id="@+id/edit_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/hint_item_quantity" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -73,13 +41,13 @@
         android:padding="8dp">
 
         <Button
-            android:id="@+id/btn_item_add"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_add" />
+            android:text="@string/btn_save" />
 
         <Button
-            android:id="@+id/btn_item_cancel"
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_cancel" />

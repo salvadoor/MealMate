@@ -208,6 +208,22 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void newFolder(ArrayList<String> folders){
+        FragmentManager fm = getSupportFragmentManager();
+        AddFolderDialogFragment addFolderDialog = AddFolderDialogFragment.newInstance(folders);
+
+        addFolderDialog.show(fm, "fragment_add_folder_dialog");
+    }
+
+
+    public void saveRecipe(String id){
+        FragmentManager fm = getSupportFragmentManager();
+        SaveRecipeDialogFragment saveRecipeDialog = SaveRecipeDialogFragment.newInstance(id);
+
+        saveRecipeDialog.show(fm, "fragment_save_recipe_dialog");
+    }
+
+
 //---------------------------------------------------------------------------
 // Following three Methods deal with setting and inflating a Fragment
     private void setFragment(Fragment f){

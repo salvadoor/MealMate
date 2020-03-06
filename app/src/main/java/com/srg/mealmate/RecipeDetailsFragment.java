@@ -60,13 +60,10 @@ public class RecipeDetailsFragment extends Fragment {
 
         // set TextViews and ImageView based on recipe's data
         init_layout();
-        /*
-        // create PopupMenu
-        init_popupMenu();
-        // set OnClickListener(s)
-        init_OnClickListener();
 
-         */
+        // set OnClickListener(s)
+        initOnClickListeners();
+
 
         return view;
     }
@@ -94,6 +91,19 @@ public class RecipeDetailsFragment extends Fragment {
         // set text for instructions
         instructionsTV = view.findViewById(R.id.detail_instructions);
         instructionsTV.setText(getStringOfInstructions());
+    }
+
+    private void initOnClickListeners(){
+        Button save_btn;
+
+        save_btn = view.findViewById(R.id.btn_save_recipe);
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // call MainActivity method to show dialogfragment
+                ((MainActivity) getActivity()).saveRecipe(recipe.getId());
+            }
+        });
     }
 
 

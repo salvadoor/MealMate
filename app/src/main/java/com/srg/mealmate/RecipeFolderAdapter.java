@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapter.ViewHolder> {
     private static final String TAG = "RecipeFolderAdapter";
-    private ArrayList<RecipeFolder> folders;
+    private ArrayList<String> folders;
     private Context mContext;
 
 
-    public RecipeFolderAdapter(ArrayList<RecipeFolder> folders, Context mContext) {
+    public RecipeFolderAdapter(ArrayList<String> folders, Context mContext) {
         this.folders = folders;
         this.mContext = mContext;
     }
@@ -38,29 +38,22 @@ public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder:called");
 
-        String type = folders.get(position).getType();
-
-        if(type.equals("user")){
-            holder.folderIcon.setImageResource(R.drawable.user_folder_icon);
-        }
-
-        holder.folderName.setText(folders.get(position).getName());
-
+        holder.folderName.setText(folders.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // check/uncheck selected grocery item
                 //Log.d(TAG, "onClick:clicked on: " + items.get(position).getName());
 
                 // go to view of all recipe in folder
+                // loadSavedRecipes(folders.get(position));
             }
         });
 
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                // dos tuff here, rename/deletion prompt
+                // do stuff here, rename/deletion prompt
 
                 return true;
             }
