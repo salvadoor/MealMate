@@ -21,6 +21,8 @@
     <string name="nav_support">Support</string>
     <string name="nav_about">About</string>
     <string name="nav_save_recipe"> Save Recipe </string>
+    <string name="nav_view_folders"> View Saved Folders</string>
+    <string name="nav_view_recipes"> View Saved Recipes</string>
 
     <string name="nav_open_drawer">Open Navigation Drawer</string>
     <string name="nav_close_drawer">Close Navigation Drawer</string>

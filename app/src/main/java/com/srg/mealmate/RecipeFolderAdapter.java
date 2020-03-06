@@ -47,6 +47,7 @@ public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapte
 
                 // go to view of all recipe in folder
                 // loadSavedRecipes(folders.get(position));
+                ((MainActivity) mContext).viewSavedRecipes(folders.get(position));
             }
         });
 

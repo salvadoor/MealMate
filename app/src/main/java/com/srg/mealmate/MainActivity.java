@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private Fragment frag = null;
     private Fragment frag2 = null;
+    private Fragment frag3 = null;
     private String actionBarTitle;
 
     @Override
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_saved_recipes:
-                frag = new SavedRecipesFragment();
+                frag = new SavedFoldersFragment();
                 getSupportActionBar().setTitle(R.string.nav_saved_recipes);
                 break;
             case R.id.nav_meal_plan:
@@ -128,6 +129,16 @@ public class MainActivity extends AppCompatActivity
         } else if(frag!=null && frag2!=null) {
             // re-attach frag on back when in frag2
             attachFragment(frag, frag2);
+            if(frag3!=null){
+                // if there are 3 fragments, set current Fragment
+                    // as frag2 and frag as frag3 then discard frag3
+                frag2 = frag;
+                frag = frag3;
+                frag3 = null;
+            } else{
+                frag2 = null;
+            }
+
         } else { // normal back button function
             super.onBackPressed();
         }
@@ -269,17 +280,42 @@ public class MainActivity extends AppCompatActivity
                 SavedRecipes
                 MealPlan
          */
-
         // put recipe in a bundle as a serialized object
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
 
+        if(frag2!=null){
+            // if frag2 is not null, need to use frag3 to keep all 3 fragments
+            frag3 = frag;
+            frag = frag2;
+        }
         // create new RecipeDetails Fragment and pass bundle
         frag2 = new RecipeDetailsFragment();
         frag2.setArguments(bundle);
 
         // detach RecipeSearchFragment and add/inflate RecipeDetails
         detachFragment(frag, frag2, R.string.nav_recipe_details);
+    }
+
+
+    public void viewSavedRecipes(String folderName){
+        // put folderName in a bundle
+        Bundle bundle = new Bundle();
+        bundle.putString("folder", folderName);
+
+
+        // get the index for the last Fragment which will be a
+            //SavedFoldersFragment because this method is only called from there
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        // use the index to set frag equal to the SavedFoldersFragment
+        frag = getSupportFragmentManager().getFragments().get(count>0?count-1:count);
+
+        // create new SavedRecipesFragment and pass bundle
+        frag2 = new SavedRecipesFragment();
+        frag2.setArguments(bundle);
+
+        //detach SavedFoldersFragment and inflate SavedRecipesFragment
+        detachFragment(frag, frag2, R.string.nav_view_recipes);
     }
 
 }

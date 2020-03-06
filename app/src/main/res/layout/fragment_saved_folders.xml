@@ -4,37 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SavedRecipesFragment">
-
-
+    tools:context=".SavedFoldersFragment">
 
     <TextView
-        android:id="@+id/saved_recipes_header"
+        android:id="@+id/saved_folders_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="4dp"
         android:gravity="center"
+        android:padding="4dp"
         android:background="@color/colorPrimary"
-        android:textSize="20sp"
         android:textColor="@color/white"
-        android:text="@string/placeholder"/>
+        android:textSize="20sp"
+        android:text="@string/nav_view_folders" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipe_list"
+        android:id="@+id/folder_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/saved_recipes_header"
-        android:layout_above="@id/btn_new_recipe"/>
+        android:layout_below="@+id/saved_folders_header"
+        android:layout_above="@id/btn_new_folder"/>
 
     <Button
-        android:id="@+id/btn_new_recipe"
+        android:id="@+id/btn_new_folder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
-        android:text="@string/btn_new_recipe" />
+        android:text="@string/btn_new_folder"/>
+
+
+
 
 
 </RelativeLayout>
