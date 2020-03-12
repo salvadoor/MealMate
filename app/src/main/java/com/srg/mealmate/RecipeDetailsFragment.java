@@ -22,6 +22,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class RecipeDetailsFragment extends Fragment {
@@ -153,8 +156,11 @@ public class RecipeDetailsFragment extends Fragment {
         String amount, units, name;
 
         amount = ingredient.get("amount").toString();
+        Log.d(TAG, amount);
         units = ingredient.get("units").toString();
+        Log.d(TAG, units);
         name = ingredient.get("name").toString();
+        Log.d(TAG, name);
 
         // add 's' to units if they should be plural
         if(Double.valueOf(ingredient.get("amount").toString()) > 1){

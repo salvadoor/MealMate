@@ -64,10 +64,10 @@ public class AddFolderDialogFragment extends DialogFragment {
 
                 String name = folderName.getText().toString();
 
-                if (name.equals("")){
-                    Log.d(TAG, "No name entered");
+                if (name.equals("") || !name.matches("[a-zA-Z ]+")){
+                    Log.d(TAG, "No name entered or invalid");
                     Toast.makeText(getActivity(),
-                            "Invalid name",
+                            "Invalid name, use only letters",
                             Toast.LENGTH_SHORT)
                             .show();
                 } else if (name.equals("ALL") || name.equals("MY RECIPES")) {

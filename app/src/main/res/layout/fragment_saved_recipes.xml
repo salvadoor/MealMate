@@ -22,8 +22,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
         android:layout_below="@+id/saved_recipes_header"
         android:layout_above="@id/btn_new_recipe"/>
 

@@ -33,6 +33,7 @@
     <string name="btn_new_folder">New Folder</string>
     <string name="btn_new_recipe">New Recipe</string>
     <string name="ask_folder_name"> Enter a name for the new folder</string>
+    <string name="ask_folder_delete"> Delete folder? </string>
     <string name="hint_folder_name"> Desserts </string>
     <string name="ask_save_folder"> Select folder to save to</string>
 
@@ -41,6 +42,7 @@
     <string name="btn_add"> Add </string>
     <string name="btn_cancel"> Cancel</string>
     <string name="btn_save"> Save</string>
+    <string name="btn_delete">Delete</string>
 
     <!-- Text for weekly views-->
     <string name="nav_previous">Prev</string>

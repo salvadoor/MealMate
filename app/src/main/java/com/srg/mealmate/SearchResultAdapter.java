@@ -28,11 +28,13 @@ import java.util.ArrayList;
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
     private static final String TAG = "SearchResultAdapter";
     private ArrayList<Recipe> results = new ArrayList<>();
+    private Boolean isSaved;
     private Context mContext;
 
 
-    public SearchResultAdapter(Context context, ArrayList<Recipe> results) {
+    public SearchResultAdapter(Context context, ArrayList<Recipe> results, Boolean isSaved) {
         this.results = results;
+        this.isSaved = isSaved;
         this.mContext = context;
     }
 
@@ -61,6 +63,18 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 ((MainActivity)view.getContext()).viewRecipeDetails(results.get(position));
             }
         });
+
+        if(isSaved){
+            // if true, adapter is being used for SavedRecipeFragment
+            holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    // OPEN EDIT DIALOG
+
+                    return true;
+                }
+            });
+        }
     }
 
     @Override

@@ -89,6 +89,7 @@ public class GroceryListFragment extends Fragment {
                     Log.d(TAG, "has Focus: true");
 
                     adapter.notifyDataSetChanged();
+                    saveGroceryList();
                 }
             }
         });

@@ -3,6 +3,7 @@ package com.srg.mealmate;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -86,6 +87,20 @@ public class ArrayListStringIO {
         }
 
         return items;
+    }
+
+
+    public static void delete(String file, Context context){
+        String filepath = "/data/user/0/com.srg.mealmate/files/" + file;
+        Log.d(TAG, "deleting: "+ filepath);
+
+            File f = new File(filepath);
+            if(f.delete()) {
+                Log.d(TAG, "Delete successful");
+            } else{
+                Log.d(TAG, "Delete Failed");
+            }
+
     }
 
 }

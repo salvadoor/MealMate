@@ -50,7 +50,6 @@ public class SavedRecipesFragment extends Fragment {
         TextView headerTV = view.findViewById(R.id.saved_recipes_header);
         headerTV.setText("Folder: " + folderName);
 
-
         return view;
     }
 
@@ -59,7 +58,7 @@ public class SavedRecipesFragment extends Fragment {
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.recipe_list);
 
-        adapter = new SearchResultAdapter(getActivity(), recipes);
+        adapter = new SearchResultAdapter(getActivity(), recipes, true);
         rv.setAdapter(adapter);
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

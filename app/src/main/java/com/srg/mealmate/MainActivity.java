@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment frag2 = null;
     private Fragment frag3 = null;
     private String actionBarTitle;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,9 @@ public class MainActivity extends AppCompatActivity
         if (frag != null) {
             // set Fragment
             setFragment(frag);
+
+            frag2 = null;
+            frag3 = null;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -235,6 +240,14 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void showEditFolderDialog(int index, ArrayList<String> folders){
+        FragmentManager fm = getSupportFragmentManager();
+        EditFolderDialogFragment editFolderDialog = EditFolderDialogFragment.newInstance(index, folders);
+
+        editFolderDialog.show(fm, "fragment_edit_folder_dialog");
+    }
+
+
 //---------------------------------------------------------------------------
 // Following three Methods deal with setting and inflating a Fragment
     private void setFragment(Fragment f){
@@ -246,6 +259,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void detachFragment(Fragment f1, Fragment f2, int newTitle){
+        Log.d(TAG, "detaching fragment");
         // add Fragment f2 and detach Fragment f1
         // detaching f1 instead of removing so that data is not deleted
         // allows f1 to be re-attached instead of recreating it
@@ -261,6 +275,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void attachFragment(Fragment f1, Fragment f2){
+        Log.d(TAG, "re-attaching fragment");
         // re-attach f1 and remove f2
         // set Action Bar title back to f1's title
         getSupportActionBar().setTitle(actionBarTitle);
@@ -319,3 +334,5 @@ public class MainActivity extends AppCompatActivity
     }
 
 }
+
+

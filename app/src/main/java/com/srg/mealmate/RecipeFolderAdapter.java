@@ -54,7 +54,8 @@ public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapte
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                // do stuff here, rename/deletion prompt
+
+                ((MainActivity)mContext).showEditFolderDialog(position, folders);
 
                 return true;
             }

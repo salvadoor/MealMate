@@ -32,9 +32,7 @@ public class SavedFoldersFragment extends Fragment {
     private ArrayList<String> folder = new ArrayList<>();
     private ArrayList<Recipe> results;
     private View view;
-    private RecipeFolderAdapter folderAdapter;
-    private SearchResultAdapter recipeAdapter;
-    private int rvType = 0; // 0 for folderAdapter, 1 for recipeAdapter
+    private RecipeFolderAdapter adapter;
 
 
     public SavedFoldersFragment() {
@@ -90,13 +88,8 @@ public class SavedFoldersFragment extends Fragment {
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.folder_list);
 
-        if(rvType == 0){
-            folderAdapter = new RecipeFolderAdapter(folders, getActivity());
-            rv.setAdapter(folderAdapter);
-        } else{
-            recipeAdapter = new SearchResultAdapter(getActivity(), results);
-            rv.setAdapter(recipeAdapter);
-        }
+        adapter = new RecipeFolderAdapter(folders, getActivity());
+        rv.setAdapter(adapter);
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -110,7 +103,8 @@ public class SavedFoldersFragment extends Fragment {
                 if(hasFocus) {
                     Log.d(TAG, "has Focus: true");
 
-                    folderAdapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+                    saveFolders();
                 }
             }
         });

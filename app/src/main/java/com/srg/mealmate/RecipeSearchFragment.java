@@ -32,6 +32,7 @@ public class RecipeSearchFragment extends Fragment {
     private ArrayList<Recipe> results = new ArrayList<>();
     private ArrayList<RecipeSearchMapping> searchMap = new ArrayList<>();
     private Boolean dataPreserved = false;
+    private SearchResultAdapter adapter;
     private View view;
 
 
@@ -98,7 +99,7 @@ public class RecipeSearchFragment extends Fragment {
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.results_list);
-        SearchResultAdapter adapter = new SearchResultAdapter(getActivity(), results);
+        adapter = new SearchResultAdapter(getActivity(), results, false);
 
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -131,7 +132,7 @@ public class RecipeSearchFragment extends Fragment {
 
     private void searchRecipes(String searchString){
         Log.d(TAG, "Searching for: '" + searchString + "'");
-        results = new ArrayList<>();
+        results.removeAll(results);
 
         for(int i=0; i < searchMap.size(); i++){
             if(searchMap.get(i).getName().contains(searchString)){
@@ -163,7 +164,8 @@ public class RecipeSearchFragment extends Fragment {
                                 category, instructions, imgURL);
 
                         results.add(newResult);
-                        initRecyclerView();
+                        adapter.notifyDataSetChanged();
+                        //initRecyclerView();
                     }
                 });
 
