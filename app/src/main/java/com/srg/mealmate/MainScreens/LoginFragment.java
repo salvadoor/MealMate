@@ -8,7 +8,7 @@
  *
  * Last Modified: 01.23.2020 12:13pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.MainScreens;
 
 
 import android.os.Bundle;
@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 

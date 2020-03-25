@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MealPlanFragment">
+    tools:context=".MainScreens.MealPlanFragment">
 
     <include
         android:id="@+id/week_nav_plan"

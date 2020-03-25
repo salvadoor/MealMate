@@ -5,7 +5,7 @@
  *
  * Last Modified: 02.14.2020 12:11pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Classes;
 
 import java.io.Serializable;
 

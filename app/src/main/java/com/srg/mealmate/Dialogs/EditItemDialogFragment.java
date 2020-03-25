@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Dialogs;
 
 
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.srg.mealmate.Services.Classes.GroceryItem;
+import com.srg.mealmate.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

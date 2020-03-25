@@ -9,7 +9,7 @@
  *
  * Last Modified: 02.12.2020 05:25pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.MainScreens;
 
 
 import android.os.Bundle;
@@ -27,6 +27,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.srg.mealmate.Services.Classes.GroceryItem;
+import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.Services.FileHelpers.Preferences;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.FileHelpers.GroceryListIO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

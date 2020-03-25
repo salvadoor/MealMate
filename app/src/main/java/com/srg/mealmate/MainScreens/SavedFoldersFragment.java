@@ -1,9 +1,8 @@
-package com.srg.mealmate;
+package com.srg.mealmate.MainScreens;
 
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,13 +14,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Adapters.RecipeFolderAdapter;
+import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 

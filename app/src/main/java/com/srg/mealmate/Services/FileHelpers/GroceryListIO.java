@@ -1,7 +1,9 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Services.FileHelpers;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.srg.mealmate.Services.Classes.GroceryItem;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,28 +13,28 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class RecipeFoldersIO {
-    private static final String TAG = "RecipeFoldersIO";
+public class GroceryListIO {
+    private static final String TAG = "GroceryListIO";
 
     public static String filename = "";
 
-    public static void setFilename(String type){
-        filename = type + "_recipe_folders.dat";
+    public static void setFilename(String sundayDate){
+        filename = sundayDate + "_list.dat";
     }
 
-    public static void writeList(ArrayList<RecipeFolder> folders, Context context){
+    public static void writeList(ArrayList<GroceryItem> items, Context context){
         Log.d(TAG, "writeList");
         Log.d(TAG, "filename="+filename);
 
-        for(int i=0; i<folders.size(); i++){
-            Log.d("item", folders.get(i).getName());
+        for(int i=0; i<items.size(); i++){
+            Log.d("item", items.get(i).getName());
         }
 
 
         try{
             FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(folders);
+            oos.writeObject(items);
             oos.close();
         } catch(FileNotFoundException e){
             e.printStackTrace();
@@ -41,16 +43,16 @@ public class RecipeFoldersIO {
         }
     }
 
-    public static ArrayList<RecipeFolder> readList(Context context) {
+    public static ArrayList<GroceryItem> readList(Context context) {
         Log.d(TAG, "readList");
         Log.d(TAG, "filename=" + filename);
 
-        ArrayList<RecipeFolder> folders = new ArrayList<>();
+        ArrayList<GroceryItem> items = new ArrayList<>();
 
         try {
             FileInputStream fis = context.openFileInput(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            folders = (ArrayList<RecipeFolder>) ois.readObject();
+            items = (ArrayList<GroceryItem>) ois.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -58,15 +60,14 @@ public class RecipeFoldersIO {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if (!folders.isEmpty()) {
-            for (int i = 0; i < folders.size(); i++) {
-                Log.d("item", folders.get(i).getName());
+        if (!items.isEmpty()) {
+            for (int i = 0; i < items.size(); i++) {
+                Log.d("item", items.get(i).getName());
             }
         } else {
             Log.d("item", "No items");
         }
 
-        return folders;
+        return items;
     }
-
 }

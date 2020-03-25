@@ -1,7 +1,9 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Services.FileHelpers;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

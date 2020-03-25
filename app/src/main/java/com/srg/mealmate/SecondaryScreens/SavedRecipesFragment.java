@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.SecondaryScreens;
 
 import android.os.Bundle;
 
@@ -17,6 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
+import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

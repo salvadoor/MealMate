@@ -9,11 +9,10 @@
  *
  * Last Modified: 02.12.2020 04:11pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +20,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

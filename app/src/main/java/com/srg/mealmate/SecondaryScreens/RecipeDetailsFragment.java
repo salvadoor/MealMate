@@ -15,7 +15,7 @@
  *
  * Last Modified: 02.13.2020 11:42pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.SecondaryScreens;
 
 
 import android.os.Bundle;
@@ -32,6 +32,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.Recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;

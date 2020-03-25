@@ -1,23 +1,21 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Dialogs;
 
 
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
+import java.util.ArrayList;
 
 
 public class EditFolderDialogFragment extends DialogFragment {

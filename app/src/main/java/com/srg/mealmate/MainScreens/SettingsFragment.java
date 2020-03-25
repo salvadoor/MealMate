@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.MainScreens;
 
 
 import android.os.Bundle;
@@ -21,6 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
+import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
 import java.util.ArrayList;
 

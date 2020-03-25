@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Classes;
 
 public class SavedRecipe {
     private String name;

@@ -6,7 +6,7 @@
  *
  * Last Modified: 02.12.2020 04:05pm
  */
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,6 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.Recipe;
 
 import java.util.ArrayList;
 

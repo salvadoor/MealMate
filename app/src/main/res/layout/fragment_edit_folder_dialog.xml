@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    tools:context=".EditFolderDialogFragment">
+    tools:context=".Dialogs.EditFolderDialogFragment">
 
     <TextView
         android:id="@+id/folder_name"

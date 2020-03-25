@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.srg.mealmate;
+package com.srg.mealmate.Services.Classes;
 
 import java.io.Serializable;
 
