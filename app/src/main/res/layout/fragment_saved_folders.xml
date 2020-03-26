@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainScreens.SavedFoldersFragment">
+    tools:context=".MainScreens.SavedFoldersFragment"
+    android:tag="SavedFoldersFragment">
 
     <TextView
         android:id="@+id/saved_folders_header"

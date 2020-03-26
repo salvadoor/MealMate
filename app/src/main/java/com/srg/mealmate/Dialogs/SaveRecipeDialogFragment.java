@@ -92,6 +92,7 @@ public class SaveRecipeDialogFragment extends DialogFragment {
                 ArrayList<String> items = ArrayListStringIO.readList(getActivity());
 
                 if(!items.isEmpty()){
+                    Log.d(TAG, "recipe id's");
                     for(int i=0;i<items.size();i++){
                         Log.d(TAG, items.get(i));
                     }

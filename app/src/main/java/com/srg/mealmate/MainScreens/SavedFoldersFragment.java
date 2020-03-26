@@ -20,13 +20,15 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.Adapters.RecipeFolderAdapter;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
+import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class SavedFoldersFragment extends Fragment {
+public class SavedFoldersFragment extends Fragment implements IOnFocusListenable {
+    private static final String TAG = "SavedFoldersFragment";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> folders = new ArrayList<>();
     private ArrayList<String> folder = new ArrayList<>();
@@ -47,14 +49,16 @@ public class SavedFoldersFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_saved_folders, container, false);
 
         // TESTING-------------------------------------
-        if(folders.isEmpty()){
-            folders.add("ALL");
-            folders.add("MY RECIPES");
-        }
+        ArrayListStringIO.setFilename("recipe_folders");
 
         loadFolders();
+        if(folders.isEmpty()){
+            initFolders();
+        }
+
+        initRecyclerView();
+
         init_click_listeners();
-        initFocusChangeListener();
         //-----------------------------------------------
 
         return view;
@@ -65,6 +69,14 @@ public class SavedFoldersFragment extends Fragment {
         super.onPause();
         // save Folders
         Log.d(TAG, "onPause");
+        saveFolders();
+    }
+
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        Log.d(TAG, "has focus");
+        // refreshing and saving data
+        adapter.notifyDataSetChanged();
         saveFolders();
     }
 
@@ -95,35 +107,26 @@ public class SavedFoldersFragment extends Fragment {
     }
 
 
-    private void initFocusChangeListener(){
-        // listener used to update recyclerview after an EditItem or AddItem dialog fragment is closed
-        view.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
-            @Override
-            public void onWindowFocusChanged(final boolean hasFocus) {
-                if(hasFocus) {
-                    Log.d(TAG, "has Focus: true");
-
-                    adapter.notifyDataSetChanged();
-                    saveFolders();
-                }
-            }
-        });
-    }
-
-
     private void loadFolders(){
         Log.d(TAG, "Loading folders");
-
-        ArrayListStringIO.setFilename("recipe_folders");
         folders = ArrayListStringIO.readList(getActivity());
+    }
 
-        initRecyclerView();
+    private void initFolders(){
+        Log.d(TAG, "Empty Folder");
+        folders.add("ALL");
+        folders.add("MY RECIPES");
     }
 
 
     private void saveFolders(){
         Log.d(TAG, "saving folders");
         ArrayListStringIO.writeList(folders, getActivity());
+    }
+
+    public void updateFolders(){
+        adapter.notifyDataSetChanged();
+        saveFolders();
     }
 
 }

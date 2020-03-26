@@ -40,6 +40,7 @@ import com.srg.mealmate.SecondaryScreens.RecipeDetailsFragment;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -187,6 +188,19 @@ public class MainActivity extends AppCompatActivity
         return super.dispatchTouchEvent( event );
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if(frag2!=null){
+            if(frag2 instanceof IOnFocusListenable) {
+                ((IOnFocusListenable) frag2).onWindowFocusChanged(hasFocus);
+            }
+        } else if(frag instanceof IOnFocusListenable) {
+            ((IOnFocusListenable) frag).onWindowFocusChanged(hasFocus);
+        }
+    }
+
 
     public void userSignedIn() {
         // set user and navigate to Settings
@@ -195,6 +209,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(R.string.nav_account);
         setFragment(new SettingsFragment());
     }
+
 
     public void userSignedOut(){
         // Sign Out user
@@ -270,6 +285,7 @@ public class MainActivity extends AppCompatActivity
         // Inflate Fragment f, replaces current Fragment
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, f);
+
         ft.commit();
     }
 
@@ -337,9 +353,9 @@ public class MainActivity extends AppCompatActivity
 
         // get the index for the last Fragment which will be a
             //SavedFoldersFragment because this method is only called from there
-        int count = getSupportFragmentManager().getBackStackEntryCount();
+        //int count = getSupportFragmentManager().getBackStackEntryCount();
         // use the index to set frag equal to the SavedFoldersFragment
-        frag = getSupportFragmentManager().getFragments().get(count>0?count-1:count);
+        //frag = getSupportFragmentManager().getFragments().get(count>0?count-1:count);
 
         // create new SavedRecipesFragment and pass bundle
         frag2 = new SavedRecipesFragment();

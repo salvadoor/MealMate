@@ -34,6 +34,7 @@ import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.Services.FileHelpers.Preferences;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.FileHelpers.GroceryListIO;
+import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +43,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class GroceryListFragment extends Fragment {
+public class GroceryListFragment extends Fragment implements IOnFocusListenable {
     private static final String TAG = "GroceryListFragment";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private View view;
@@ -72,7 +73,6 @@ public class GroceryListFragment extends Fragment {
         init_weekData();
         init_NavClickListeners();
         init_OnClickListeners();
-        init_FocusChangeListener();
 
         dataPreserved = true;
 
@@ -87,19 +87,11 @@ public class GroceryListFragment extends Fragment {
     }
 
 
-    private void init_FocusChangeListener(){
-        // listener used to update recyclerview after an EditItem or AddItem dialog fragment is closed
-        view.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
-            @Override
-            public void onWindowFocusChanged(final boolean hasFocus) {
-                if(hasFocus) {
-                    Log.d(TAG, "has Focus: true");
-
-                    adapter.notifyDataSetChanged();
-                    saveGroceryList();
-                }
-            }
-        });
+    public void onWindowFocusChanged(boolean hasFocus) {
+        Log.d(TAG, "has focus: true");
+        // refreshing and saving data
+        adapter.notifyDataSetChanged();
+        saveGroceryList();
     }
 
 
@@ -257,6 +249,12 @@ public class GroceryListFragment extends Fragment {
         // save current Grocery List
         Log.d(TAG, "Saving Grocery List");
         GroceryListIO.writeList(items, getActivity());
+    }
+
+
+    public void updateList(){
+        adapter.notifyDataSetChanged();
+        saveGroceryList();
     }
 
 

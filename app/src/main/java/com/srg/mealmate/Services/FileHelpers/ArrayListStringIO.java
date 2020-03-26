@@ -27,8 +27,9 @@ public class ArrayListStringIO {
         Log.d(TAG, "writeList");
         Log.d(TAG, "filename="+filename);
 
+        Log.d(TAG, "items:");
         for(int i=0; i<items.size(); i++){
-            Log.d("item", items.get(i));
+            Log.d(TAG, items.get(i));
         }
 
 
@@ -79,11 +80,12 @@ public class ArrayListStringIO {
             e.printStackTrace();
         }
         if (!items.isEmpty()) {
+            Log.d(TAG, "items:");
             for (int i = 0; i < items.size(); i++) {
-                Log.d("item", items.get(i));
+                Log.d(TAG, items.get(i));
             }
         } else {
-            Log.d("item", "No items");
+            Log.d(TAG, "No items");
         }
 
         return items;

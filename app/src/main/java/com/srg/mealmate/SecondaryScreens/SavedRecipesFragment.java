@@ -29,6 +29,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class SavedRecipesFragment extends Fragment {
+    private static final String TAG = "SavedRecipesFragment";
     private View view;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> folder;
@@ -70,6 +71,7 @@ public class SavedRecipesFragment extends Fragment {
 
 
     private void loadSavedRecipes(String folderName){
+        Log.d(TAG, "loading recipes from folder");
         ArrayListStringIO.setFilename(folderName+"_folder");
         folder = ArrayListStringIO.readList(getActivity());
 
@@ -91,22 +93,26 @@ public class SavedRecipesFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document = task.getResult();
-                        Log.d(TAG, document.getData().toString());
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            Log.d(TAG, document.getData().toString());
 
-                        String name = document.getString("title");
-                        String source = document.getString("source");
-                        String id = document.getId();
-                        String imgURL = document.getString("imageURL");
-                        ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
-                        String category = document.getString("category");
-                        ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
+                            String name = document.getString("title");
+                            String source = document.getString("source");
+                            String id = document.getId();
+                            String imgURL = document.getString("imageURL");
+                            ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
+                            String category = document.getString("category");
+                            ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
 
-                        Recipe newResult = new Recipe(name, source, id, ingredients,
-                                category, instructions, imgURL);
+                            Recipe newResult = new Recipe(name, source, id, ingredients,
+                                    category, instructions, imgURL);
 
-                        recipes.add(newResult);
-                        initRecyclerView();
+                            recipes.add(newResult);
+                            initRecyclerView();
+                        } else{
+                            Log.d(TAG, "error retrieving document");
+                        }
                     }
                 });
     }
