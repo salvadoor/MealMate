@@ -36,6 +36,7 @@ public class SavedRecipesFragment extends Fragment {
     private ArrayList<Recipe> recipes;
     private SearchResultAdapter adapter;
 
+
     public SavedRecipesFragment() {
         // Required empty public constructor
     }

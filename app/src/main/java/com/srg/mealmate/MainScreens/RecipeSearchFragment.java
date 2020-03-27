@@ -119,19 +119,11 @@ public class RecipeSearchFragment extends Fragment {
             public void onClick(View v) {
                 EditText searchET = view.findViewById(R.id.searchTxt);
                 String searchString = searchET.getText().toString().toLowerCase();
-                /*
-                results = new ArrayList<>();
-
-                for(int i=0; i < searchMap.size(); i++){
-                    if(searchMap.get(i).getName().contains(searchString)){
-                        retrieveRecipe(searchMap.get(i).getId());
-                    }
-                }
-                */
                 searchRecipes(searchString);
 
             }
         });
+
     }
 
 

@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
 import com.srg.mealmate.MainActivity;
@@ -36,11 +37,14 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.FileHelpers.GroceryListIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+
 
 
 public class GroceryListFragment extends Fragment implements IOnFocusListenable {
@@ -248,13 +252,11 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
     private void saveGroceryList(){
         // save current Grocery List
         Log.d(TAG, "Saving Grocery List");
+        FirebaseCrashlytics.getInstance().log(TAG + ": Saving grocery list");
+
         GroceryListIO.writeList(items, getActivity());
-    }
 
-
-    public void updateList(){
-        adapter.notifyDataSetChanged();
-        saveGroceryList();
+        // throw new RuntimeException("Test Crash"); // Force a crash, to test Crashlytics
     }
 
 
