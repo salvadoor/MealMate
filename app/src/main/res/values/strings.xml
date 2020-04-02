@@ -36,6 +36,8 @@
     <string name="ask_folder_delete"> Delete folder? </string>
     <string name="hint_folder_name"> Desserts </string>
     <string name="ask_save_folder"> Select folder to save to</string>
+    <string name="ask_recipe_remove"> Remove this recipe from folder? </string>
+    <string name="remove_label">Remove</string>
 
 
     <!-- General button text -->
@@ -43,6 +45,7 @@
     <string name="btn_cancel"> Cancel</string>
     <string name="btn_save"> Save</string>
     <string name="btn_delete">Delete</string>
+    <string name="btn_remove"> Remove</string>
 
     <!-- Text for weekly views-->
     <string name="nav_previous">Prev</string>

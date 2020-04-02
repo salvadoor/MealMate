@@ -8,7 +8,9 @@
  */
 package com.srg.mealmate.Services.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
+import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.Recipe;
 
 import java.util.ArrayList;
@@ -73,6 +77,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 @Override
                 public boolean onLongClick(View view) {
                     // OPEN EDIT DIALOG
+                    removeDialog(position);
 
                     return true;
                 }
@@ -83,6 +88,42 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     @Override
     public int getItemCount() {
         return results.size();
+    }
+
+    public void removeDialog(final int index){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
+        builder1.setMessage("Remove the recipe?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(mContext, "Removed " + results.get(index).getName(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Removed " + results.get(index).getId());
+
+                        SavedRecipesFragment.removal = results.get(index).getId();
+
+                        results.remove(index);
+
+                        for(int i=0; i<results.size();i++){
+                            Log.d(TAG, results.get(i).getId());
+                        }
+
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
 
@@ -99,5 +140,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             parentLayout = itemView.findViewById(R.id.search_result);
         }
     }
+
 
 }

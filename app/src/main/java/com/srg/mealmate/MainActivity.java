@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity
         setFragment(new LoginFragment());
     }
 
+
     private void setEmailHeader(boolean signedIn){
         // Set Email header for user
         TextView user_email = findViewById(R.id.header_email);
@@ -234,6 +235,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+// create instance of EditItemDialogFragment and show it
     public void showEditDialog(int position, ArrayList<GroceryItem> items, HashMap itemHash){
         // create new EditItemDialogFragment and pass data, show DialogFragment
         // pass item position in arraylist and arraylist of items
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity
         editItemDialog.show(fm, "fragment_edit_item_dialog");
     }
 
-
+    // create instance of AddItemDialogFragment and show it
     public void newItem(HashMap<String, Double> hashMap, ArrayList<GroceryItem> items, HashMap itemHash){
         // create new AddItemDialogFragment and pass data, show DialogFragment
         // pass hashmap of items in grocery list
@@ -254,7 +256,7 @@ public class MainActivity extends AppCompatActivity
         addItemDialog.show(fm, "fragment_add_item_dialog");
     }
 
-
+    // create instance of AddFolderDialogFragment and show it
     public void newFolder(ArrayList<String> folders){
         FragmentManager fm = getSupportFragmentManager();
         AddFolderDialogFragment addFolderDialog = AddFolderDialogFragment.newInstance(folders);
@@ -262,7 +264,7 @@ public class MainActivity extends AppCompatActivity
         addFolderDialog.show(fm, "fragment_add_folder_dialog");
     }
 
-
+    // create instance of SaveRecipeDialogFragment and show it
     public void saveRecipe(String id){
         FragmentManager fm = getSupportFragmentManager();
         SaveRecipeDialogFragment saveRecipeDialog = SaveRecipeDialogFragment.newInstance(id);
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity
         saveRecipeDialog.show(fm, "fragment_save_recipe_dialog");
     }
 
-
+// create instance of EditFolderDialogFragment and show it
     public void showEditFolderDialog(int index, ArrayList<String> folders){
         FragmentManager fm = getSupportFragmentManager();
         EditFolderDialogFragment editFolderDialog = EditFolderDialogFragment.newInstance(index, folders);

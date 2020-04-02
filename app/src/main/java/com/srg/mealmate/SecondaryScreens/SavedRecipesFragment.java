@@ -21,6 +21,7 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
+import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,13 +29,15 @@ import java.util.HashMap;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class SavedRecipesFragment extends Fragment {
+public class SavedRecipesFragment extends Fragment implements IOnFocusListenable {
     private static final String TAG = "SavedRecipesFragment";
+    public static String removal = "";
     private View view;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ArrayList<String> folder;
-    private ArrayList<Recipe> recipes;
+    private ArrayList<String> folder; // list of recipe ids for saved recipes
+    private ArrayList<Recipe> recipes; //recipes with ids corresponding to ids from folder
     private SearchResultAdapter adapter;
+    private String folderName;
 
 
     public SavedRecipesFragment() {
@@ -49,14 +52,24 @@ public class SavedRecipesFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_saved_recipes, container, false);
 
         Bundle bundle = getArguments();
-        String folderName = bundle.getString("folder");
+        folderName = bundle.getString("folder");
 
-        loadSavedRecipes(folderName);
+        loadSavedRecipes();
 
         TextView headerTV = view.findViewById(R.id.saved_recipes_header);
         headerTV.setText("Folder: " + folderName);
 
         return view;
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        Log.d(TAG, "has focus: true");
+        // refreshing and saving data
+        adapter.notifyDataSetChanged();
+        // also remove the item from folder
+        if(folder.contains(removal)){
+            saveRecipeList();
+        }
     }
 
     private void initRecyclerView(){
@@ -71,7 +84,7 @@ public class SavedRecipesFragment extends Fragment {
     }
 
 
-    private void loadSavedRecipes(String folderName){
+    private void loadSavedRecipes(){
         Log.d(TAG, "loading recipes from folder");
         ArrayListStringIO.setFilename(folderName+"_folder");
         folder = ArrayListStringIO.readList(getActivity());
@@ -116,6 +129,16 @@ public class SavedRecipesFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+
+    private void saveRecipeList(){
+            // remove recipe id matching removal from folder
+            ArrayListStringIO.setFilename(folderName + "_folder");
+            folder.remove(removal);
+            ArrayListStringIO.writeList(folder, getActivity());
+            // reset removal value
+            removal = "";
     }
 
 

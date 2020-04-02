@@ -30,6 +30,7 @@ public class EditFolderDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
+
     public static EditFolderDialogFragment newInstance(int itemIndex, ArrayList<String> folders){
         EditFolderDialogFragment frag = new EditFolderDialogFragment();
 
