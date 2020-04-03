@@ -65,9 +65,9 @@
     <string name="instructions_subheader">Instructions</string>
     <string name="recipe_menu">View Menu</string>
     <string name="fav_recipe">Save Recipe</string>
-    <string name="save_recipe">Save Recipe</string>
-    <string name="nav_nutrition"> View Nutrition for Recipe</string>
-    <string name="add_to_plan">Add Recipe to Meal Plan</string>
+    <string name="save_recipe">Save </string>
+    <string name="nav_nutrition"> View Nutrition </string>
+    <string name="add_to_plan">Add to Meal Plan</string>
 
 
     <!-- GroceryList -->
