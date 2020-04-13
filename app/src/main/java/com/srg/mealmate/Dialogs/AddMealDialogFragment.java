@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.MealPlan;
+import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,7 +89,27 @@ public class AddMealDialogFragment extends DialogFragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get selected Meal Plan and load it
+                String planDate = spinner_plans.getSelectedItem()
+                        .toString()
+                        .replaceAll("\\s+", "");
 
+                MealPlanIO.setFilename(planDate);
+                MealPlan plan = MealPlanIO.readList(getActivity());
+
+                // get selected day
+                String selected_day = spinner_days.getSelectedItem()
+                        .toString()
+                        .replaceAll("\\s+", "");
+
+                // add recipe to meal plan
+                plan.addRecipe(selected_day, recipeID);
+                Log.d(TAG, plan.getDay(0).toString());
+
+                //save the meal plan
+                MealPlanIO.writeList(plan, getActivity());
+
+                dismiss();
             }
         });
 

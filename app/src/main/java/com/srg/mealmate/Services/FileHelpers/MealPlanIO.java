@@ -27,6 +27,14 @@ public class MealPlanIO {
         Log.d(TAG, "writeList");
         Log.d(TAG, "filename="+filename);
 
+        Log.d(TAG, "Meal Plan: ");
+        for(int i=0;i<plan.getWeek().size();i++){
+            Log.d(TAG, "Week " + i );
+            for(String recipe : plan.getDay(i)){
+                Log.d(TAG, recipe);
+            }
+        }
+
         /* debugging
         for(int i=0; i<items.size(); i++){
             Log.d("item", items.get(i).getName());
@@ -62,6 +70,14 @@ public class MealPlanIO {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+
+        Log.d(TAG, "Meal Plan: ");
+        for(int i=0;i<plan.getWeek().size();i++){
+            Log.d(TAG, "Week " + i );
+            for(String recipe : plan.getDay(i)){
+                Log.d(TAG, recipe);
+            }
         }
         /* debugging
         if (!items.isEmpty()) {

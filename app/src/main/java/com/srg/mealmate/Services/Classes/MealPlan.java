@@ -17,6 +17,9 @@ public class MealPlan {
 
     public MealPlan(){
         this.week = new ArrayList<>();
+        for(int i=0;i<7;i++){
+            this.week.add(new ArrayList<String>());
+        }
     }
 
     public MealPlan(ArrayList<ArrayList<String>> week) {
@@ -49,6 +52,40 @@ public class MealPlan {
 
     public int size(){
         return this.week.size(); // should be 0 or 7
+    }
+
+
+    public void addRecipe(String day, String recipeID){
+        int dayIndex;
+
+        switch(day){
+            case "Sunday":
+                dayIndex = 0;
+                break;
+            case "Monday":
+                dayIndex = 1;
+                break;
+            case "Tuesday":
+                dayIndex = 2;
+                break;
+            case "Wednesday":
+                dayIndex = 3;
+                break;
+            case "Thursday":
+                dayIndex = 4;
+                break;
+            case "Friday":
+                dayIndex = 5;
+                break;
+            case "Saturday":
+                dayIndex = 6;
+                break;
+            default:
+                dayIndex = 0;
+                break;
+        }
+
+        this.week.get(dayIndex).add(recipeID);
     }
 
 

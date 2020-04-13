@@ -44,8 +44,9 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private Boolean dataPreserved = false; //initial false,  true when fragment is not destroyed and then re-inflated
 
     private MealPlan plan = new MealPlan();
-    private ArrayList<SearchResultAdapter> adapters;
-    private ArrayList<ArrayList<Recipe>> recipes;
+    private ArrayList<SearchResultAdapter> adapters = new ArrayList<>();
+    private ArrayList<ArrayList<Recipe>> recipes = new ArrayList<>();
+    private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
 
     //private MealAdapter adapter;
 
@@ -61,9 +62,11 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal_plan, container, false);
 
+        init_ArrayLists();
         init_weekData();
         init_NavClickListeners();
 
+        dataPreserved = true;
 
         return view;
     }
@@ -81,6 +84,16 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         // refreshing and saving data
         //adapter.notifyDataSetChanged();
         //saveGroceryList();
+    }
+
+
+    private void init_ArrayLists(){
+        for(int i=0;i<7;i++){
+            recipes.add(new ArrayList<Recipe>());
+            adapters.add(new SearchResultAdapter(getActivity(), recipes.get(i), false));
+        }
+
+
     }
 
 
@@ -114,7 +127,8 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(viewId);
-        adapters.set(index, new SearchResultAdapter(getActivity(), recipes.get(index), false));
+        //adapters.set(index, new SearchResultAdapter(getActivity(), recipes.get(index), false));
+        //adapters.get(index).notifyDataSetChanged();
 
         rv.setAdapter(adapters.get(index));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -151,7 +165,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         String weekText;
         TextView tv = view.findViewById(R.id.txt_current);
         // save current Grocery List if it exists
-        if(!plan.isEmpty()) {
+        if(!plan.isEmpty() && dataPreserved) {
             saveMealPlan();
         }
         // change week, ex: go back a week if offset = -7
@@ -215,7 +229,9 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
         for(int day=0; day<plan.size(); day++){
             if(!plan.getWeek().get(day).isEmpty()){
-                recipes.set(day, new ArrayList<Recipe>());
+                // recipes.set(day, new ArrayList<Recipe>());
+
+                Log.d(TAG, plan.getDay(day).toString());
 
                 for(int i=0; i<plan.getDay(day).size();i++){
                     retrieveRecipe(plan.getDay(day).get(i), day);
@@ -256,6 +272,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
                                     category, instructions, imgURL);
 
                             recipes.get(day).add(newResult);
+                            adapters.get(day).notifyDataSetChanged();
                             initRecyclerView(day);
                         } else{
                             Log.d(TAG, "error retrieving document");

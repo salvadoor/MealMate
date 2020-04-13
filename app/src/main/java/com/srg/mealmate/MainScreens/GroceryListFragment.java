@@ -161,7 +161,7 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
         String weekText;
         TextView tv = view.findViewById(R.id.txt_current);
         // save current Grocery List if it exists
-        if(!items.isEmpty()) {
+        if(!items.isEmpty() && dataPreserved) {
             saveGroceryList();
         }
         // change week, ex: go back a week if offset = -7
