@@ -71,6 +71,8 @@ public class RecipeSearchFragment extends Fragment {
 
         if(searchMap.isEmpty()){
             Log.d(TAG, "searchMap is empty");
+            // searchMap.add(new RecipeSearchMapping("LAST-UPDATE", ""));
+
             refreshSearchMap();
             searchMap = RecipeSearchMapIO.readList(getActivity());
         }

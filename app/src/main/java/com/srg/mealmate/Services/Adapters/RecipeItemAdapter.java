@@ -49,7 +49,7 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.search_result, parent, false);
+                .inflate(R.layout.recipe_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

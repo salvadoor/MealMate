@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_of_the_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string-array name="food_units">
+        <item>other</item>
+        <item>oz</item>
+        <item>fl oz</item>
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>pinch</item>
+        <item>cup</item>
+        <item>loaf</item>
+        <item>package</item>
+        <item>packet</item>
+    </string-array>
+
+</resources>

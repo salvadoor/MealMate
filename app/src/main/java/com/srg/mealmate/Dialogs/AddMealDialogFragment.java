@@ -23,8 +23,8 @@ import java.util.Calendar;
 
 public class AddMealDialogFragment extends DialogFragment {
     private static final String TAG = "AddMealPlanDialog";
-    private static final String[] days =
-            {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private String[] days;
+          //  {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private ArrayList<String> filenames = new ArrayList<>();
     private Calendar c;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
@@ -57,6 +57,8 @@ public class AddMealDialogFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         recipeID = bundle.getString("recipeID");
+
+        days =  getContext().getResources().getStringArray(R.array.days_of_the_week);
 
         getSundays();
         initSpinners();

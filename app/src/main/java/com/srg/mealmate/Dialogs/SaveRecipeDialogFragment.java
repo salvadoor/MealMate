@@ -78,6 +78,7 @@ public class SaveRecipeDialogFragment extends DialogFragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String folderName = spinner.getSelectedItem()
                         .toString()
                         .replaceAll("\\s+", "");

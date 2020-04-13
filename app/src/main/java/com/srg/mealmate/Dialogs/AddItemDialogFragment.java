@@ -28,7 +28,7 @@ public class AddItemDialogFragment extends DialogFragment {
     private ArrayList<GroceryItem> items;
     private HashMap<String, Double> itemMap = new HashMap<>();
     private HashMap<String, Double> itemHash;
-    private static final String[] unitOptions = {"other", "oz", "tsp", "tbsp", "pinch", "lb", "cup", "loaf", "package"};
+    private String[] unitOptions;
 
 
     public AddItemDialogFragment() {
@@ -62,6 +62,8 @@ public class AddItemDialogFragment extends DialogFragment {
         itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
         items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
         itemHash = (HashMap<String, Double>) bundle.getSerializable("hashmap");
+
+        unitOptions = getContext().getResources().getStringArray(R.array.food_units);
 
         initSpinner();
         initOnClickListeners();

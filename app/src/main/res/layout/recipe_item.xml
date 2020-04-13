@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    "search_result.xml"
-     Used repeatedly for RecyclerView
+    "recipe_item.xml     Used repeatedly for RecyclerView
 
      Layout Contains:
         recipe image
@@ -15,7 +14,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/search_result">
+    android:layout_marginTop="8dp"
+    android:id="@+id/search_result"
+    android:background="@drawable/rounded_4">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@string/placeholder" />
 
             <TextView
@@ -49,12 +51,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 android:text="@string/placeholder" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <include layout="@layout/horizontal_divider"/>
+    <!--<include layout="@layout/horizontal_divider"/>-->
 
 </LinearLayout>

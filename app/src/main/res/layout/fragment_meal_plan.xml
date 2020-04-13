@@ -12,7 +12,7 @@
         layout="@layout/week_nav" />
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     <LinearLayout
         android:orientation="vertical"
@@ -20,14 +20,26 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_sunday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Sunday" />
-
-        <include layout="@layout/horizontal_divider" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye1"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye1"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Sunday" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sunday_meals"
@@ -35,15 +47,27 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_monday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Monday" />
-
-        <include layout="@layout/horizontal_divider" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye2"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye2"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Monday" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/monday_meals"
@@ -51,15 +75,27 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_tuesday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Tuesday" />
-
-        <include layout="@layout/horizontal_divider" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye3"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye3"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Tuesday" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tuesday_meals"
@@ -67,15 +103,27 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_wednesday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Wednesday" />
-
-        <include layout="@layout/horizontal_divider" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye4"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye4"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Wednesday" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wednesday_meals"
@@ -83,15 +131,27 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_thursday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Thursday" />
-
-        <include layout="@layout/horizontal_divider" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye5"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye5"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Thursday" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/thursday_meals"
@@ -99,15 +159,28 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_friday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Friday" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye6"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye6"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Friday" />
+        </RelativeLayout>
 
-        <include layout="@layout/horizontal_divider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friday_meals"
@@ -115,15 +188,28 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/header_saturday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Saturday" />
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye7"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye7"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Saturday" />
+        </RelativeLayout>
 
-        <include layout="@layout/horizontal_divider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saturday_meals"
@@ -135,3 +221,172 @@
     </ScrollView>
 
 </LinearLayout>
+
+
+<!-- older version using only TextViews and no visibility icon
+note Sunday is new version, needs to be changed back
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainScreens.MealPlanFragment">
+
+<include
+    android:id="@+id/week_nav_plan"
+    layout="@layout/week_nav" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <RelativeLayout
+            android:id="@+id/header_sunday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_10">
+            <ImageView
+                android:id="@+id/eye1"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/visibility_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/eye1"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Sunday" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sunday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_monday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_10"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:text="Monday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/monday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Tuesday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tuesday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_wednesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Wednesday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wednesday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_thursday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Thursday" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/thursday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_friday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Friday" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/header_saturday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Saturday" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saturday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>
+-->

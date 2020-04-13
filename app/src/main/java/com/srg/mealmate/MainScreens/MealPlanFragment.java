@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +46,8 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private Boolean dataPreserved = false; //initial false,  true when fragment is not destroyed and then re-inflated
 
     private MealPlan plan = new MealPlan();
-    private ArrayList<RecipeItemAdapter> adapters = new ArrayList<>();
-    private ArrayList<ArrayList<Recipe>> recipes = new ArrayList<>();
+    private ArrayList<RecipeItemAdapter> adapters;
+    private ArrayList<ArrayList<Recipe>> recipes;
     // private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
 
     //private MealAdapter adapter;
@@ -65,6 +67,11 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         init_ArrayLists();
         init_weekData();
         init_NavClickListeners();
+
+        // initialize the RecyclerView for each day
+        for(int i=0; i<7; i++){
+            initRecyclerView(i);
+        }
 
         dataPreserved = true;
 
@@ -88,6 +95,10 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
 
     private void init_ArrayLists(){
+        // create new ArrayLists and initialize them
+        recipes = new ArrayList<>();
+        adapters = new ArrayList<>();
+
         for(int i=0;i<7;i++){
             recipes.add(new ArrayList<Recipe>());
             adapters.add(new RecipeItemAdapter(getActivity(), recipes.get(i), false));
@@ -98,37 +109,54 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
 
     private void initRecyclerView(int index){
-        int viewId = 0;
+        int rvId = 0;
+        int rlId = 0;
+        int imgId = 0;
         // switch case for viewId to int id for proper recyclerview
         switch (index){
             case 0:
-                viewId = R.id.sunday_meals;
+                rvId = R.id.sunday_meals;
+                rlId = R.id.header_sunday;
+                imgId = R.id.eye1;
                 break;
             case 1:
-                viewId = R.id.monday_meals;
+                rvId = R.id.monday_meals;
+                rlId = R.id.header_monday;
+                imgId = R.id.eye2;
                 break;
             case 2:
-                viewId = R.id.tuesday_meals;
+                rvId = R.id.tuesday_meals;
+                rlId = R.id.header_tuesday;
+                imgId = R.id.eye3;
                 break;
             case 3:
-                viewId = R.id.wednesday_meals;
+                rvId = R.id.wednesday_meals;
+                rlId = R.id.header_wednesday;
+                imgId = R.id.eye4;
                 break;
             case 4:
-                viewId = R.id.thursday_meals;
+                rvId = R.id.thursday_meals;
+                rlId = R.id.header_thursday;
+                imgId = R.id.eye5;
                 break;
             case 5:
-                viewId = R.id.friday_meals;
+                rvId = R.id.friday_meals;
+                rlId = R.id.header_friday;
+                imgId = R.id.eye6;
                 break;
             default:
-                viewId = R.id.saturday_meals;
+                rvId = R.id.saturday_meals;
+                rlId = R.id.header_saturday;
+                imgId = R.id.eye7;
                 break;
         }
 
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
-        RecyclerView rv = view.findViewById(viewId);
+        RecyclerView rv = view.findViewById(rvId);
         //adapters.set(index, new SearchResultAdapter(getActivity(), recipes.get(index), false));
         //adapters.get(index).notifyDataSetChanged();
+        init_HeaderClickListener(rlId, imgId, rv);
 
         rv.setAdapter(adapters.get(index));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -174,6 +202,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         tv.setText(weekText);
 
         // Load corresponding Grocery List
+        clearRecipes();
         loadMealPlan(dateFormat.format(c.getTime()));
     }
 
@@ -219,6 +248,24 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         });
     }
 
+    private void init_HeaderClickListener(int rl_id, int img_id, final RecyclerView rv){
+        RelativeLayout rl = view.findViewById(rl_id);
+        final ImageView iv = view.findViewById(img_id);
+
+        rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rv.getVisibility() == View.VISIBLE){
+                    iv.setImageResource(R.drawable.visibility_off_white);
+                    rv.setVisibility(View.GONE);
+                } else{
+                    rv.setVisibility(View.VISIBLE);
+                    iv.setImageResource(R.drawable.visibility_white);
+                }
+            }
+        });
+    }
+
 
 //----------------------------------------------------------------------------------
 // Methods to deal with reading and writing data using the GroceryListIO class
@@ -248,6 +295,16 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     }
 
 
+    private void clearRecipes(){
+        // set each recipe list to null and update adapter
+        for(int i=0;i<plan.getWeek().size();i++){
+            recipes.get(i).clear();
+            adapters.get(i).notifyDataSetChanged();
+
+        }
+    }
+
+
 
     private void retrieveRecipe(String id, final int day){
         db.collection("recipes")
@@ -273,7 +330,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
                             recipes.get(day).add(newResult);
                             adapters.get(day).notifyDataSetChanged();
-                            initRecyclerView(day);
+                            // initRecyclerView(day);
                         } else{
                             Log.d(TAG, "error retrieving document");
                         }
