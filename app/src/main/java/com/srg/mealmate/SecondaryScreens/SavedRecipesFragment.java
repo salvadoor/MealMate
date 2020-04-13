@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
+import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
@@ -34,7 +34,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> folder; // list of recipe ids for saved recipes
     private ArrayList<Recipe> recipes; //recipes with ids corresponding to ids from folder
-    private SearchResultAdapter adapter;
+    private RecipeItemAdapter adapter;
     private String folderName;
 
 
@@ -75,7 +75,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.recipe_list);
 
-        adapter = new SearchResultAdapter(getActivity(), recipes, true);
+        adapter = new RecipeItemAdapter(getActivity(), recipes, true);
         rv.setAdapter(adapter);
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -21,7 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
+import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.MealPlan;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
@@ -44,9 +44,9 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private Boolean dataPreserved = false; //initial false,  true when fragment is not destroyed and then re-inflated
 
     private MealPlan plan = new MealPlan();
-    private ArrayList<SearchResultAdapter> adapters = new ArrayList<>();
+    private ArrayList<RecipeItemAdapter> adapters = new ArrayList<>();
     private ArrayList<ArrayList<Recipe>> recipes = new ArrayList<>();
-    private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
+    // private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
 
     //private MealAdapter adapter;
 
@@ -90,7 +90,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private void init_ArrayLists(){
         for(int i=0;i<7;i++){
             recipes.add(new ArrayList<Recipe>());
-            adapters.add(new SearchResultAdapter(getActivity(), recipes.get(i), false));
+            adapters.add(new RecipeItemAdapter(getActivity(), recipes.get(i), false));
         }
 
 

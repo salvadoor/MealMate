@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.srg.mealmate.Services.Classes.MealPlan;
-import com.srg.mealmate.Services.Classes.Recipe;
-import com.srg.mealmate.Services.Classes.RecipeSimple;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
+import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
@@ -37,7 +37,7 @@ public class RecipeSearchFragment extends Fragment {
     private ArrayList<Recipe> results = new ArrayList<>();
     private ArrayList<RecipeSearchMapping> searchMap = new ArrayList<>();
     private Boolean dataPreserved = false;
-    private SearchResultAdapter adapter;
+    private RecipeItemAdapter adapter;
     private View view;
 
 
@@ -104,7 +104,7 @@ public class RecipeSearchFragment extends Fragment {
         // create RecyclerView
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.results_list);
-        adapter = new SearchResultAdapter(getActivity(), results, false);
+        adapter = new RecipeItemAdapter(getActivity(), results, false);
 
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

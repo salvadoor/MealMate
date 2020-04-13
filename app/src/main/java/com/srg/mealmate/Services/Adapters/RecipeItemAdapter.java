@@ -32,14 +32,14 @@ import com.srg.mealmate.Services.Classes.Recipe;
 import java.util.ArrayList;
 
 
-public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
+public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.ViewHolder>{
     private static final String TAG = "SearchResultAdapter";
     private ArrayList<Recipe> results = new ArrayList<>();
     private Boolean isSaved;
     private Context mContext;
 
 
-    public SearchResultAdapter(Context context, ArrayList<Recipe> results, Boolean isSaved) {
+    public RecipeItemAdapter(Context context, ArrayList<Recipe> results, Boolean isSaved) {
         this.results = results;
         this.isSaved = isSaved;
         this.mContext = context;
