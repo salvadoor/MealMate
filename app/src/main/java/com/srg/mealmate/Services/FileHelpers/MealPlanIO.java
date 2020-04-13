@@ -3,7 +3,9 @@ package com.srg.mealmate.Services.FileHelpers;
 import android.content.Context;
 import android.util.Log;
 
-import com.srg.mealmate.Services.Classes.GroceryItem;
+import com.srg.mealmate.Services.Classes.MealPlan;
+import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.RecipeSimple;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,19 +23,20 @@ public class MealPlanIO {
         filename = sundayDate + "_plan.dat";
     }
 
-    public static void writeList(ArrayList<GroceryItem> items, Context context){
+    public static void writeList(MealPlan plan, Context context){
         Log.d(TAG, "writeList");
         Log.d(TAG, "filename="+filename);
 
+        /* debugging
         for(int i=0; i<items.size(); i++){
             Log.d("item", items.get(i).getName());
         }
-
+        */
 
         try{
             FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(items);
+            oos.writeObject(plan.getWeek());
             oos.close();
         } catch(FileNotFoundException e){
             e.printStackTrace();
@@ -42,23 +45,25 @@ public class MealPlanIO {
         }
     }
 
-    public static ArrayList<GroceryItem> readList(Context context) {
+    public static MealPlan readList(Context context) {
         Log.d(TAG, "readList");
         Log.d(TAG, "filename=" + filename);
 
-        ArrayList<GroceryItem> items = new ArrayList<>();
+        MealPlan plan = new MealPlan();
+
 
         try {
             FileInputStream fis = context.openFileInput(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            items = (ArrayList<GroceryItem>) ois.readObject();
+            plan.setWeek((ArrayList<ArrayList<String>>) ois.readObject());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        /* debugging
         if (!items.isEmpty()) {
             for (int i = 0; i < items.size(); i++) {
                 Log.d("item", items.get(i).getName());
@@ -66,7 +71,8 @@ public class MealPlanIO {
         } else {
             Log.d("item", "No items");
         }
+        */
 
-        return items;
+        return plan;
     }
 }

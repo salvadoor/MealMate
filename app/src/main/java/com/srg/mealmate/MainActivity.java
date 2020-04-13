@@ -1,3 +1,12 @@
+/*
+ * "MainActivity.java"
+ *
+ * Main Activity that sets the Navigation Drawer
+ * draws all other screens for application via Fragments
+ * 
+ *
+ * Last Modified: 02.12.2020 05:25pm
+ */
 package com.srg.mealmate;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,6 +36,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.srg.mealmate.Dialogs.AboutFragment;
 import com.srg.mealmate.Dialogs.AddFolderDialogFragment;
 import com.srg.mealmate.Dialogs.AddItemDialogFragment;
+import com.srg.mealmate.Dialogs.AddMealDialogFragment;
 import com.srg.mealmate.Dialogs.EditFolderDialogFragment;
 import com.srg.mealmate.Dialogs.EditItemDialogFragment;
 import com.srg.mealmate.Dialogs.SaveRecipeDialogFragment;
@@ -280,6 +290,13 @@ public class MainActivity extends AppCompatActivity
         editFolderDialog.show(fm, "fragment_edit_folder_dialog");
     }
 
+// create instance of EditFolderDialogFragment and show it
+    public void showAddMealDialog(String id){
+        FragmentManager fm = getSupportFragmentManager();
+        AddMealDialogFragment addMealDialog = AddMealDialogFragment.newInstance(id);
+
+        addMealDialog.show(fm, "fragment_add_meal_dialog");
+    }
 
 //---------------------------------------------------------------------------
 // Following three Methods deal with setting and inflating a Fragment
@@ -351,7 +368,6 @@ public class MainActivity extends AppCompatActivity
         // put folderName in a bundle
         Bundle bundle = new Bundle();
         bundle.putString("folder", folderName);
-
 
         // get the index for the last Fragment which will be a
             //SavedFoldersFragment because this method is only called from there

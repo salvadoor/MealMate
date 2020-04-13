@@ -69,6 +69,10 @@
     <string name="nav_nutrition"> View Nutrition </string>
     <string name="add_to_plan">Add to Meal Plan</string>
 
+    <!-- Meal Plan -->
+    <string name="nav_add_meal">Add to Meal Plan</string>
+    <string name="ask_meal_plan"> Select Meal Plan</string>
+    <string name="ask_meal_plan_day"> Select Day in Meal Plan</string>
 
     <!-- GroceryList -->
     <string name="nav_new_grocery">Add New Grocery Item</string>

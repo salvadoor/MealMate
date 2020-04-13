@@ -11,6 +11,9 @@
         android:id="@+id/week_nav_plan"
         layout="@layout/week_nav" />
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -24,6 +27,12 @@
             android:textStyle="bold"
             android:text="Sunday" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sunday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
         <include layout="@layout/horizontal_divider" />
 
         <TextView
@@ -33,6 +42,12 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="Monday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/monday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
         <include layout="@layout/horizontal_divider" />
 
@@ -44,6 +59,12 @@
             android:textStyle="bold"
             android:text="Tuesday" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tuesday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
         <include layout="@layout/horizontal_divider" />
 
         <TextView
@@ -53,6 +74,12 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="Wednesday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wednesday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
         <include layout="@layout/horizontal_divider" />
 
@@ -64,6 +91,12 @@
             android:textStyle="bold"
             android:text="Thursday" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/thursday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
         <include layout="@layout/horizontal_divider" />
 
         <TextView
@@ -73,6 +106,12 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="Friday" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
         <include layout="@layout/horizontal_divider" />
 
@@ -84,9 +123,15 @@
             android:textStyle="bold"
             android:text="Saturday" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saturday_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
         <include layout="@layout/horizontal_divider" />
 
     </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

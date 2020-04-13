@@ -100,16 +100,25 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
     private void initOnClickListeners(){
-        Button save_btn;
+        Button btn_save_recipe, btn_add_meal;
 
-        save_btn = view.findViewById(R.id.btn_save_recipe);
-        save_btn.setOnClickListener(new View.OnClickListener() {
+        btn_save_recipe = view.findViewById(R.id.btn_save_recipe);
+        btn_save_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 // call MainActivity method to show dialogfragment
                 ((MainActivity) getActivity()).saveRecipe(recipe.getId());
             }
         });
+
+        btn_add_meal = view.findViewById(R.id.btn_add_to_plan);
+        btn_add_meal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).showAddMealDialog(recipe.getId());
+            }
+        });
+
     }
 
 

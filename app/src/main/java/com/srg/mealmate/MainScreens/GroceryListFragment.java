@@ -53,7 +53,7 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
     private View view;
     private Calendar c;
     private int weeksFromCurr; // 0 value is current week, -1 is week before current, 1 is week after current, etc
-    private int weeksSaved;
+    private static final int weeksSaved = 1;
     private ArrayList<GroceryItem> items = new ArrayList<>();
     private Boolean dataPreserved = false; //initial false,  true when fragment is not destroyed and then re-inflated
     private HashMap<String, Double> itemHash;
@@ -122,7 +122,7 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
 // Methods to deal with setting the week and retrieving corresponding list
     private void init_weekData(){
         // If pref is 5, there are 5//2 weeks saved before and  after the current week
-        weeksSaved = (new Preferences().getWeeks()) / 2;
+        //weeksSaved = (new Preferences().getWeeks()) / 2;
 
         if(dataPreserved){
             // if dataStored == true, then variables such as the c Calendar object already have defined values

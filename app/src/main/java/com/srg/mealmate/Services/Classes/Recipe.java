@@ -14,8 +14,8 @@ public class Recipe implements Serializable {
     private String imgURL;
 
 
-    public Recipe(String name, String source, String id, ArrayList<HashMap> ingredients
-                    , String category, ArrayList<String> instructions, String imgURL) {
+    public Recipe(String name, String source, String id, ArrayList<HashMap> ingredients,
+                  String category, ArrayList<String> instructions, String imgURL) {
         this.name = name;
         this.source = source;
         this.id = id;
@@ -24,6 +24,7 @@ public class Recipe implements Serializable {
         this.instructions = instructions;
         this.imgURL = imgURL;
     }
+
 
     public String getName() {
         return name;

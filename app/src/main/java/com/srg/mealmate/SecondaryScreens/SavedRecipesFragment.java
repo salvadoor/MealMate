@@ -26,8 +26,6 @@ import com.srg.mealmate.Services.IOnFocusListenable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 
 public class SavedRecipesFragment extends Fragment implements IOnFocusListenable {
     private static final String TAG = "SavedRecipesFragment";

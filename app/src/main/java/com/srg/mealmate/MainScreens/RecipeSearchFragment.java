@@ -22,9 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
-import com.srg.mealmate.Services.Adapters.SearchResultAdapter;
 import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
 import java.util.ArrayList;

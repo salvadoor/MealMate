@@ -73,7 +73,7 @@ public class AddItemDialogFragment extends DialogFragment {
     private void initSpinner(){
         spinner = view.findViewById(R.id.spinner_units);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.unit_item,unitOptions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.unit_item, unitOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
