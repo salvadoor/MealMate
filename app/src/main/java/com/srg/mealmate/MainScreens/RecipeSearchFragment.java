@@ -164,7 +164,6 @@ public class RecipeSearchFragment extends Fragment {
 
                         results.add(newResult);
                         adapter.notifyDataSetChanged();
-                        //initRecyclerView();
                     }
                 });
 

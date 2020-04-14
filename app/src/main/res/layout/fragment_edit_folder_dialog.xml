@@ -38,14 +38,18 @@
             android:id="@+id/btn_delete_folder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/rounded_10"
+            android:textColor="@color/white"
             android:text="@string/btn_delete"/>
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/rounded_10"
+            android:textColor="@color/white"
             android:text="@string/btn_cancel"/>
 
     </LinearLayout>

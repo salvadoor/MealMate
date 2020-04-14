@@ -192,6 +192,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private void setWeek(int offset){
         String weekText;
         TextView tv = view.findViewById(R.id.txt_current);
+
         // save current Grocery List if it exists
         if(!plan.isEmpty() && dataPreserved) {
             saveMealPlan();
