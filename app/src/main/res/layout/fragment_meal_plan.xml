@@ -45,6 +45,7 @@
             android:id="@+id/sunday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -73,6 +74,7 @@
             android:id="@+id/monday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -101,6 +103,7 @@
             android:id="@+id/tuesday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -129,6 +132,7 @@
             android:id="@+id/wednesday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -157,6 +161,7 @@
             android:id="@+id/thursday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -186,6 +191,7 @@
             android:id="@+id/friday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
         <RelativeLayout
@@ -215,6 +221,7 @@
             android:id="@+id/saturday_meals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:nestedScrollingEnabled="false" />
 
     </LinearLayout>

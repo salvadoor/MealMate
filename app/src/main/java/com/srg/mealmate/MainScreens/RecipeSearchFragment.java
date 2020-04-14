@@ -1,6 +1,7 @@
 package com.srg.mealmate.MainScreens;
 
 
+import android.net.ParseException;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,8 +28,13 @@ import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 
 public class RecipeSearchFragment extends Fragment {
@@ -39,6 +45,8 @@ public class RecipeSearchFragment extends Fragment {
     private Boolean dataPreserved = false;
     private RecipeItemAdapter adapter;
     private View view;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+    final Date date = new Date();
 
 
     public RecipeSearchFragment() {
@@ -71,11 +79,29 @@ public class RecipeSearchFragment extends Fragment {
 
         if(searchMap.isEmpty()){
             Log.d(TAG, "searchMap is empty");
-            // searchMap.add(new RecipeSearchMapping("LAST-UPDATE", ""));
+            searchMap.add(new RecipeSearchMapping("LAST-UPDATE", dateFormat.format(date)));
 
             refreshSearchMap();
-            searchMap = RecipeSearchMapIO.readList(getActivity());
+        } else{ // check if searchMap has been updated within the past day, if not, update
+            try {
+                Date lastUpdated = dateFormat.parse(searchMap.get(0).getId());
+
+                long diffInMS = Math.abs(date.getTime() - lastUpdated.getTime());
+                long diffInDays = TimeUnit.DAYS.convert(diffInMS, TimeUnit.MILLISECONDS);
+
+                if (diffInDays >= 1) {
+                    Log.d(TAG, "Time to update: days since last update: " + diffInDays);
+
+                    searchMap.clear();
+                    searchMap.add(new RecipeSearchMapping("LAST-UPDATE", dateFormat.format(date)));
+
+                    refreshSearchMap();
+                }
+            } catch (java.text.ParseException e){
+                Log.d(TAG, "ParseException");
+            }
         }
+
     }
 
 
@@ -93,6 +119,7 @@ public class RecipeSearchFragment extends Fragment {
 
                                 searchMap.add(new RecipeSearchMapping(name, id));
                                 RecipeSearchMapIO.writeList(searchMap, getActivity());
+                                retrieveRecipe(id);
                             }
                         } else{
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -133,7 +160,7 @@ public class RecipeSearchFragment extends Fragment {
         Log.d(TAG, "Searching for: '" + searchString + "'");
         results.removeAll(results);
 
-        for(int i=0; i < searchMap.size(); i++){
+        for(int i=1; i < searchMap.size(); i++){
             if(searchMap.get(i).getName().contains(searchString)){
                 retrieveRecipe(searchMap.get(i).getId());
             }

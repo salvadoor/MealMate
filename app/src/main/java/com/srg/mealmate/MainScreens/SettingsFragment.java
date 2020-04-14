@@ -64,16 +64,17 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setListeners(){
-        btn_logout = view.findViewById(R.id.btn_logout);
+        //btn_logout = view.findViewById(R.id.btn_logout);
         btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
-        btn_refresh = view.findViewById(R.id.btn_refresh);
 
+        /*
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).userSignedOut();
             }
         });
+         */
 
         btn_reset_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,37 +98,9 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        btn_refresh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Toast.makeText(getActivity(), "Refreshing", Toast.LENGTH_SHORT).show();
-                refresh_searchMap();
-            }
-        });
-
     }
 
 
-    private void refresh_searchMap(){
-        db.collection("recipes")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for(QueryDocumentSnapshot document: task.getResult()){
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.getString("title").toLowerCase();
-                                String id = document.getId();
 
-                                searchMap.add(new RecipeSearchMapping(name, id));
-                                RecipeSearchMapIO.writeList(searchMap, getActivity());
-                            }
-                        } else{
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
 
 }

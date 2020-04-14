@@ -12,30 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_10"
+        android:textColor="@color/white"
         android:text="@string/login_subheader"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider_settings1"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_subheader" />
-
     <LinearLayout
         android:id="@+id/settings1_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_settings1">
+        app:layout_constraintTop_toBottomOf="@+id/login_subheader">
 
         <TextView
             android:id="@+id/email_label"
@@ -56,7 +50,7 @@
         android:id="@+id/settings1_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings1_email">
@@ -70,62 +64,13 @@
 
         <Button
             android:id="@+id/btn_reset_pwd"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_10"
+            android:textColor="@color/white"
             android:text="@string/btn_reset_pwd" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/preferences_subheader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="start"
-        android:text="@string/preferences_subheader"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings1_password" />
-
-    <View
-        android:id="@+id/divider_settings2"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferences_subheader" />
-
-    <TextView
-        android:id="@+id/pref1_instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pref1_instruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_settings2" />
-
-    <RadioGroup
-        android:id="@+id/pref1_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pref1_instruction">
-
-        <RadioButton
-            android:id="@+id/radio3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3 Weeks: previous week, current week, and next week" />
-
-        <RadioButton
-            android:id="@+id/radio5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5 Weeks, previous 2 weeks, current week, and next 2 weeks" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/data_subheader"
@@ -133,37 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="start"
+        android:background="@drawable/rounded_10"
+        android:textColor="@color/white"
         android:text="@string/data_subheader"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pref1_radio_group" />
-
-    <View
-        android:id="@+id/divider_settings3"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/data_subheader" />
-
-    <Button
-        android:id="@+id/btn_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_refresh"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_settings3" />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log Out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/settings1_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
