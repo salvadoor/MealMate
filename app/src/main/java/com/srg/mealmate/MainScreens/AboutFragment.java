@@ -1,4 +1,4 @@
-package com.srg.mealmate.Dialogs;
+package com.srg.mealmate.MainScreens;
 
 
 import android.os.Bundle;

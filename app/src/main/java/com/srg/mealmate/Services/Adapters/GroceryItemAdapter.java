@@ -38,6 +38,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
     private Context mContext;
     private Activity activity;
     private HashMap<String, Double> itemHash;
+    private int type;
 
 
     public GroceryItemAdapter(Context context,
@@ -48,7 +49,19 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         this.mContext = context;
         this.activity = activity;
         this.itemHash = itemHash;
+        this.type = 0;
     }
+
+
+    public GroceryItemAdapter(Context context,
+                              Activity activity,
+                              ArrayList<GroceryItem> items) {
+        this.items = items;
+        this.mContext = context;
+        this.activity = activity;
+        this.type = 1;
+    }
+
 
     @NonNull
     @Override
@@ -82,22 +95,22 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 } else {
                     items.get(position).setChecked(true);
                 }
-                //notifyDataSetChanged();
                 notifyItemChanged(position);
             }
         });
 
-        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                // show deletion confirmation prompt on item long click
+        if(type==0){ // long press listener only set for GroceryListFragment
+            holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    // show dialog to edit/delete grocery item
+                    ((MainActivity) activity).showEditDialog(position, items, itemHash);
 
-                //do_Dialog(position); // deletion dialog
-                ((MainActivity) activity).showEditDialog(position, items, itemHash);
+                    return true;
+                }
+            });
+        }
 
-                return true;
-            }
-        });
     }
 
     @Override

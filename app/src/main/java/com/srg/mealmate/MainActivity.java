@@ -33,7 +33,8 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.srg.mealmate.Dialogs.AboutFragment;
+import com.srg.mealmate.Dialogs.AddIngredientsDialogFragment;
+import com.srg.mealmate.MainScreens.AboutFragment;
 import com.srg.mealmate.Dialogs.AddFolderDialogFragment;
 import com.srg.mealmate.Dialogs.AddItemDialogFragment;
 import com.srg.mealmate.Dialogs.AddMealDialogFragment;
@@ -291,11 +292,19 @@ public class MainActivity extends AppCompatActivity
     }
 
 // create instance of EditFolderDialogFragment and show it
-    public void showAddMealDialog(String id){
+    public void showAddMealDialog(Recipe recipe){
         FragmentManager fm = getSupportFragmentManager();
-        AddMealDialogFragment addMealDialog = AddMealDialogFragment.newInstance(id);
+        AddMealDialogFragment addMealDialog = AddMealDialogFragment.newInstance(recipe);
 
         addMealDialog.show(fm, "fragment_add_meal_dialog");
+    }
+
+// create instance of AddIngredientsDialogFragment and show it
+    public void addIngredients(ArrayList<GroceryItem> ingredients){
+        FragmentManager fm = getSupportFragmentManager();
+        AddIngredientsDialogFragment addIngredientsDialog = AddIngredientsDialogFragment.newInstance(ingredients);
+
+        addIngredientsDialog.show(fm, "fragment_add_ingredients_dialog");
     }
 
 //---------------------------------------------------------------------------

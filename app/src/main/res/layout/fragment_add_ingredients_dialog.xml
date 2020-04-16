@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".Dialogs.AddIngredientsDialogFragment">
+
+    <TextView
+        android:id="@+id/add_ingredients_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="@string/nav_add_ingredients" />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_ingredients_header"
+        android:layout_marginHorizontal="4dp"
+        android:textAlignment="center"
+        android:text="@string/add_ingredients_prompt" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_below="@+id/instructions"
+        android:layout_above="@+id/buttons"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="1dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="@string/btn_add" />
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="@string/btn_continue" />
+
+    </LinearLayout>
+
+</RelativeLayout>

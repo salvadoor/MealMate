@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
 
 import java.util.ArrayList;
@@ -115,7 +116,7 @@ public class RecipeDetailsFragment extends Fragment {
         btn_add_meal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).showAddMealDialog(recipe.getId());
+                ((MainActivity) getActivity()).showAddMealDialog(recipe);
             }
         });
 
@@ -128,6 +129,13 @@ public class RecipeDetailsFragment extends Fragment {
         StringBuilder str = new StringBuilder();
         String ingredient_string;
 
+        ArrayList<GroceryItem> ingredients = recipe.getIngredients();
+
+        for(GroceryItem item : ingredients){
+            str.append(item.getGroceryDetailString());
+            str.append("\n");
+        }
+        /*
         ingredients = recipe.getIngredients();
 
         for(int i=0; i<ingredients.size(); i++){
@@ -138,7 +146,7 @@ public class RecipeDetailsFragment extends Fragment {
                 str.append("\n");
             }
         }
-
+        */
         return str.toString();
     }
 

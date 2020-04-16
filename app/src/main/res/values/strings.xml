@@ -23,6 +23,7 @@
     <string name="nav_save_recipe"> Save Recipe </string>
     <string name="nav_view_folders"> View Saved Folders</string>
     <string name="nav_view_recipes"> View Saved Recipes</string>
+    <string name="nav_add_ingredients">Add Ingredients</string>
 
     <string name="nav_open_drawer">Open Navigation Drawer</string>
     <string name="nav_close_drawer">Close Navigation Drawer</string>
@@ -46,6 +47,7 @@
     <string name="btn_save"> Save</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_remove"> Remove</string>
+    <string name="btn_continue">Continue</string>
 
     <!-- Text for weekly views-->
     <string name="nav_previous">Prev</string>
@@ -73,6 +75,7 @@
     <string name="nav_add_meal">Add to Meal Plan</string>
     <string name="ask_meal_plan"> Select Meal Plan</string>
     <string name="ask_meal_plan_day"> Select Day in Meal Plan</string>
+    <string name="add_ingredients_prompt">Check off ingredients to add to Grocery List or Continue</string>
 
     <!-- GroceryList -->
     <string name="nav_new_grocery">Add New Grocery Item</string>

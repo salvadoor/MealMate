@@ -12,8 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
+import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.MealPlan;
+import com.srg.mealmate.Services.Classes.Recipe;
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 
 import java.text.SimpleDateFormat;
@@ -30,7 +33,9 @@ public class AddMealDialogFragment extends DialogFragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private Spinner spinner_plans;
     private Spinner spinner_days;
+    private Recipe recipe;
     private String recipeID;
+    private ArrayList<GroceryItem> ingredients;
     private View view;
 
 
@@ -39,10 +44,10 @@ public class AddMealDialogFragment extends DialogFragment {
     }
 
 
-    public static AddMealDialogFragment newInstance(String recipeID){
+    public static AddMealDialogFragment newInstance(Recipe recipe){
         AddMealDialogFragment frag = new AddMealDialogFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("recipeID", recipeID);
+        bundle.putSerializable("recipe", recipe);
         frag.setArguments(bundle);
 
         return frag;
@@ -56,7 +61,8 @@ public class AddMealDialogFragment extends DialogFragment {
         view = inflater.inflate(R.layout.fragment_add_meal_dialog, container, false);
 
         Bundle bundle = getArguments();
-        recipeID = bundle.getString("recipeID");
+        recipe = (Recipe) bundle.getSerializable("recipe");
+        recipeID = recipe.getId();
 
         days =  getContext().getResources().getStringArray(R.array.days_of_the_week);
 
@@ -111,6 +117,7 @@ public class AddMealDialogFragment extends DialogFragment {
                 //save the meal plan
                 MealPlanIO.writeList(plan, getActivity());
 
+                ((MainActivity) getActivity()).addIngredients(recipe.getIngredients());
                 dismiss();
             }
         });
