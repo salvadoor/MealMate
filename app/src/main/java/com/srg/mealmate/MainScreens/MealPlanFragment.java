@@ -48,6 +48,8 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private MealPlan plan = new MealPlan();
     private ArrayList<RecipeItemAdapter> adapters;
     private ArrayList<ArrayList<Recipe>> recipes;
+    public static String removal = "";
+    public static int day = -1;
     // private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
 
     //private MealAdapter adapter;
@@ -64,6 +66,8 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal_plan, container, false);
 
+        removal = "";
+        day = -1;
         init_ArrayLists();
         init_weekData();
         init_NavClickListeners();
@@ -78,18 +82,25 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         return view;
     }
 
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if(hasFocus==true) {
+            Log.d(TAG, "has focus: true");
+            // refreshing and saving data
+            adapters.get(day).notifyDataSetChanged();
+            if (plan.getDay(day).contains(removal)) {
+                plan.getDay(day).remove(removal);
+                saveMealPlan();
+
+                day = -1;
+                removal = "";
+            }
+        }
+    }
+
     @Override
     public void onPause() {
         super.onPause();
         // save Meal Plan(s)
-        //saveGroceryList();
-    }
-
-
-    public void onWindowFocusChanged(boolean hasFocus) {
-        Log.d(TAG, "has focus: true");
-        // refreshing and saving data
-        //adapter.notifyDataSetChanged();
         //saveGroceryList();
     }
 
@@ -101,7 +112,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
         for(int i=0;i<7;i++){
             recipes.add(new ArrayList<Recipe>());
-            adapters.add(new RecipeItemAdapter(getActivity(), recipes.get(i), false));
+            adapters.add(new RecipeItemAdapter(getActivity(), recipes.get(i), true, i));
         }
 
 
@@ -291,6 +302,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
 
     private void saveMealPlan(){
+        // save current MealPlan
         Log.d(TAG, "Saving Meal Plan");
         MealPlanIO.writeList(plan, getActivity());
     }
@@ -304,7 +316,6 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
         }
     }
-
 
 
     private void retrieveRecipe(String id, final int day){

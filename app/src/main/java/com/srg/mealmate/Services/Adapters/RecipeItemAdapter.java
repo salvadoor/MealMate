@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.srg.mealmate.MainActivity;
+import com.srg.mealmate.MainScreens.MealPlanFragment;
 import com.srg.mealmate.R;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.Recipe;
@@ -33,16 +34,27 @@ import java.util.ArrayList;
 
 
 public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.ViewHolder>{
-    private static final String TAG = "SearchResultAdapter";
-    private ArrayList<Recipe> results = new ArrayList<>();
-    private Boolean isSaved;
+    private static final String TAG = "RecipeItemAdapter";
+    private ArrayList<Recipe> recipes = new ArrayList<>();
+    private Boolean removable; // if the recipe is part of a users meal plan or saved recipes
+    private int listIndex = -1; // used to differentiate days for MealPlanFragment
     private Context mContext;
 
 
-    public RecipeItemAdapter(Context context, ArrayList<Recipe> results, Boolean isSaved) {
-        this.results = results;
-        this.isSaved = isSaved;
+    public RecipeItemAdapter(Context context, ArrayList<Recipe> recipes, Boolean removable) {
+        this.recipes = recipes;
+        this.removable = removable;
         this.mContext = context;
+    }
+
+
+    public RecipeItemAdapter(Context context, ArrayList<Recipe> recipes, Boolean removable, int li) {
+        Log.d(TAG, "listIndex was passed, li = " + li);
+        this.recipes = recipes;
+        this.removable = removable;
+        this.mContext = context;
+        this.listIndex = li;
+        Log.d(TAG, "listIndex = " + listIndex);
     }
 
     @NonNull
@@ -59,20 +71,20 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
         // bind ViewHolder and set text and click listener based on the individual recipe result
         Log.d(TAG,"onBindViewHolder:called");
 
-        Picasso.get().load(results.get(position).getImgURL()).into(holder.result_image);
-        holder.result_name.setText(results.get(position).getName());
-        holder.result_source.setText(results.get(position).getSource());
+        Picasso.get().load(recipes.get(position).getImgURL()).into(holder.result_image);
+        holder.result_name.setText(recipes.get(position).getName());
+        holder.result_source.setText(recipes.get(position).getSource());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // call function from MainActivity and pass the selected recipe
-                ((MainActivity)view.getContext()).viewRecipeDetails(results.get(position));
+                ((MainActivity)view.getContext()).viewRecipeDetails(recipes.get(position));
             }
         });
 
-        if(isSaved){
-            // if true, adapter is being used for SavedRecipeFragment
+        if(removable){
+            // if true, adapter is being used for SavedRecipeFragment or MealPlanFragment
             holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -87,7 +99,7 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return results.size();
+        return recipes.size();
     }
 
     public void removeDialog(final int index){
@@ -99,18 +111,26 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(mContext, "Removed " + results.get(index).getName(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Removed " + results.get(index).getId());
+                        Toast.makeText(mContext, "Removed " + recipes.get(index).getName(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Removed " + recipes.get(index).getId());
+                        Log.d(TAG, "listIndex = " + listIndex);
+                        if(listIndex==-1){
+                            SavedRecipesFragment.removal = recipes.get(index).getId();
+                        } else{
+                            MealPlanFragment.removal = recipes.get(index).getId();
+                            MealPlanFragment.day = listIndex;
 
-                        SavedRecipesFragment.removal = results.get(index).getId();
-
-                        results.remove(index);
-
-                        for(int i=0; i<results.size();i++){
-                            Log.d(TAG, results.get(i).getId());
+                            Log.d(TAG, "listIndex =  " + listIndex);
                         }
 
-                        dialog.cancel();
+                        recipes.remove(index);
+                        notifyItemRemoved(index);
+
+                        for(int i = 0; i< recipes.size(); i++){
+                            Log.d(TAG, recipes.get(i).getId());
+                        }
+
+                        dialog.dismiss();
                     }
                 });
 

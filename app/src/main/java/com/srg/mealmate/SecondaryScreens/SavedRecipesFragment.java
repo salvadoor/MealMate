@@ -52,6 +52,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
         Bundle bundle = getArguments();
         folderName = bundle.getString("folder");
 
+        removal = "";
         loadSavedRecipes();
 
         TextView headerTV = view.findViewById(R.id.saved_recipes_header);
@@ -61,12 +62,14 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
     }
 
     public void onWindowFocusChanged(boolean hasFocus) {
-        Log.d(TAG, "has focus: true");
-        // refreshing and saving data
-        adapter.notifyDataSetChanged();
-        // also remove the item from folder
-        if(folder.contains(removal)){
-            saveRecipeList();
+        if(hasFocus==true) {
+            Log.d(TAG, "has focus: true");
+            // refreshing and saving data
+            //adapter.notifyDataSetChanged();
+            // also remove the item from folder
+            if (folder.contains(removal)) {
+                saveRecipeList();
+            }
         }
     }
 
