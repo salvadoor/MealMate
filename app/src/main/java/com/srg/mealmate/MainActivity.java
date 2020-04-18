@@ -303,9 +303,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 // create instance of AddIngredientsDialogFragment and show it
-    public void addIngredients(ArrayList<GroceryItem> ingredients){
+    public void addIngredients(ArrayList<GroceryItem> ingredients, String sunDate){
         FragmentManager fm = getSupportFragmentManager();
-        AddIngredientsDialogFragment addIngredientsDialog = AddIngredientsDialogFragment.newInstance(ingredients);
+        AddIngredientsDialogFragment addIngredientsDialog;
+        addIngredientsDialog = AddIngredientsDialogFragment.newInstance(ingredients, sunDate);
 
         addIngredientsDialog.show(fm, "fragment_add_ingredients_dialog");
     }

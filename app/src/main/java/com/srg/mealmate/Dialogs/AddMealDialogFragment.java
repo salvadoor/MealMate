@@ -117,7 +117,7 @@ public class AddMealDialogFragment extends DialogFragment {
                 //save the meal plan
                 MealPlanIO.writeList(plan, getActivity());
 
-                ((MainActivity) getActivity()).addIngredients(recipe.getIngredients());
+                ((MainActivity) getActivity()).addIngredients(recipe.getIngredients(), planDate);
                 dismiss();
             }
         });

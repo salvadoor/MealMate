@@ -24,7 +24,7 @@ public class GroceryItem implements Serializable {
         this.quantity = quantity;
         this.units = units;
         this.name = item;
-        this.isChecked = false;
+        this.isChecked = true;
     }
 
     public GroceryItem(double quantity, String units, String item, Boolean checked){
