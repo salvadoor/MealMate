@@ -109,9 +109,10 @@
     <string name="pwd_label">Password: </string>
     <string name="btn_reset_pwd"> Reset Password</string>
 
-    <string name="pref1_instruction">Select number of weeks to save for grocery lists and plans</string>
-
-    <string name="btn_refresh">Refresh Recipe Data</string>
+    <string name="del_data">Delete User Data</string>
+    <string name="del_account">Delete my Account</string>
+    <string name="reauthenticate">Re-Authentication</string>
+    <string name="reauth_instructions">Please re-enter your password</string>
 
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>

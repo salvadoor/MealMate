@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.srg.mealmate.Dialogs.AddIngredientsDialogFragment;
+import com.srg.mealmate.Dialogs.ReauthenticateDialog;
 import com.srg.mealmate.MainScreens.AboutFragment;
 import com.srg.mealmate.Dialogs.AddFolderDialogFragment;
 import com.srg.mealmate.Dialogs.AddItemDialogFragment;
@@ -223,12 +224,14 @@ public class MainActivity extends AppCompatActivity
 
 
     public void userSignedOut(){
-        // Sign Out user
-        FirebaseAuth.getInstance().signOut();
-        // make sure user value is updated to reflect no user signed in
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            // Sign Out user
+            FirebaseAuth.getInstance().signOut();
+            // make sure user value is updated to reflect no user signed in
+            Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+        }
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // navigate back to Login
         getSupportActionBar().setTitle(R.string.nav_login);
         setFragment(new LoginFragment());
@@ -305,6 +308,14 @@ public class MainActivity extends AppCompatActivity
         AddIngredientsDialogFragment addIngredientsDialog = AddIngredientsDialogFragment.newInstance(ingredients);
 
         addIngredientsDialog.show(fm, "fragment_add_ingredients_dialog");
+    }
+
+// create instance of AddIngredientsDialogFragment and show it
+    public void userDelete(){
+        FragmentManager fm = getSupportFragmentManager();
+        ReauthenticateDialog reauthDialog = new ReauthenticateDialog();
+
+        reauthDialog.show(fm, "fragment_reauth_dialog");
     }
 
 //---------------------------------------------------------------------------

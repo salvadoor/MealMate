@@ -1,6 +1,7 @@
 package com.srg.mealmate.MainScreens;
 
 
+import android.app.ActivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
 import java.util.ArrayList;
 
+import static android.content.Context.ACTIVITY_SERVICE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
@@ -39,7 +41,6 @@ public class SettingsFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View view;
-    private Button btn_reset_pwd, btn_logout, btn_refresh;
     private ArrayList<RecipeSearchMapping> searchMap = new ArrayList<>();
 
     public SettingsFragment() {
@@ -64,18 +65,17 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setListeners(){
-        //btn_logout = view.findViewById(R.id.btn_logout);
-        btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
+        Button btn_logout, btn_reset_pwd, btn_del_account, btn_del_data;
 
-        /*
+        btn_logout = view.findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).userSignedOut();
             }
         });
-         */
 
+        btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
         btn_reset_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +95,26 @@ public class SettingsFragment extends Fragment {
                                 }
                             }
                         });
+            }
+        });
+
+        btn_del_data = view.findViewById(R.id.btn_del_data);
+        btn_del_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    ((ActivityManager) getActivity().getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
+                } catch (Exception e){
+                    Toast.makeText(getActivity(), "Error occurred", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btn_del_account = view.findViewById(R.id.btn_del_account);
+        btn_del_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).userDelete();
             }
         });
 
