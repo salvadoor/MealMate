@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
                           implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private ArrayList<Fragment> frags = new ArrayList<>();
     private Fragment frag = null;
     private Fragment frag2 = null;
     private Fragment frag3 = null;
@@ -73,9 +74,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             // start a RecipeSearchFragment - default view to display
-            frag = new RecipeSearchFragment();
+            //------------------------------------------------frag = new RecipeSearchFragment();
+            frags.add(new RecipeSearchFragment());
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.content_frame, frag);
+            ft.add(R.id.content_frame, frags.get(0));
             ft.commit();
         }
 
@@ -109,44 +111,51 @@ public class MainActivity extends AppCompatActivity
         // change Action Bar title, and navigate to new Fragment on item press
         int id = item.getItemId();
         // Intent intent = null;
+        frags = new ArrayList<>();
 
         switch (id) {
             case R.id.nav_saved_recipes:
-                frag = new SavedFoldersFragment();
+                //--------------------frag = new SavedFoldersFragment();
+                frags.add(new SavedFoldersFragment());
                 getSupportActionBar().setTitle(R.string.nav_saved_recipes);
                 break;
             case R.id.nav_meal_plan:
-                frag = new MealPlanFragment();
+                //-------------frag = new MealPlanFragment();
+                frags.add(new MealPlanFragment());
                 getSupportActionBar().setTitle(R.string.nav_meal_plan);
                 break;
             case R.id.nav_grocery_list:
-                frag = new GroceryListFragment();
+                //-------------frag = new GroceryListFragment();
+                frags.add(new GroceryListFragment());
                 getSupportActionBar().setTitle(R.string.nav_grocery_list);
                 break;
             case R.id.nav_account:
                 if(user!=null){
-                    frag = new SettingsFragment();
+                    //-------------frag = new SettingsFragment();
+                    frags.add(new SettingsFragment());
                     getSupportActionBar().setTitle(R.string.nav_account);
                 } else{
-                    frag = new LoginFragment();
+                    //----------------frag = new LoginFragment();
+                    frags.add(new LoginFragment());
                     getSupportActionBar().setTitle(R.string.nav_login);
                 }
                 break;
             case R.id.nav_about:
-                frag = new AboutFragment();
+                //-----------frag = new AboutFragment();
+                frags.add(new AboutFragment());
                 getSupportActionBar().setTitle(R.string.nav_about);
                 break;
             default:
-                frag = new RecipeSearchFragment();
+                //--------------frag = new RecipeSearchFragment();
+                frags.add(new RecipeSearchFragment());
                 getSupportActionBar().setTitle(R.string.nav_search);
         }
 
-        if (frag != null) {
+        if (frags.get(0) != null) {
             // set Fragment
-            setFragment(frag);
-
-            frag2 = null;
-            frag3 = null;
+            setFragment(frags.get(0));
+            //frag2 = null;
+            //frag3 = null;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -160,7 +169,12 @@ public class MainActivity extends AppCompatActivity
         // close nav drawer on back
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if(frag!=null && frag2!=null) {
+        } else if(frags.size()>1){
+            int last = frags.size() - 1;
+            attachFragment();
+        }
+        /*
+        else if(frag!=null && frag2!=null) {
             // re-attach frag on back when in frag2
             attachFragment(frag, frag2);
             if(frag3!=null){
@@ -173,7 +187,9 @@ public class MainActivity extends AppCompatActivity
                 frag2 = null;
             }
 
-        } else { // normal back button function
+        }
+        */
+        else { // normal back button function
             super.onBackPressed();
         }
     }
@@ -203,7 +219,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-
+        /*
         if(frag2!=null){
             if(frag2 instanceof IOnFocusListenable) {
                 ((IOnFocusListenable) frag2).onWindowFocusChanged(hasFocus);
@@ -211,10 +227,17 @@ public class MainActivity extends AppCompatActivity
         } else if(frag instanceof IOnFocusListenable) {
             ((IOnFocusListenable) frag).onWindowFocusChanged(hasFocus);
         }
+
+         */
+        if(frags.size()>1) {
+            if (frags.get(frags.size() - 1) instanceof IOnFocusListenable) {
+                ((IOnFocusListenable) frags.get(frags.size() - 1)).onWindowFocusChanged(hasFocus);
+            }
+        }
     }
 
 
-    public void userSignedIn() {
+    public void userSignedIn(){
         // set user and navigate to Settings
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -330,7 +353,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void detachFragment(Fragment f1, Fragment f2, int newTitle){
+    private void detachFragment(int newTitle){
         Log.d(TAG, "detaching fragment");
         // add Fragment f2 and detach Fragment f1
         // detaching f1 instead of removing so that data is not deleted
@@ -340,21 +363,22 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(newTitle);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_frame, f2);
-        ft.detach(f1);
+        ft.add(R.id.content_frame, frags.get(frags.size()-1));
+        ft.detach(frags.get(frags.size()-2));
         ft.commit();
     }
 
 
-    private void attachFragment(Fragment f1, Fragment f2){
+    private void attachFragment(){
         Log.d(TAG, "re-attaching fragment");
         // re-attach f1 and remove f2
         // set Action Bar title back to f1's title
         getSupportActionBar().setTitle(actionBarTitle);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.attach(f1);
-        ft.remove(f2);
+        ft.attach(frags.get(frags.size()-2));
+        ft.remove(frags.get(frags.size()-1));
+        frags.remove(frags.size()-1);
         ft.commit();
     }
 //---------------------------------------------------------------------------
@@ -371,6 +395,7 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
 
+        /*
         if(frag2!=null){
             // if frag2 is not null, need to use frag3 to keep all 3 fragments
             frag3 = frag;
@@ -379,9 +404,11 @@ public class MainActivity extends AppCompatActivity
         // create new RecipeDetails Fragment and pass bundle
         frag2 = new RecipeDetailsFragment();
         frag2.setArguments(bundle);
-
+        */
+        frags.add(new RecipeDetailsFragment());
+        frags.get(frags.size()-1).setArguments(bundle);
         // detach RecipeSearchFragment and add/inflate RecipeDetails
-        detachFragment(frag, frag2, R.string.nav_recipe_details);
+        detachFragment(R.string.nav_recipe_details);
     }
 
 
@@ -397,11 +424,15 @@ public class MainActivity extends AppCompatActivity
         //frag = getSupportFragmentManager().getFragments().get(count>0?count-1:count);
 
         // create new SavedRecipesFragment and pass bundle
+        /*
         frag2 = new SavedRecipesFragment();
         frag2.setArguments(bundle);
+         */
+        frags.add(new SavedRecipesFragment());
+        frags.get(frags.size()-1).setArguments(bundle);
 
         //detach SavedFoldersFragment and inflate SavedRecipesFragment
-        detachFragment(frag, frag2, R.string.nav_view_recipes);
+        detachFragment(R.string.nav_view_recipes);
     }
 
 }
