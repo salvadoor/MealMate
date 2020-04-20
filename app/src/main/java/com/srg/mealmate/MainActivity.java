@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.srg.mealmate.Dialogs.AddIngredientsDialogFragment;
+import com.srg.mealmate.Dialogs.AddPriceDialog;
 import com.srg.mealmate.Dialogs.ReauthenticateDialog;
 import com.srg.mealmate.MainScreens.AboutFragment;
 import com.srg.mealmate.Dialogs.AddFolderDialogFragment;
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity
         }
 
          */
-        if(frags.size()>1) {
+        if(frags.size()>0) {
             if (frags.get(frags.size() - 1) instanceof IOnFocusListenable) {
                 ((IOnFocusListenable) frags.get(frags.size() - 1)).onWindowFocusChanged(hasFocus);
             }
@@ -340,6 +341,14 @@ public class MainActivity extends AppCompatActivity
         ReauthenticateDialog reauthDialog = new ReauthenticateDialog();
 
         reauthDialog.show(fm, "fragment_reauth_dialog");
+    }
+
+// create instance of AddPriceDialog and show it
+    public void addGroceryPrice(GroceryItem grocery){
+        FragmentManager fm = getSupportFragmentManager();
+        AddPriceDialog addPriceDialog = AddPriceDialog.newInstance(grocery);
+
+        addPriceDialog.show(fm, "fragment_add_price_dialog");
     }
 
 //---------------------------------------------------------------------------

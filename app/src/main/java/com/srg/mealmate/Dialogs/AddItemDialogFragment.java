@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
+import com.srg.mealmate.Services.FileHelpers.DoubleValueIO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,8 +96,13 @@ public class AddItemDialogFragment extends DialogFragment {
                 if(!fieldEmpty()){
                     double quantity = Double.parseDouble(itemQuantity.getText().toString());
                     String name = itemName.getText().toString();
-                    // String units = itemUnits.getText().toString();
                     String units = spinner.getSelectedItem().toString();
+
+                    // see if there is a price saved for this item
+                    DoubleValueIO.setFilename(name + units + "__grocery");
+                    Double price = DoubleValueIO.readDouble(getActivity()) * quantity;
+                    price = Math.round(price * 100) / 100.0;
+
                     if(units=="other"){
                         units = "";
                     }
@@ -120,7 +126,7 @@ public class AddItemDialogFragment extends DialogFragment {
                         ((MainActivity) getActivity()).showEditDialog(index, items, itemHash);
                     } else {
                         itemHash.put(name, quantity);
-                        items.add(new GroceryItem(quantity, units, name));
+                        items.add(new GroceryItem(quantity, units, name, false, price));
                         //((MainActivity) getActivity()).addItem(quantity, units, name);
                         dismiss();
                     }

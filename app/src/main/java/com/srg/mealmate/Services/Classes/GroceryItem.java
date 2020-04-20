@@ -23,20 +23,27 @@ public class GroceryItem implements Serializable {
         new GroceryItem(1, "Apple")
     };
 */
-    public GroceryItem(double quantity, String units, String item){
+    public GroceryItem(double quantity, String units, String name){
         this.quantity = quantity;
         this.units = units;
-        this.name = item;
+        this.name = name;
         this.isChecked = true;
     }
 
-    public GroceryItem(double quantity, String units, String item, Boolean checked){
+    public GroceryItem(double quantity, String units, String name, Boolean checked){
         this.quantity = quantity;
         this.units = units;
-        this.name = item;
+        this.name = name;
         this.isChecked = checked;
     }
 
+    public GroceryItem(double quantity, String units, String name, Boolean isChecked, double price) {
+        this.isChecked = isChecked;
+        this.quantity = quantity;
+        this.units = units;
+        this.name = name;
+        this.price = price;
+    }
 
     public Boolean getChecked() {
         return isChecked;
@@ -56,6 +63,10 @@ public class GroceryItem implements Serializable {
         return name;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setChecked(Boolean tf) {
         isChecked = tf;
     }
@@ -68,6 +79,9 @@ public class GroceryItem implements Serializable {
         this.units = units;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public String getGroceryDetailString(){
         StringBuilder full_details = new StringBuilder();
@@ -86,6 +100,11 @@ public class GroceryItem implements Serializable {
         }
         full_details.append("  -  ")
                 .append(this.name);
+
+        if(price>0){
+            full_details.append("\t Price: $")
+                    .append(price);
+        }
 
         return full_details.toString();
     }

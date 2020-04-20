@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
 import com.srg.mealmate.Services.Classes.GroceryItem;
+import com.srg.mealmate.Services.FileHelpers.DoubleValueIO;
 import com.srg.mealmate.Services.FileHelpers.GroceryListIO;
 
 import java.util.ArrayList;
@@ -118,6 +119,10 @@ public class AddIngredientsDialogFragment extends DialogFragment {
                                 items.remove(itemHash.get(grocery.getName()));
                             }
                         }
+                        DoubleValueIO.setFilename(grocery.getName() + grocery.getUnits() + "__grocery");
+                        Double price = DoubleValueIO.readDouble(getActivity()) * grocery.getQuantity();
+                        price = Math.round(price * 100) / 100.0;
+                        grocery.setPrice(price);
                         items.add(grocery);
                     }
                 }

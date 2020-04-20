@@ -92,10 +92,12 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
 
 
     public void onWindowFocusChanged(boolean hasFocus) {
-        Log.d(TAG, "has focus: true");
-        // refreshing and saving data
-        adapter.notifyDataSetChanged();
-        saveGroceryList();
+        if(hasFocus){
+            Log.d(TAG, "has focus: true");
+            // refreshing and saving data
+            adapter.notifyDataSetChanged();
+            saveGroceryList();
+        }
     }
 
 
