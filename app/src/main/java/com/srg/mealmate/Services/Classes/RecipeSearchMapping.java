@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class RecipeSearchMapping implements Serializable {
     private String name;
-    private String id;
+    private String category;
 
-    public RecipeSearchMapping(String name, String id) {
+    public RecipeSearchMapping(String name, String category) {
         this.name = name;
-        this.id = id;
+        this.category = category;
     }
 
     public String getName() {
@@ -19,11 +19,11 @@ public class RecipeSearchMapping implements Serializable {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCategory(String id) {
+        this.category = id;
     }
 }

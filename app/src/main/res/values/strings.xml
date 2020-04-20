@@ -2,13 +2,15 @@
     <string name="app_name">  MealMate</string>
     <string name="email_holder">  Select Account Settings to SignIn or Register</string>
 
+
     <string name="search_hint">Enter Search Phrase Here</string>
     <string name="search_btn_text">SEARCH</string>
+    <string name="category"> Category</string>
 
     <string name="placeholder">Placeholder</string>
 
 
-    <!-- Menu Items -->
+    <!-- Menu Items and Navigation-->
     <string name="nav_search">Search Recipes</string>
     <string name="nav_recipe_details">View Recipe</string>
     <string name="nav_saved_recipes">Saved Recipes</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- name for each day in a week -->
     <string-array name="days_of_the_week">
         <item>Sunday</item>
         <item>Monday</item>
@@ -10,6 +12,7 @@
         <item>Saturday</item>
     </string-array>
 
+    <!-- unit of measure for grocery items -->
     <string-array name="food_units">
         <item>other</item>
         <item>oz</item>
@@ -22,5 +25,17 @@
         <item>package</item>
         <item>packet</item>
     </string-array>
+
+    <!-- recipe categories-->
+    <string-array name="categories">
+        <item>all</item>
+        <item>chili</item>
+        <item>soup</item>
+        <item>salad</item>
+        <item>mexican</item>
+        <item>italian</item>
+        <item>pasta</item>
+    </string-array>
+
 
 </resources>

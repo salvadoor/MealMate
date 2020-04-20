@@ -14,7 +14,10 @@ public class GroceryItem implements Serializable {
     private double quantity;
     private String units;
     private String name;
-/*
+    private double price = 0; // price per unit
+
+
+/* for testing
     public static final GroceryItem[] items = {
         new GroceryItem(2, "Avacados"),
         new GroceryItem(1, "Apple")

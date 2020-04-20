@@ -73,7 +73,7 @@ public class AddMealDialogFragment extends DialogFragment {
         return view;
     }
 
-    public void initSpinners(){
+    private void initSpinners(){
         // set spinner and adapter for Meal Plans
         spinner_plans = view.findViewById(R.id.spinner_plans);
         ArrayAdapter<String> adapter_plans = new ArrayAdapter<String>(getContext(),
@@ -90,7 +90,7 @@ public class AddMealDialogFragment extends DialogFragment {
     }
 
 
-    public void initOnClickListeners(){
+    private void initOnClickListeners(){
         Button btn_add, btn_cancel;
 
         btn_add = view.findViewById(R.id.btn_add);
@@ -132,7 +132,7 @@ public class AddMealDialogFragment extends DialogFragment {
     }
 
 
-    public void getSundays(){
+    private void getSundays(){
         // get filenames for where the mealplans are stored
         // filenames used for spinner_plans selection
 

@@ -1,5 +1,7 @@
 package com.srg.mealmate.Services.Classes;
 
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +29,17 @@ public class Recipe implements Serializable {
 
         //this.ingredients = adaptIngredients(ingredients);
         adaptIngredients(ingredients);
+    }
+
+    public Recipe(QueryDocumentSnapshot recipe_doc){
+        this.name = recipe_doc.getString("title");
+        this.source = recipe_doc.getString("source");
+        this.id = recipe_doc.getId();
+        this.category = recipe_doc.getString("category");
+        this.instructions = (ArrayList<String>) recipe_doc.get("instructions");
+        this.imgURL = recipe_doc.getString("imageURL");
+
+        adaptIngredients((ArrayList<HashMap>) recipe_doc.get("ingredients"));
     }
 
 

@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,7 +48,9 @@ public class RecipeSearchFragment extends Fragment {
     private RecipeItemAdapter adapter;
     private View view;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-    final Date date = new Date();
+    private final Date date = new Date();
+    private String[] categories;
+    private Spinner spin_categories;
 
 
     public RecipeSearchFragment() {
@@ -61,6 +65,7 @@ public class RecipeSearchFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_recipe_search, container, false);
 
         initRecyclerView();
+        initSpinner();
         if(!dataPreserved){
             loadSearchMap();
             searchRecipes("");
@@ -84,7 +89,7 @@ public class RecipeSearchFragment extends Fragment {
             refreshSearchMap();
         } else{ // check if searchMap has been updated within the past day, if not, update
             try {
-                Date lastUpdated = dateFormat.parse(searchMap.get(0).getId());
+                Date lastUpdated = dateFormat.parse(searchMap.get(0).getCategory());
 
                 long diffInMS = Math.abs(date.getTime() - lastUpdated.getTime());
                 long diffInDays = TimeUnit.DAYS.convert(diffInMS, TimeUnit.MILLISECONDS);
@@ -114,12 +119,12 @@ public class RecipeSearchFragment extends Fragment {
                         if (task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
                                 // Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.getString("title").toLowerCase();
-                                String id = document.getId();
+                                String rName = document.getString("title");
+                                String rCategory = document.getString("category");
 
-                                searchMap.add(new RecipeSearchMapping(name, id));
+                                searchMap.add(new RecipeSearchMapping(rName, rCategory));
                                 RecipeSearchMapIO.writeList(searchMap, getActivity());
-                                retrieveRecipe(id);
+                                retrieveRecipe(rName);
                             }
                         } else{
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -137,6 +142,18 @@ public class RecipeSearchFragment extends Fragment {
 
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+
+    private void initSpinner(){
+        // set spinner and adapter for categories
+        categories =  getContext().getResources().getStringArray(R.array.categories);
+
+        spin_categories = view.findViewById(R.id.spin_category);
+        ArrayAdapter<String> adapter_categories = new ArrayAdapter<String>(getContext(),
+                R.layout.unit_item, categories);
+        adapter_categories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin_categories.setAdapter(adapter_categories);
     }
 
 
@@ -160,41 +177,48 @@ public class RecipeSearchFragment extends Fragment {
         Log.d(TAG, "Searching for: '" + searchString + "'");
         results.removeAll(results);
 
+        String searchCategory = spin_categories.getSelectedItem().toString();
+        searchString = searchString.toLowerCase();
+
         for(int i=1; i < searchMap.size(); i++){
-            if(searchMap.get(i).getName().contains(searchString)){
-                retrieveRecipe(searchMap.get(i).getId());
+            Log.d("searchRecipes", "Category: " + searchCategory);
+            Log.d("searchMap", "name: " + searchMap.get(i).getName() + ", category: " + searchMap.get(i).getCategory());
+            String recipeName = searchMap.get(i).getName().toLowerCase(); // get lower-cased recipe name
+
+            if(recipeName.contains(searchString)){
+                if(searchCategory.equals("all")){
+                    Log.d(TAG, searchMap.get(i).getName());
+                    retrieveRecipe(searchMap.get(i).getName());
+                } else if(searchMap.get(i).getCategory().equals(searchCategory)){
+                    Log.d(TAG, searchMap.get(i).getName());
+                    retrieveRecipe(searchMap.get(i).getName());
+                }
+
             }
         }
     }
 
-    private void retrieveRecipe(String id){
+
+    private void retrieveRecipe(String name){
+        Log.d("retrieveRecipe v2", name);
 
         db.collection("recipes")
-                .document(id)
+                .whereEqualTo("title", name)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document = task.getResult();
-                        Log.d(TAG, document.getData().toString());
-
-                        String name = document.getString("title");
-                        String source = document.getString("source");
-                        String id = document.getId();
-                        String imgURL = document.getString("imageURL");
-                        ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
-                        String category = document.getString("category");
-                        ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
-
-                        Recipe newResult = new Recipe(name, source, id, ingredients,
-                                category, instructions, imgURL);
-
-                        results.add(newResult);
-                        adapter.notifyDataSetChanged();
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot doc : task.getResult()){
+                                Log.d(TAG, doc.toString());
+                                results.add(new Recipe(doc));
+                                adapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
                     }
                 });
-
-
     }
 
 }

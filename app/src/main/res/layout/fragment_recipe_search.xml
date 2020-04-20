@@ -11,7 +11,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            >
 
             <EditText
                 android:id="@+id/searchTxt"
@@ -31,6 +33,25 @@
                 android:textColor="@color/white"
                 android:text="@string/search_btn_text" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/category" />
+
+            <Spinner
+                android:id="@+id/spin_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"/>
         </LinearLayout>
 
         <include layout="@layout/horizontal_divider"/>
