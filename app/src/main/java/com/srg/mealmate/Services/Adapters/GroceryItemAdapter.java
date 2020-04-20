@@ -94,7 +94,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                     items.get(position).setChecked(false);
                 } else {
                     items.get(position).setChecked(true);
-                    if(type==0 && items.get(position).getPrice()==0.0){
+                    if(type==0){
                         ((MainActivity) activity).addGroceryPrice(items.get(position));
                     }
                 }

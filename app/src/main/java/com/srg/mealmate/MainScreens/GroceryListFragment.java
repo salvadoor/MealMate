@@ -97,6 +97,7 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
             // refreshing and saving data
             adapter.notifyDataSetChanged();
             saveGroceryList();
+            updateTotalPrice();
         }
     }
 
@@ -242,12 +243,11 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
         // retrieve list
         items = GroceryListIO.readList(getActivity());
 
-
         //create HashMap
         init_hashMap();
         // start RecyclerView
         init_RecyclerView();
-
+        updateTotalPrice();
     }
 
 
@@ -269,6 +269,22 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
             Log.d(TAG,"item count" + items.size());
             itemHash.put(items.get(i).getName(), items.get(i).getQuantity());
         }
+    }
+
+    private void updateTotalPrice(){
+        StringBuilder headerText = new StringBuilder();
+        TextView tv = view.findViewById(R.id.grocery_item_details);
+
+        Double totalPrice = 0.0;
+
+        for(int i=0;i<items.size();i++){
+            totalPrice += items.get(i).getPrice();
+        }
+
+        headerText.append(getResources().getString(R.string.grocery_item_outline))
+                .append("\nEstimated Total: $")
+                .append(totalPrice);
+        tv.setText(headerText.toString());
     }
 
 

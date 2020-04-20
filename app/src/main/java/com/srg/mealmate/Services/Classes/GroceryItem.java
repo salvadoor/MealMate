@@ -102,7 +102,7 @@ public class GroceryItem implements Serializable {
                 .append(this.name);
 
         if(price>0){
-            full_details.append("\t Price: $")
+            full_details.append("\n Price: $")
                     .append(price);
         }
 
