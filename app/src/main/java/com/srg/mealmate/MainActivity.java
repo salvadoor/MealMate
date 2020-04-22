@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.srg.mealmate.Dialogs.AddIngredientsDialogFragment;
+import com.srg.mealmate.Dialogs.AddInstructionDialog;
 import com.srg.mealmate.Dialogs.AddPriceDialog;
 import com.srg.mealmate.Dialogs.ReauthenticateDialog;
 import com.srg.mealmate.MainScreens.AboutFragment;
@@ -49,6 +50,7 @@ import com.srg.mealmate.MainScreens.MealPlanFragment;
 import com.srg.mealmate.MainScreens.RecipeSearchFragment;
 import com.srg.mealmate.MainScreens.SavedFoldersFragment;
 import com.srg.mealmate.MainScreens.SettingsFragment;
+import com.srg.mealmate.SecondaryScreens.NewRecipeFragment;
 import com.srg.mealmate.SecondaryScreens.RecipeDetailsFragment;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.GroceryItem;
@@ -285,11 +287,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     // create instance of AddItemDialogFragment and show it
-    public void newItem(HashMap<String, Double> hashMap, ArrayList<GroceryItem> items, HashMap itemHash){
+    public void newItem(/*HashMap<String, Double> hashMap, */ ArrayList<GroceryItem> items, HashMap itemHash){
         // create new AddItemDialogFragment and pass data, show DialogFragment
         // pass hashmap of items in grocery list
         FragmentManager fm = getSupportFragmentManager();
-        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(hashMap, items, itemHash);
+        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(/*hashMap,*/ items, itemHash);
 
         addItemDialog.show(fm, "fragment_add_item_dialog");
     }
@@ -349,6 +351,15 @@ public class MainActivity extends AppCompatActivity
         AddPriceDialog addPriceDialog = AddPriceDialog.newInstance(grocery);
 
         addPriceDialog.show(fm, "fragment_add_price_dialog");
+    }
+
+// create instance of AddInstructionDialog and show it
+    public void newInstruction(ArrayList<String> instructions){
+        // create new AddInstructionDialog and pass data, show the DialogFragment
+        FragmentManager fm = getSupportFragmentManager();
+        AddInstructionDialog addInstructionDialog = AddInstructionDialog.newInstance(instructions);
+
+        addInstructionDialog.show(fm, "fragment_add_instruction_dialog");
     }
 
 //---------------------------------------------------------------------------
@@ -442,6 +453,18 @@ public class MainActivity extends AppCompatActivity
 
         //detach SavedFoldersFragment and inflate SavedRecipesFragment
         detachFragment(R.string.nav_view_recipes);
+    }
+
+
+    public void newRecipe(/* ArrayList<GroceryItem> ingredients */){
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("ingredients", ingredients);
+
+        frags.add(new NewRecipeFragment());
+        //frags.get(frags.size()-1).setArguments(bundle);
+
+        detachFragment(R.string.btn_new_recipe);
+
     }
 
 }

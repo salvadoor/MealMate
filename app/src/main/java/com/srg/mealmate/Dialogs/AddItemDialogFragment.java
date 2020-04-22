@@ -37,13 +37,13 @@ public class AddItemDialogFragment extends DialogFragment {
     }
 
 
-    public static AddItemDialogFragment newInstance(HashMap hashMap,
+    public static AddItemDialogFragment newInstance(/*HashMap hashMap, */
                                                     ArrayList<GroceryItem> list,
                                                     HashMap itemHash){
         AddItemDialogFragment frag = new AddItemDialogFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("hashMap", hashMap);
+        // bundle.putSerializable("hashMap", hashMap);
         bundle.putSerializable("items", list);
         bundle.putSerializable("hashmap", itemHash);
         frag.setArguments(bundle);
@@ -60,7 +60,7 @@ public class AddItemDialogFragment extends DialogFragment {
         view = inflater.inflate(R.layout.fragment_add_item_dialog, container, false);
 
         Bundle bundle = getArguments();
-        itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
+        //itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
         items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
         itemHash = (HashMap<String, Double>) bundle.getSerializable("hashmap");
 
@@ -107,7 +107,7 @@ public class AddItemDialogFragment extends DialogFragment {
                         units = "";
                     }
 
-                    if(itemMap.containsKey(name)){
+                    if(itemHash.containsKey(name)){
                         Toast.makeText(getActivity(),
                                 "Already in List",
                                 Toast.LENGTH_SHORT)

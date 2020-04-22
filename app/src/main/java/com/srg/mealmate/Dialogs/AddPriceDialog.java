@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Classes.Grocery;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.FileHelpers.DoubleValueIO;
 

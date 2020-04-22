@@ -16,6 +16,7 @@
     <string-array name="food_units">
         <item>other</item>
         <item>oz</item>
+        <item>lb</item>
         <item>fl oz</item>
         <item>tsp</item>
         <item>tbsp</item>

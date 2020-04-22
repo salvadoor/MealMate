@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
@@ -54,6 +56,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
 
         removal = "";
         loadSavedRecipes();
+        init_OnClickListener();
 
         TextView headerTV = view.findViewById(R.id.saved_recipes_header);
         headerTV.setText("Folder: " + folderName);
@@ -72,6 +75,24 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
             }
         }
     }
+
+
+    private void init_OnClickListener(){
+        Button btn_new = view.findViewById(R.id.btn_new_recipe);
+
+        if(!folderName.equals("MY RECIPES")){
+            btn_new.setVisibility(View.GONE);
+            return;
+        }
+
+        btn_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).newRecipe();
+            }
+        });
+    }
+
 
     private void initRecyclerView(){
         // create RecyclerView

@@ -50,6 +50,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
     private ArrayList<ArrayList<Recipe>> recipes;
     public static String removal = "";
     public static int day = -1;
+    private String sundayDate = "";
     // private ArrayList<RecyclerView> recyclerViews = new ArrayList<>();
 
     //private MealAdapter adapter;
@@ -99,9 +100,17 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
     @Override
     public void onPause() {
+        Log.d(TAG, "onPause");
+
         super.onPause();
-        // save Meal Plan(s)
-        //saveGroceryList();
+        // save Meal Plan
+        saveMealPlan();
+    }
+
+    @Override
+    public void onResume(){
+        Log.d(TAG, "onResume");
+        super.onResume();
     }
 
 
@@ -114,8 +123,6 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
             recipes.add(new ArrayList<Recipe>());
             adapters.add(new RecipeItemAdapter(getActivity(), recipes.get(i), true, i));
         }
-
-
     }
 
 
@@ -215,7 +222,8 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
         // Load corresponding Grocery List
         clearRecipes();
-        loadMealPlan(dateFormat.format(c.getTime()));
+        sundayDate = dateFormat.format(c.getTime());
+        loadMealPlan();
     }
 
 
@@ -281,7 +289,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
 
 //----------------------------------------------------------------------------------
 // Methods to deal with reading and writing data using the GroceryListIO class
-    private void loadMealPlan(String sundayDate){
+    private void loadMealPlan(){
         Log.d(TAG, "Loading Meal Plan");
         MealPlanIO.setFilename(sundayDate);
         plan = MealPlanIO.readList(getActivity());

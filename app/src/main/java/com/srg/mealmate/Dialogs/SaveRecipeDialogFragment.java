@@ -63,6 +63,7 @@ public class SaveRecipeDialogFragment extends DialogFragment {
 
         ArrayListStringIO.setFilename("recipe_folders");
         ArrayList<String> folders = ArrayListStringIO.readList(getActivity());
+        folders.remove("MY RECIPES"); // user cannot save recipes to ths folder
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.unit_item, folders);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

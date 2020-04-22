@@ -57,8 +57,9 @@ public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapte
         holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
-                ((MainActivity)mContext).showEditFolderDialog(position, folders);
+                if(!folders.get(position).equals("MY RECIPES")) {
+                    ((MainActivity) mContext).showEditFolderDialog(position, folders);
+                }
 
                 return true;
             }

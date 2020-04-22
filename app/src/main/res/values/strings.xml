@@ -106,6 +106,16 @@
     <string name="btn_item_cancel">Cancel</string>
     <string name="btn_item_add">Add </string>
 
+
+    <!-- New Recipe -->
+    <string name="ask_recipe_name">Enter name for recipe</string>
+    <string name="hint_recipe_name">Mom\'s Meatloaf</string>
+
+    <string name="nav_new_instruction">New Instruction</string>
+    <string name="ask_instruction">Enter instruction</string>
+    <string name="hint_instruction">Add 1/2 water</string>
+
+
     <!-- Settings -->
     <string name="login_subheader"> Login Information</string>
     <string name="preferences_subheader"> Preferences</string>

@@ -227,7 +227,7 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
             @Override
             public void onClick(View view) {
                 // call newItem() from MainActivity
-                ((MainActivity)getActivity()).newItem(itemHash, items, itemHash);
+                ((MainActivity)getActivity()).newItem(/*itemHash,*/ items, itemHash);
 
             }
         });

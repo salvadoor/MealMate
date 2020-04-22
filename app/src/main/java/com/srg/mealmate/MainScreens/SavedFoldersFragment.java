@@ -114,7 +114,6 @@ public class SavedFoldersFragment extends Fragment implements IOnFocusListenable
 
     private void initFolders(){
         Log.d(TAG, "Empty Folder");
-        folders.add("ALL");
         folders.add("MY RECIPES");
     }
 

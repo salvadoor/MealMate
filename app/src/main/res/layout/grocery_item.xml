@@ -38,8 +38,5 @@
         android:textColor="@color/white"
         android:text="@string/grocery_item_outline" />
 
-
-
-
 </LinearLayout>
 
