@@ -6,50 +6,49 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Recipe implements Serializable {
-    private String title;
+public class Recipe1 implements Serializable {
+    private String name;
     private String source;
     private String id;
-    private ArrayList<HashMap> ingredients;
+    //private ArrayList<HashMap> ingredients;
+    private ArrayList<GroceryItem> ingredients;
     private String category;
     private ArrayList<String> instructions;
-    private String imageURL;
+    private String imgURL;
 
 
-    public Recipe(){
+    public Recipe1(){
         // empty Constructor
     }
 
-    public Recipe(String title, String source, String id, ArrayList<HashMap> ingredients,
-                  String category, ArrayList<String> instructions, String imageURL) {
-        this.title = title;
+    public Recipe1(String name, String source, String id, ArrayList<HashMap> ingredients,
+                   String category, ArrayList<String> instructions, String imgURL) {
+        this.name = name;
         this.source = source;
         this.id = id;
         //this.ingredients = ingredients;
         this.category = category;
         this.instructions = instructions;
-        this.imageURL = imageURL;
-        this.ingredients = ingredients;
+        this.imgURL = imgURL;
 
         //this.ingredients = adaptIngredients(ingredients);
-        //adaptIngredients(ingredients);
+        adaptIngredients(ingredients);
     }
 
-    public Recipe(QueryDocumentSnapshot recipe_doc){
-        this.title = recipe_doc.getString("title");
+    public Recipe1(QueryDocumentSnapshot recipe_doc){
+        this.name = recipe_doc.getString("title");
         this.source = recipe_doc.getString("source");
         this.id = recipe_doc.getId();
         this.category = recipe_doc.getString("category");
         this.instructions = (ArrayList<String>) recipe_doc.get("instructions");
-        this.imageURL = recipe_doc.getString("imageURL");
-        this.ingredients = (ArrayList<HashMap>) recipe_doc.get("ingredients");
+        this.imgURL = recipe_doc.getString("imageURL");
 
-        //adaptIngredients((ArrayList<HashMap>) recipe_doc.get("ingredients"));
+        adaptIngredients((ArrayList<HashMap>) recipe_doc.get("ingredients"));
     }
 
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public String getSource() {
@@ -60,21 +59,8 @@ public class Recipe implements Serializable {
         return id;
     }
 
-    public ArrayList<HashMap> getIngredients() {
+    public ArrayList<GroceryItem> getIngredients() {
         return ingredients;
-    }
-
-    public ArrayList<GroceryItem> getGroceryItems(){
-        ArrayList<GroceryItem> items = new ArrayList<>();
-
-        for(HashMap hash : this.ingredients){
-            items.add(new GroceryItem(
-                    Double.parseDouble(hash.get("amount").toString()),
-                    hash.get("units").toString(),
-                    hash.get("name").toString()));
-        }
-
-        return items;
     }
 
     public String getCategory() {
@@ -85,8 +71,8 @@ public class Recipe implements Serializable {
         return instructions;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImgURL() {
+        return imgURL;
     }
 
     private void adaptIngredients(ArrayList<HashMap> iMap){
@@ -98,7 +84,7 @@ public class Recipe implements Serializable {
             Double amount = Double.parseDouble(item.get("amount").toString());
             String units = item.get("units").toString();
 
-            //this.ingredients.add(new GroceryItem(amount, units, name));
+            this.ingredients.add(new GroceryItem(amount, units, name));
         }
 
     }

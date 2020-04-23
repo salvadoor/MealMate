@@ -17,6 +17,7 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.MealPlan;
 import com.srg.mealmate.Services.Classes.Recipe;
+// import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +34,7 @@ public class AddMealDialogFragment extends DialogFragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
     private Spinner spinner_plans;
     private Spinner spinner_days;
-    private Recipe recipe;
+    private Recipe recipe; // private Recipe1 recipe;
     private String recipeID;
     private ArrayList<GroceryItem> ingredients;
     private View view;
@@ -117,7 +118,7 @@ public class AddMealDialogFragment extends DialogFragment {
                 //save the meal plan
                 MealPlanIO.writeList(plan, getActivity());
 
-                ((MainActivity) getActivity()).addIngredients(recipe.getIngredients(), planDate);
+                ((MainActivity) getActivity()).addIngredients(recipe.getGroceryItems(), planDate);
                 dismiss();
             }
         });

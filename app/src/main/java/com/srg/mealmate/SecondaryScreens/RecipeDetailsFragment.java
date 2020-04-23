@@ -36,6 +36,7 @@ import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
+// import com.srg.mealmate.Services.Classes.Recipe1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecipeDetailsFragment extends Fragment {
     private View view;
-    private Recipe recipe;
+    private Recipe recipe; // Recipe1 recipe;
     private ArrayList<HashMap> ingredients;
     private PopupMenu popupMenu;
 
@@ -82,11 +83,11 @@ public class RecipeDetailsFragment extends Fragment {
         ImageView imageView;
 
         imageView = view.findViewById(R.id.detail_image);
-        Picasso.get().load(recipe.getImgURL()).into(imageView);
+        Picasso.get().load(recipe.getImageURL()).into(imageView);
 
         // set Recipe name and source text
         nameTV = view.findViewById(R.id.detail_title);
-        nameTV.setText(recipe.getName());
+        nameTV.setText(recipe.getTitle());
 
         sourceTV = view.findViewById(R.id.detail_source);
         sourceTV.setText(("Source: " + recipe.getSource()));
@@ -129,7 +130,7 @@ public class RecipeDetailsFragment extends Fragment {
         StringBuilder str = new StringBuilder();
         String ingredient_string;
 
-        ArrayList<GroceryItem> ingredients = recipe.getIngredients();
+        ArrayList<GroceryItem> ingredients = recipe.getGroceryItems();
 
         for(GroceryItem item : ingredients){
             str.append(item.getGroceryDetailString());

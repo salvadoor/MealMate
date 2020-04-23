@@ -4,8 +4,8 @@
          Used repeatedly for RecyclerViews in MealPlanFragment
 
          Layout Contains:
-            recipe image
-            name of recipe
+            recipe1 image
+            name of recipe1
             divider to visually separate it from other results
 
          Last Modified: 04.11.2020

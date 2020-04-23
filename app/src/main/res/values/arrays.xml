@@ -27,7 +27,7 @@
         <item>packet</item>
     </string-array>
 
-    <!-- recipe categories-->
+    <!-- recipe1 categories-->
     <string-array name="categories">
         <item>all</item>
         <item>chili</item>

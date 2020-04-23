@@ -11,20 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.Adapters.RecipeFolderAdapter;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class SavedFoldersFragment extends Fragment implements IOnFocusListenable {
@@ -32,7 +29,7 @@ public class SavedFoldersFragment extends Fragment implements IOnFocusListenable
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> folders = new ArrayList<>();
     private ArrayList<String> folder = new ArrayList<>();
-    private ArrayList<Recipe> results;
+    private ArrayList<Recipe1> results;
     private View view;
     private RecipeFolderAdapter adapter;
 

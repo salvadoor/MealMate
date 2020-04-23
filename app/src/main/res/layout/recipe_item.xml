@@ -3,9 +3,9 @@
     "recipe_item.xml     Used repeatedly for RecyclerView
 
      Layout Contains:
-        recipe image
-        name of recipe
-        source of recipe
+        recipe1 image
+        name of recipe1
+        source of recipe1
         divider to visually separate it from other results
 
      Last Modified: 02.13.2020 11:31pm

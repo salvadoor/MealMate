@@ -39,7 +39,7 @@
     <string name="ask_folder_delete"> Delete folder? </string>
     <string name="hint_folder_name"> Desserts </string>
     <string name="ask_save_folder"> Select folder to save to</string>
-    <string name="ask_recipe_remove"> Remove this recipe from folder? </string>
+    <string name="ask_recipe_remove"> Remove this recipe1 from folder? </string>
     <string name="remove_label">Remove</string>
 
 
@@ -108,7 +108,7 @@
 
 
     <!-- New Recipe -->
-    <string name="ask_recipe_name">Enter name for recipe</string>
+    <string name="ask_recipe_name">Enter name for recipe1</string>
     <string name="hint_recipe_name">Mom\'s Meatloaf</string>
 
     <string name="nav_new_instruction">New Instruction</string>

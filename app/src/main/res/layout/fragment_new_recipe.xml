@@ -20,9 +20,26 @@
             android:text="@string/ask_recipe_name" />
 
         <EditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_recipe_name" />
+
+        <ImageView
+            android:id="@+id/upload_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_48"/>
+
+        <Button
+            android:id="@+id/btn_choose_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_10"
+            android:textColor="@color/white"
+            android:text="Choose image"/>
 
         <include layout="@layout/new_recipe_groceries"/>
 

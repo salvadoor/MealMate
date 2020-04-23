@@ -1,7 +1,6 @@
 package com.srg.mealmate.MainScreens;
 
 
-import android.net.ParseException;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,22 +19,19 @@ import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 

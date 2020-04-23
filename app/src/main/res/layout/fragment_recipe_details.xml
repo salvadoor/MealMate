@@ -5,15 +5,15 @@
 
      Layout Contains:
         Scrollview as root layout
-            used to allow scrolling for recipes with
+            used to allow scrolling for recipe1s with
             long list of ingredients/instructions
         LinearLayout for all views
-        TextViews to display recipe name and source
+        TextViews to display recipe1 name and source
         TextViews to label subheadings for and display
-            recipe ingredients and instructions
-        Buttons for recipe actions
+            recipe1 ingredients and instructions
+        Buttons for recipe1 actions
 
-    All TextViews contain placeholder text that is changed to recipe
+    All TextViews contain placeholder text that is changed to recipe1
         info when layout is inflated
 
      Last Modified: 02.12.2020 08:03pm

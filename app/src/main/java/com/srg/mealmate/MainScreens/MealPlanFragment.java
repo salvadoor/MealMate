@@ -26,6 +26,7 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.MealPlan;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 

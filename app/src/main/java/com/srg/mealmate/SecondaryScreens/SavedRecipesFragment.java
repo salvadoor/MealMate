@@ -13,15 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
@@ -88,6 +92,13 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
         btn_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user==null){
+                    Toast.makeText(getActivity(),
+                            "Must be Signed in",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ((MainActivity) getActivity()).newRecipe();
             }
         });

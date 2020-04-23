@@ -29,6 +29,7 @@ import com.srg.mealmate.MainScreens.MealPlanFragment;
 import com.srg.mealmate.R;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.Recipe1;
 
 import java.util.ArrayList;
 
@@ -71,8 +72,8 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
         // bind ViewHolder and set text and click listener based on the individual recipe result
         Log.d(TAG,"onBindViewHolder:called");
 
-        Picasso.get().load(recipes.get(position).getImgURL()).into(holder.result_image);
-        holder.result_name.setText(recipes.get(position).getName());
+        Picasso.get().load(recipes.get(position).getImageURL()).into(holder.result_image);
+        holder.result_name.setText(recipes.get(position).getTitle());
         holder.result_source.setText(recipes.get(position).getSource());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +112,7 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(mContext, "Removed " + recipes.get(index).getName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Removed " + recipes.get(index).getTitle(), Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "Removed " + recipes.get(index).getId());
                         Log.d(TAG, "listIndex = " + listIndex);
                         if(listIndex==-1){
