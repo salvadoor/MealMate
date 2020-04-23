@@ -47,8 +47,32 @@
         <item>soup</item>
         <item>southern</item>
         <item>vegan</item>
+    </string-array>
 
+    <!-- nutrition -->
+    <string-array name="nutrition">
+        <item>calories</item>
+        <item>total fats</item>
+        <item>saturated fat</item>
+        <item>cholesterol</item>
+        <item>sodium</item>
+        <item>total carbohydrates</item>
+        <item>dietary fiber</item>
+        <item>protein</item>
+        <item>sugar</item>
 
+    </string-array>
+
+    <string-array name="nutrition_units">
+        <item></item>
+        <item>g</item>
+        <item>g</item>
+        <item>mg</item>
+        <item>mg</item>
+        <item>g</item>
+        <item>g</item>
+        <item>g</item>
+        <item>g</item>
     </string-array>
 
 

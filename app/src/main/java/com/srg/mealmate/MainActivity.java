@@ -51,6 +51,7 @@ import com.srg.mealmate.MainScreens.RecipeSearchFragment;
 import com.srg.mealmate.MainScreens.SavedFoldersFragment;
 import com.srg.mealmate.MainScreens.SettingsFragment;
 import com.srg.mealmate.SecondaryScreens.NewRecipeFragment;
+import com.srg.mealmate.SecondaryScreens.NutritionFragment;
 import com.srg.mealmate.SecondaryScreens.RecipeDetailsFragment;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.GroceryItem;
@@ -440,6 +441,17 @@ public class MainActivity extends AppCompatActivity
         frags.add(new NewRecipeFragment());
 
         detachFragment(R.string.btn_new_recipe);
+    }
+
+
+    public void viewNutrition(HashMap<String, Double> nutrition){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("nutrition", nutrition);
+
+        frags.add(new NutritionFragment());
+        frags.get(frags.size()-1).setArguments(bundle);
+
+        detachFragment(R.string.nav_nutrition);
     }
 
 }

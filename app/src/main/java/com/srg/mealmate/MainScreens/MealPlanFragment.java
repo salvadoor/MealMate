@@ -338,16 +338,7 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
                             DocumentSnapshot document = task.getResult();
                             Log.d(TAG, document.getData().toString());
 
-                            String name = document.getString("title");
-                            String source = document.getString("source");
-                            String id = document.getId();
-                            String imgURL = document.getString("imageURL");
-                            ArrayList<HashMap> ingredients = (ArrayList<HashMap>) document.get("ingredients");
-                            String category = document.getString("category");
-                            ArrayList<String> instructions = (ArrayList<String>) document.get("instructions");
-
-                            Recipe newResult = new Recipe(name, source, id, ingredients,
-                                    category, instructions, imgURL);
+                            Recipe newResult = new Recipe(document);
 
                             recipes.get(day).add(newResult);
                             adapters.get(day).notifyDataSetChanged();

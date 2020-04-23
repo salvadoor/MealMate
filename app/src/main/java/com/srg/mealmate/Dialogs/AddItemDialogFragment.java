@@ -98,6 +98,13 @@ public class AddItemDialogFragment extends DialogFragment {
                     String name = itemName.getText().toString();
                     String units = spinner.getSelectedItem().toString();
 
+                    if(!isValidInput(name)){
+                        Toast.makeText(getActivity(),
+                                "Invalid name",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     // see if there is a price saved for this item
                     DoubleValueIO.setFilename(name + units + "__grocery");
                     Double price = DoubleValueIO.readDouble(getActivity()) * quantity;
@@ -130,6 +137,10 @@ public class AddItemDialogFragment extends DialogFragment {
                         //((MainActivity) getActivity()).addItem(quantity, units, name);
                         dismiss();
                     }
+                } else{
+                    Toast.makeText(getActivity(),
+                            "Please fill all fields",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -161,6 +172,19 @@ public class AddItemDialogFragment extends DialogFragment {
         // check if EditText is empty or only contains whitespace
         // returns true if EditText is empty, false if not empty/whitespace
         return et.getText().toString().trim().length() == 0;
+    }
+
+    private boolean isValidInput(String string){
+        string = string.replaceAll("\\s+", "");
+        char[] chars = string.toCharArray();
+
+        for(char c : chars){
+            if(!Character.isLetter(c)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

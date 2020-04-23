@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +48,7 @@ public class RecipeSearchFragment extends Fragment {
     private final Date date = new Date();
     private String[] categories;
     private Spinner spin_categories;
+    private int recipesDisplayed = 0;
 
 
     public RecipeSearchFragment() {
@@ -113,15 +115,20 @@ public class RecipeSearchFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
-                            for(QueryDocumentSnapshot document: task.getResult()){
+                            for(QueryDocumentSnapshot document: task.getResult()) {
+                                recipesDisplayed++;
                                 // Log.d(TAG, document.getId() + " => " + document.getData());
                                 String rName = document.getString("title");
                                 String rCategory = document.getString("category");
 
                                 searchMap.add(new RecipeSearchMapping(rName, rCategory));
                                 RecipeSearchMapIO.writeList(searchMap, getActivity());
-                                retrieveRecipe(rName);
+
+                                if (recipesDisplayed < 20) { // show up to twenty recipes
+                                    retrieveRecipe(rName);
+                                }
                             }
+                            recipesDisplayed = 0;
                         } else{
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
@@ -172,6 +179,7 @@ public class RecipeSearchFragment extends Fragment {
     private void searchRecipes(String searchString){
         Log.d(TAG, "Searching for: '" + searchString + "'");
         results.removeAll(results);
+        adapter.notifyDataSetChanged();
 
         String searchCategory = spin_categories.getSelectedItem().toString();
         searchString = searchString.toLowerCase();
@@ -207,6 +215,7 @@ public class RecipeSearchFragment extends Fragment {
                             for(QueryDocumentSnapshot doc : task.getResult()){
                                 Log.d(TAG, doc.toString());
                                 results.add(new Recipe(doc));
+                                Log.d(TAG, "Recipe nutrition: " + results.get(results.size()-1).getNutrition().toString());
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
@@ -214,6 +223,13 @@ public class RecipeSearchFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+
+    private void toastNoResults(){
+        Toast.makeText(getActivity(),
+                "No results found",
+                Toast.LENGTH_LONG).show();
     }
 
 }

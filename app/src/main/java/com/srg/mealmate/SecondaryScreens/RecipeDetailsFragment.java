@@ -102,7 +102,7 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
     private void initOnClickListeners(){
-        Button btn_save_recipe, btn_add_meal;
+        Button btn_save_recipe, btn_add_meal, btn_view_nutrition;
 
         btn_save_recipe = view.findViewById(R.id.btn_save_recipe);
         btn_save_recipe.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +118,14 @@ public class RecipeDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).showAddMealDialog(recipe);
+            }
+        });
+
+        btn_view_nutrition = view.findViewById(R.id.btn_view_nutrition);
+        btn_view_nutrition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).viewNutrition(recipe.getNutrition());
             }
         });
 

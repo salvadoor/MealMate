@@ -71,6 +71,7 @@
     <string name="fav_recipe">Save Recipe</string>
     <string name="save_recipe">Save </string>
     <string name="nav_nutrition"> View Nutrition </string>
+    <string name="basic_nutrition">Basic Nutrition</string>
     <string name="add_to_plan">Add to Meal Plan</string>
 
     <!-- Meal Plan -->

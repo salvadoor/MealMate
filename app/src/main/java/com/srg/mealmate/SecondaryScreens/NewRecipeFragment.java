@@ -40,7 +40,9 @@ import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
 import com.srg.mealmate.Services.Adapters.InstructionAdapter;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
+import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.io.ByteArrayOutputStream;
@@ -112,7 +114,7 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 // get smaller file size for faster uploading and loading
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
                 //Setting image to ImageView
                 iv.setImageBitmap(bitmap);
@@ -321,6 +323,12 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
                 ArrayList<String> saved = ArrayListStringIO.readList(getActivity());
                 saved.add(recipe.getId());
                 ArrayListStringIO.writeList(saved, getActivity());
+
+                // update searchMap
+                ArrayList<RecipeSearchMapping> searchMap = RecipeSearchMapIO.readList(getActivity());
+                searchMap.add(new RecipeSearchMapping(recipe.getTitle(), recipe.getCategory()));
+                RecipeSearchMapIO.writeList(searchMap, getActivity());
+
                 // redirect to previous fragment
                 ((MainActivity) getActivity()).attachFragment();
             }
@@ -336,7 +344,7 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
 
         id = db.collection("recipes").document().getId(); // get auto-generated id
 
-        Recipe recipe = new Recipe(name, "MealMate User", id, hashIngredients, category, instructions, downloadPath);
+        Recipe recipe = new Recipe(name, "MealMate User", id, hashIngredients, category, instructions, downloadPath, new HashMap());
 
         return recipe;
     }
