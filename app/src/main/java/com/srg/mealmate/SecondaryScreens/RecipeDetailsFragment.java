@@ -130,7 +130,7 @@ public class RecipeDetailsFragment extends Fragment {
         StringBuilder str = new StringBuilder();
         String ingredient_string;
 
-        ArrayList<GroceryItem> ingredients = recipe.getGroceryItems();
+        ArrayList<GroceryItem> ingredients = recipe.toGroceryItems();
 
         for(GroceryItem item : ingredients){
             str.append(item.getGroceryDetailString());

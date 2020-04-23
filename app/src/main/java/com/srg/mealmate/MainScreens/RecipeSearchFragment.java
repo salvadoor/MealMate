@@ -189,7 +189,6 @@ public class RecipeSearchFragment extends Fragment {
                     Log.d(TAG, searchMap.get(i).getName());
                     retrieveRecipe(searchMap.get(i).getName());
                 }
-
             }
         }
     }

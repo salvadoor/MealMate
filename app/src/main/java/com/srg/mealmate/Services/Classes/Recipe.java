@@ -64,7 +64,7 @@ public class Recipe implements Serializable {
         return ingredients;
     }
 
-    public ArrayList<GroceryItem> getGroceryItems(){
+    public ArrayList<GroceryItem> toGroceryItems(){
         ArrayList<GroceryItem> items = new ArrayList<>();
 
         for(HashMap hash : this.ingredients){

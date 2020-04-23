@@ -85,13 +85,13 @@ public class GroceryItem implements Serializable {
     }
 
     public HashMap getHash(){
-        HashMap h = new HashMap();
+        HashMap ingredient = new HashMap();
 
-        h.put("name", this.name);
-        h.put("amount", this.quantity);
-        h.put("units", this.units);
+        ingredient.put("name", this.name);
+        ingredient.put("amount", this.quantity);
+        ingredient.put("units", this.units);
 
-        return h;
+        return ingredient;
     }
 
     public String getGroceryDetailString(){

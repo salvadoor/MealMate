@@ -243,7 +243,7 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "document wrute failed");
+                Log.d(TAG, "document write failed");
             }
         });
 
@@ -256,6 +256,13 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
         if(name.trim().length()==0 || name.length() > 50){
             Toast.makeText(getActivity(),
                     "Invalid name",
+                    Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if(ingredients.size()<1 || instructions.size() < 1){
+            Toast.makeText(getActivity(),
+                    "Make sure to add the ingredients and instructions!",
                     Toast.LENGTH_SHORT).show();
             return null;
         }
