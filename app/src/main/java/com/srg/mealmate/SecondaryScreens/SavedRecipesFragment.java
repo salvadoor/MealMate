@@ -77,6 +77,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
             if (folder.contains(removal)) {
                 saveRecipeList();
             }
+            adapter.notifyDataSetChanged();
         }
     }
 

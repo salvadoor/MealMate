@@ -16,9 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,8 +40,10 @@ import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
 import com.srg.mealmate.Services.Adapters.InstructionAdapter;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
+import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,8 +55,16 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
     private View view;
     private GroceryItemAdapter adapt_ingredients;
     private InstructionAdapter adapt_instructions;
+
+    private String name;
+    private String category;
     private ArrayList<GroceryItem> ingredients = new ArrayList<>();
     private ArrayList<String> instructions = new ArrayList<>();
+
+    private Spinner spinner;
+    private EditText et;
+    private Button btn_add, btn_choose_img;
+    private ImageView btn_new_ingredient, btn_new_instruction;
 
     private int PICK_IMAGE_REQUEST = 111;
     private ImageView iv;
@@ -60,6 +72,7 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
     private String uploadPath;
     private String downloadPath;
     private String id;
+    private byte[] imageData;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
@@ -80,7 +93,9 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
 
         iv = view.findViewById(R.id.upload_img);
         init_RecyclerViews();
+        initSpinner();
         init_OnClickListeners();
+
 
         return view;
     }
@@ -95,7 +110,10 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
             try {
                 //getting image from gallery
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-
+                // get smaller file size for faster uploading and loading
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+                imageData = baos.toByteArray();
                 //Setting image to ImageView
                 iv.setImageBitmap(bitmap);
             } catch (Exception e) {
@@ -133,17 +151,38 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
     }
 
 
+    private void initSpinner(){
+        // set spinner for category selection
+       final String[] categories = getResources().getStringArray(R.array.categories);
+
+        spinner = view.findViewById(R.id.spin_category);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                R.layout.unit_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+
     private void init_OnClickListeners(){
-        Button btn_add, btn_choose_img;
-        ImageView btn_new_ingredient, btn_new_instruction;
+        et = view.findViewById(R.id.edit_name);
 
         btn_add = view.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                Log.d(TAG, "add button clicked");
 
-               // writeToDB();
+                setFieldsEnabled(false);
+                if(validateForm()){
+                    Toast.makeText(getActivity(),
+                            "Please wait, uploading recipe",
+                            Toast.LENGTH_LONG).show();
+                    uploadImage();
+                } else{
+                    setFieldsEnabled(true);
+
+                }
+
             }
         });
 
@@ -174,12 +213,23 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
     }
 
 
+    private void setFieldsEnabled(Boolean option){
+        btn_add.setEnabled(option);
+        btn_choose_img.setEnabled(option);
+        btn_new_ingredient.setEnabled(option);
+        btn_new_instruction.setEnabled(option);
+        et.setEnabled(option);
+        spinner.setEnabled(option);
+    }
+
+
     private void chooseImage(){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
     }
+
 
     private void uploadImage(){
         if(filePath==null) { // use default image if no image uploaded
@@ -191,7 +241,8 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
         uploadPath = getUploadPath();
         StorageReference uploadRef = storageRef.child(uploadPath);
 
-        UploadTask uploadTask = uploadRef.putFile(filePath);
+        UploadTask uploadTask = uploadRef.putBytes(imageData);
+        //UploadTask uploadTask = uploadRef.putFile(filePath);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -212,72 +263,6 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
 
     }
 
-    // set the upload path for the image
-    private String getUploadPath(){
-        StringBuilder refString = new StringBuilder();
-        refString.append(user.getUid())
-                .append("_images/")
-                .append(filePath.getLastPathSegment());
-        Log.d(TAG, "firebase path: " + refString.toString());
-
-        return refString.toString();
-    }
-
-
-    private void writeToDB(){
-        Recipe recipe = createRecipe();
-
-        if(recipe == null){
-            return;
-        }
-        Log.d(TAG, recipe.toString());
-
-        db.collection("recipes")
-                .document(id)
-                .set(recipe)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "document successfully written");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "document write failed");
-            }
-        });
-
-    }
-
-    private Recipe createRecipe(){
-        EditText et = view.findViewById(R.id.edit_name);
-        String name = et.getText().toString();
-
-        if(name.trim().length()==0 || name.length() > 50){
-            Toast.makeText(getActivity(),
-                    "Invalid name",
-                    Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        if(ingredients.size()<1 || instructions.size() < 1){
-            Toast.makeText(getActivity(),
-                    "Make sure to add the ingredients and instructions!",
-                    Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        ArrayList<HashMap> hashIngredients = new ArrayList<>();
-        for(GroceryItem item : ingredients){
-            hashIngredients.add(item.getHash());
-        }
-
-        id = db.collection("recipes").document().getId();
-
-        Recipe recipe = new Recipe(name, user.getEmail(), id, hashIngredients, "", instructions, downloadPath);
-
-        return recipe;
-    }
 
     private void getImageDownload(){
 
@@ -300,6 +285,94 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
             }
         });
 
+    }
+
+
+    private void writeToDB(){
+        final Recipe recipe = createRecipe();
+
+        if(recipe == null){
+            return;
+        }
+        Log.d(TAG, recipe.toString());
+
+        db.collection("recipes")
+                .document(id)
+                .set(recipe)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "document successfully written");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "document write failed");
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getActivity(),
+                        "Recipe created",
+                        Toast.LENGTH_SHORT).show();
+
+                // add recipe to MY RECIPES folder
+                ArrayListStringIO.setFilename("MY RECIPES_folder");
+                ArrayList<String> saved = ArrayListStringIO.readList(getActivity());
+                saved.add(recipe.getId());
+                ArrayListStringIO.writeList(saved, getActivity());
+                // redirect to previous fragment
+                ((MainActivity) getActivity()).attachFragment();
+            }
+        });
+
+    }
+
+    private Recipe createRecipe(){
+        ArrayList<HashMap> hashIngredients = new ArrayList<>();
+        for(GroceryItem item : ingredients){
+            hashIngredients.add(item.getHash());
+        }
+
+        id = db.collection("recipes").document().getId(); // get auto-generated id
+
+        Recipe recipe = new Recipe(name, "MealMate User", id, hashIngredients, category, instructions, downloadPath);
+
+        return recipe;
+    }
+
+    private Boolean validateForm(){
+        name = et.getText().toString();
+        category = spinner.getSelectedItem().toString();
+
+        if(name.trim().length()==0 || name.length() > 50){
+            Toast.makeText(getActivity(),
+                    "Invalid name",
+                    Toast.LENGTH_SHORT).show();
+        } else if(category.equals("all")){
+            Toast.makeText(getActivity(),
+                    "Cannot use 'all' category",
+                    Toast.LENGTH_SHORT).show();
+        } else if(ingredients.size()<1 || instructions.size() < 1){
+            Toast.makeText(getActivity(),
+                    "Make sure to add the ingredients and instructions!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            return true;
+        }
+
+        return false;
+    }
+
+    // set the upload path for the image
+    private String getUploadPath(){
+        StringBuilder refString = new StringBuilder();
+        refString.append(user.getUid())
+                .append("_images/")
+                .append(filePath.getLastPathSegment());
+        Log.d(TAG, "firebase path: " + refString.toString());
+
+        return refString.toString();
     }
 
 }

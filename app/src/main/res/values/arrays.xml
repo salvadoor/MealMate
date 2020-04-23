@@ -27,15 +27,28 @@
         <item>packet</item>
     </string-array>
 
-    <!-- recipe1 categories-->
+    <!-- recipe categories-->
     <string-array name="categories">
         <item>all</item>
+        <item>asian</item>
+        <item>bread</item>
+        <item>breakfast</item>
+        <item>brunch</item>
         <item>chili</item>
-        <item>soup</item>
-        <item>salad</item>
-        <item>mexican</item>
+        <item>dessert</item>
+        <item>indian</item>
         <item>italian</item>
+        <item>lunch</item>
+        <item>mexican</item>
+        <item>other</item>
         <item>pasta</item>
+        <item>salad</item>
+        <item>smoothie</item>
+        <item>soup</item>
+        <item>southern</item>
+        <item>vegan</item>
+
+
     </string-array>
 
 

@@ -114,6 +114,7 @@
     <string name="nav_new_instruction">New Instruction</string>
     <string name="ask_instruction">Enter instruction</string>
     <string name="hint_instruction">Add 1/2 water</string>
+    <string name="ask_category">Select a Category</string>
 
 
     <!-- Settings -->

@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void attachFragment(){
+    public void attachFragment(){
         Log.d(TAG, "re-attaching fragment");
         // re-attach f1 and remove f2
         // set Action Bar title back to f1's title
@@ -416,16 +416,6 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
 
-        /*
-        if(frag2!=null){
-            // if frag2 is not null, need to use frag3 to keep all 3 fragments
-            frag3 = frag;
-            frag = frag2;
-        }
-        // create new RecipeDetails Fragment and pass bundle
-        frag2 = new RecipeDetailsFragment();
-        frag2.setArguments(bundle);
-        */
         frags.add(new RecipeDetailsFragment());
         frags.get(frags.size()-1).setArguments(bundle);
         // detach RecipeSearchFragment and add/inflate RecipeDetails
@@ -438,17 +428,6 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
         bundle.putString("folder", folderName);
 
-        // get the index for the last Fragment which will be a
-            //SavedFoldersFragment because this method is only called from there
-        //int count = getSupportFragmentManager().getBackStackEntryCount();
-        // use the index to set frag equal to the SavedFoldersFragment
-        //frag = getSupportFragmentManager().getFragments().get(count>0?count-1:count);
-
-        // create new SavedRecipesFragment and pass bundle
-        /*
-        frag2 = new SavedRecipesFragment();
-        frag2.setArguments(bundle);
-         */
         frags.add(new SavedRecipesFragment());
         frags.get(frags.size()-1).setArguments(bundle);
 
@@ -457,15 +436,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void newRecipe(/* ArrayList<GroceryItem> ingredients */){
-        //Bundle bundle = new Bundle();
-        //bundle.putSerializable("ingredients", ingredients);
-
+    public void newRecipe(){
         frags.add(new NewRecipeFragment());
-        //frags.get(frags.size()-1).setArguments(bundle);
 
         detachFragment(R.string.btn_new_recipe);
-
     }
 
 }
