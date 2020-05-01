@@ -88,13 +88,15 @@ public class MealPlanFragment extends Fragment implements IOnFocusListenable {
         if(hasFocus==true) {
             Log.d(TAG, "has focus: true");
             // refreshing and saving data
-            adapters.get(day).notifyDataSetChanged();
-            if (plan.getDay(day).contains(removal)) {
-                plan.getDay(day).remove(removal);
-                saveMealPlan();
+            if(day!=-1) {
+                adapters.get(day).notifyDataSetChanged();
+                if (plan.getDay(day).contains(removal)) {
+                    plan.getDay(day).remove(removal);
+                    saveMealPlan();
 
-                day = -1;
-                removal = "";
+                    day = -1;
+                    removal = "";
+                }
             }
         }
     }

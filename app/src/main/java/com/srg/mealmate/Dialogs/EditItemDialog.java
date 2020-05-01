@@ -1,3 +1,10 @@
+/*
+ * "EditItemDialog.java"
+ * Layout:  "fragment_edit_item_dialog.xml"
+ *
+ * DialogFragment used to edit GroceryItem quantity or delete
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 
@@ -21,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class EditItemDialogFragment extends DialogFragment {
+public class EditItemDialog extends DialogFragment {
     private View view;
     private TextView nameTV, unitsTV;
     private EditText quantityET;
@@ -31,14 +38,14 @@ public class EditItemDialogFragment extends DialogFragment {
     private HashMap<String, Double> itemHash;
 
 
-    public EditItemDialogFragment() {
+    public EditItemDialog() {
         // Required empty public constructor
     }
 
-    public static EditItemDialogFragment newInstance(int itemIndex,
-                                                     ArrayList<GroceryItem> items,
-                                                     HashMap itemHash){
-        EditItemDialogFragment frag = new EditItemDialogFragment();
+    public static EditItemDialog newInstance(int itemIndex,
+                                             ArrayList<GroceryItem> items,
+                                             HashMap itemHash){
+        EditItemDialog frag = new EditItemDialog();
 
         Bundle bundle = new Bundle();
         bundle.putInt("itemIndex", itemIndex);
@@ -71,6 +78,7 @@ public class EditItemDialogFragment extends DialogFragment {
 
 
     private void init_fields(){
+        // initialize texts
         String itemUnits = item.getUnits();
 
         StringBuilder itemName = new StringBuilder();
@@ -95,6 +103,8 @@ public class EditItemDialogFragment extends DialogFragment {
         // set OnClick for save and delete buttons
         Button btn_save, btn_delete;
 
+
+        // save any changes to item amount
         btn_save = view.findViewById(R.id.btn_save_changes);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +130,7 @@ public class EditItemDialogFragment extends DialogFragment {
             }
         });
 
+        // delete the item
         btn_delete = view.findViewById(R.id.btn_delete_item);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override

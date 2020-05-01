@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    tools:context=".Dialogs.AddMealDialogFragment">
+    tools:context=".Dialogs.AddMealDialog">
 
     <TextView
         android:id="@+id/add_item_header"

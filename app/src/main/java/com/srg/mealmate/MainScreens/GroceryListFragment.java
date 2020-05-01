@@ -281,6 +281,8 @@ public class GroceryListFragment extends Fragment implements IOnFocusListenable 
             totalPrice += items.get(i).getPrice();
         }
 
+        totalPrice = Math.round(totalPrice * 100) / 100.0;
+
         headerText.append(getResources().getString(R.string.grocery_item_outline))
                 .append("\nEstimated Total: $")
                 .append(totalPrice);

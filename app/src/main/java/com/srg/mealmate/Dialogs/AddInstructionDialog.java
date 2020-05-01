@@ -1,3 +1,13 @@
+/*
+ * "AddInstructionsDialog.java"
+ * Layout:  "fragment_add_instructions_dialog.xml"
+ *
+ * DialogFragment used to add a step for  user submitted recipe
+ *
+ * uses one text box to get user string
+ *
+ * Last Modified: 04.22.2020 11:30pm
+ */
 package com.srg.mealmate.Dialogs;
 
 import android.os.Bundle;
@@ -11,11 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Classes.GroceryItem;
-import com.srg.mealmate.Services.FileHelpers.DoubleValueIO;
-
 import java.util.ArrayList;
 
 
@@ -29,6 +35,7 @@ public class AddInstructionDialog extends DialogFragment {
     }
 
     public static AddInstructionDialog newInstance(ArrayList<String> instructions){
+        // create new instance and pass instructions in a bundle
         AddInstructionDialog frag = new AddInstructionDialog();
 
         Bundle bundle = new Bundle();
@@ -57,6 +64,7 @@ public class AddInstructionDialog extends DialogFragment {
     private void initOnClickListeners(){
         Button btn_add, btn_cancel;
 
+        // add the step
         btn_add = view.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +73,7 @@ public class AddInstructionDialog extends DialogFragment {
 
                 String step = et.getText().toString();
 
+                // check if input is blank
                 if(step.trim().length() == 0 || step.length() > 250){
                     Toast.makeText(getActivity(),
                             "instruction must be between 1-250 characters long",

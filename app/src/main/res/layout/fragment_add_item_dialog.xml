@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    tools:context=".Dialogs.AddItemDialogFragment">
+    tools:context=".Dialogs.AddItemDialog">
 
     <TextView
         android:id="@+id/add_item_header"
@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ems="10"
-        android:inputType="textCapWords"
         android:hint="@string/hint_item_name" />
 
     <TextView

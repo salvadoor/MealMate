@@ -1,3 +1,14 @@
+/*
+ * "AddIngredientsDialog.java"
+ * Layout:  "fragment_add_ingredients_dialog.xml"
+ *
+ * DialogFragment used to add a recipe's ingredients
+ * to the corresponding grocery list
+ *
+ * user can select which items to add or continue without adding any
+ *
+ * Last Modified: 04.10.2020 012:30pm
+ */
 package com.srg.mealmate.Dialogs;
 
 
@@ -13,8 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.srg.mealmate.R;
@@ -29,7 +38,7 @@ import java.util.HashMap;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class AddIngredientsDialogFragment extends DialogFragment {
+public class AddIngredientsDialog extends DialogFragment {
     private View view;
     private ArrayList<String> folders;
     private ArrayList<GroceryItem> items = new ArrayList<>();
@@ -38,12 +47,14 @@ public class AddIngredientsDialogFragment extends DialogFragment {
     private HashMap<String, GroceryItem> itemHash;
 
 
-    public AddIngredientsDialogFragment() {
+    public AddIngredientsDialog() {
         // Required empty public constructor
     }
 
-    public static AddIngredientsDialogFragment newInstance(ArrayList<GroceryItem> ingredients, String sunDate){
-        AddIngredientsDialogFragment frag = new AddIngredientsDialogFragment();
+    public static AddIngredientsDialog newInstance(ArrayList<GroceryItem> ingredients, String sunDate){
+        // create new instance and pass list of grocery items
+        // and the sunday date of the selected meal plan
+        AddIngredientsDialog frag = new AddIngredientsDialog();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("ingredients", ingredients);
@@ -57,7 +68,6 @@ public class AddIngredientsDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme);
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_ingredients_dialog, container, false);
 
@@ -78,17 +88,15 @@ public class AddIngredientsDialogFragment extends DialogFragment {
 
         Dialog dialog = getDialog();
         if (dialog != null) {
-            //dialog.getWindow().requestFeature(Window.F)
+            // make this dialog full screen
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             dialog.getWindow().setBackgroundDrawable(null);
-            //setStyle(STYLE_NO_FRAME, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-
         }
     }
 
 
     private void init_RecyclerView(){
-        // create RecyclerView
+        // create RecyclerView for ingredients
         Log.d(TAG, "initRecyclerView: init rv");
         RecyclerView rv = view.findViewById(R.id.ingredients);
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(), getActivity(), ingredients);
@@ -100,6 +108,8 @@ public class AddIngredientsDialogFragment extends DialogFragment {
     private void init_OnClickListeners(){
         Button btn_add, btn_continue;
 
+
+        // add selected items to corresponding grocery list
         btn_add = view.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,20 +129,25 @@ public class AddIngredientsDialogFragment extends DialogFragment {
                                 items.remove(itemHash.get(grocery.getName()));
                             }
                         }
+
+                        // get price if it exists
                         DoubleValueIO.setFilename(grocery.getName() + grocery.getUnits() + "__grocery");
                         Double price = DoubleValueIO.readDouble(getActivity()) * grocery.getQuantity();
                         price = Math.round(price * 100) / 100.0;
                         grocery.setPrice(price);
+                        // add item to grocery list
                         items.add(grocery);
                     }
                 }
 
+                // write to the grocery list
                 GroceryListIO.writeList(items, getActivity());
                 Toast.makeText(getActivity(), "Items added", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
 
+        // continue without adding ingredients to grocery list
         btn_continue = view.findViewById(R.id.btn_continue);
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +159,7 @@ public class AddIngredientsDialogFragment extends DialogFragment {
 
 
     private void init_hashMap(){
+        // hashmap of ingredients currently in grocery list
         itemHash = new HashMap<>();
 
         for(int i=0; i < items.size();i++){

@@ -1,3 +1,13 @@
+/*
+ * "AddFolderDialog.java"
+ * Layout:  "fragment_add_folder_dialog.xml"
+ *
+ * DialogFragment used to create a new folder
+ *      for saved recipes
+ * gets name of new folder from user
+ *
+ * Last Modified: 03.28.2020 01:05pm
+ */
 package com.srg.mealmate.Dialogs;
 
 
@@ -20,17 +30,18 @@ import java.util.ArrayList;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class AddFolderDialogFragment extends DialogFragment {
+public class AddFolderDialog extends DialogFragment {
     private View view;
-    private ArrayList<String> folders;
+    private ArrayList<String> folders; // list of folder names
 
 
-    public AddFolderDialogFragment() {
+    public AddFolderDialog() {
         // Required empty public constructor
     }
 
-    public static AddFolderDialogFragment newInstance(ArrayList<String> folders){
-        AddFolderDialogFragment frag = new AddFolderDialogFragment();
+    // create new instance and pass the list of folder names as a bundle
+    public static AddFolderDialog newInstance(ArrayList<String> folders){
+        AddFolderDialog frag = new AddFolderDialog();
 
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("folders", folders);
@@ -46,6 +57,7 @@ public class AddFolderDialogFragment extends DialogFragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_folder_dialog, container, false);
 
+        // get list of folders from bundle
         Bundle bundle = getArguments();
         folders = bundle.getStringArrayList("folders");
 
@@ -58,6 +70,7 @@ public class AddFolderDialogFragment extends DialogFragment {
     private void initOnClickListeners(){
         Button btn_add, btn_cancel;
 
+        // add button to add/create the folder
         btn_add = view.findViewById(R.id.btn_folder_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,19 +79,25 @@ public class AddFolderDialogFragment extends DialogFragment {
 
                 String name = folderName.getText().toString();
 
+
                 if (name.equals("") || !name.matches("[a-zA-Z ]+")){
+                    // if folder name uses non-letter characters
+                        // notify user
                     Log.d(TAG, "No name entered or invalid");
                     Toast.makeText(getActivity(),
                             "Invalid name, use only letters",
                             Toast.LENGTH_SHORT)
                             .show();
-                } else if (name.equals("ALL") || name.equals("MY RECIPES")) {
+                } else if (name.equals("MY RECIPES")) {
+                    // if folder name matches preset folder name for user recipes
+                        /// notify user
                     Log.d(TAG, "bad name");
                     Toast.makeText(getActivity(),
                             "Cannot use '" + name + "'",
                             Toast.LENGTH_SHORT)
                             .show();
                 } else {
+                    // else, add folder
                     Log.d(TAG, "adding new folder");
                     folders.add(name);
                 }
@@ -87,6 +106,7 @@ public class AddFolderDialogFragment extends DialogFragment {
             }
         });
 
+        // cancel button
         btn_cancel = view.findViewById(R.id.btn_folder_cancel);
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

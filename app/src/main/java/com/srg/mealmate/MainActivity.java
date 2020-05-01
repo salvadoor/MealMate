@@ -33,17 +33,17 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.srg.mealmate.Dialogs.AddIngredientsDialogFragment;
+import com.srg.mealmate.Dialogs.AddIngredientsDialog;
 import com.srg.mealmate.Dialogs.AddInstructionDialog;
 import com.srg.mealmate.Dialogs.AddPriceDialog;
 import com.srg.mealmate.Dialogs.ReauthenticateDialog;
 import com.srg.mealmate.MainScreens.AboutFragment;
-import com.srg.mealmate.Dialogs.AddFolderDialogFragment;
-import com.srg.mealmate.Dialogs.AddItemDialogFragment;
-import com.srg.mealmate.Dialogs.AddMealDialogFragment;
-import com.srg.mealmate.Dialogs.EditFolderDialogFragment;
-import com.srg.mealmate.Dialogs.EditItemDialogFragment;
-import com.srg.mealmate.Dialogs.SaveRecipeDialogFragment;
+import com.srg.mealmate.Dialogs.AddFolderDialog;
+import com.srg.mealmate.Dialogs.AddItemDialog;
+import com.srg.mealmate.Dialogs.AddMealDialog;
+import com.srg.mealmate.Dialogs.EditFolderDialog;
+import com.srg.mealmate.Dialogs.EditItemDialog;
+import com.srg.mealmate.Dialogs.SaveRecipeDialog;
 import com.srg.mealmate.MainScreens.GroceryListFragment;
 import com.srg.mealmate.MainScreens.LoginFragment;
 import com.srg.mealmate.MainScreens.MealPlanFragment;
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity
         // create new EditItemDialogFragment and pass data, show DialogFragment
         // pass item position in arraylist and arraylist of items
         FragmentManager fm = getSupportFragmentManager();
-        EditItemDialogFragment editItemDialog = EditItemDialogFragment.newInstance(position, items, itemHash);
+        EditItemDialog editItemDialog = EditItemDialog.newInstance(position, items, itemHash);
 
 
         editItemDialog.show(fm, "fragment_edit_item_dialog");
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity
         // create new AddItemDialogFragment and pass data, show DialogFragment
         // pass hashmap of items in grocery list
         FragmentManager fm = getSupportFragmentManager();
-        AddItemDialogFragment addItemDialog = AddItemDialogFragment.newInstance(/*hashMap,*/ items, itemHash);
+        AddItemDialog addItemDialog = AddItemDialog.newInstance(/*hashMap,*/ items, itemHash);
 
         addItemDialog.show(fm, "fragment_add_item_dialog");
     }
@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity
     // create instance of AddFolderDialogFragment and show it
     public void newFolder(ArrayList<String> folders){
         FragmentManager fm = getSupportFragmentManager();
-        AddFolderDialogFragment addFolderDialog = AddFolderDialogFragment.newInstance(folders);
+        AddFolderDialog addFolderDialog = AddFolderDialog.newInstance(folders);
 
         addFolderDialog.show(fm, "fragment_add_folder_dialog");
     }
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity
     // create instance of SaveRecipeDialogFragment and show it
     public void saveRecipe(String id){
         FragmentManager fm = getSupportFragmentManager();
-        SaveRecipeDialogFragment saveRecipeDialog = SaveRecipeDialogFragment.newInstance(id);
+        SaveRecipeDialog saveRecipeDialog = SaveRecipeDialog.newInstance(id);
 
         saveRecipeDialog.show(fm, "fragment_save_recipe_dialog");
     }
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity
 // create instance of EditFolderDialogFragment and show it
     public void showEditFolderDialog(int index, ArrayList<String> folders){
         FragmentManager fm = getSupportFragmentManager();
-        EditFolderDialogFragment editFolderDialog = EditFolderDialogFragment.newInstance(index, folders);
+        EditFolderDialog editFolderDialog = EditFolderDialog.newInstance(index, folders);
 
         editFolderDialog.show(fm, "fragment_edit_folder_dialog");
     }
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity
 // create instance of EditFolderDialogFragment and show it
     public void showAddMealDialog(Recipe recipe){
         FragmentManager fm = getSupportFragmentManager();
-        AddMealDialogFragment addMealDialog = AddMealDialogFragment.newInstance(recipe);
+        AddMealDialog addMealDialog = AddMealDialog.newInstance(recipe);
 
         addMealDialog.show(fm, "fragment_add_meal_dialog");
     }
@@ -333,8 +333,8 @@ public class MainActivity extends AppCompatActivity
 // create instance of AddIngredientsDialogFragment and show it
     public void addIngredients(ArrayList<GroceryItem> ingredients, String sunDate){
         FragmentManager fm = getSupportFragmentManager();
-        AddIngredientsDialogFragment addIngredientsDialog;
-        addIngredientsDialog = AddIngredientsDialogFragment.newInstance(ingredients, sunDate);
+        AddIngredientsDialog addIngredientsDialog;
+        addIngredientsDialog = AddIngredientsDialog.newInstance(ingredients, sunDate);
 
         addIngredientsDialog.show(fm, "fragment_add_ingredients_dialog");
     }

@@ -1,3 +1,10 @@
+/*
+ * "EditFolderialog.java"
+ * Layout:  "fragment_edit_folder_dialog.xml"
+ *
+ * DialogFragment used to delete a recipe folder
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 
@@ -18,7 +25,7 @@ import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import java.util.ArrayList;
 
 
-public class EditFolderDialogFragment extends DialogFragment {
+public class EditFolderDialog extends DialogFragment {
     private View view;
     private TextView nameTV;
     private String folderName;
@@ -26,13 +33,15 @@ public class EditFolderDialogFragment extends DialogFragment {
     private ArrayList<String> folders;
 
 
-    public EditFolderDialogFragment() {
+    public EditFolderDialog() {
         // Required empty public constructor
     }
 
 
-    public static EditFolderDialogFragment newInstance(int itemIndex, ArrayList<String> folders){
-        EditFolderDialogFragment frag = new EditFolderDialogFragment();
+    public static EditFolderDialog newInstance(int itemIndex, ArrayList<String> folders){
+        // pass list of folder names and itemIndex to new instance
+        //itemIndex used to get the specific folder name
+        EditFolderDialog frag = new EditFolderDialog();
 
         Bundle bundle = new Bundle();
         bundle.putInt("itemIndex", itemIndex);
@@ -79,6 +88,7 @@ public class EditFolderDialogFragment extends DialogFragment {
         // set OnClick for save and delete buttons
         Button btn_delete, btn_cancel;
 
+        // delete the folder
         btn_delete = view.findViewById(R.id.btn_delete_folder);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override

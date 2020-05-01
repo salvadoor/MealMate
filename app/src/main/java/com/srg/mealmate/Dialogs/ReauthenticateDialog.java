@@ -1,3 +1,10 @@
+/*
+ * "ReauthenticateDialog.java"
+ * Layout:  "dialog_reauthenticate.xml"
+ *
+ * DialogFragment used to get users password again and re-authenticate them
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 import android.os.Bundle;
@@ -72,6 +79,7 @@ public class ReauthenticateDialog extends DialogFragment {
 
         AuthCredential credential = EmailAuthProvider.getCredential(email, password);
 
+        // re-authenticate user, only get password, use email from current authentication
         user.reauthenticate(credential)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

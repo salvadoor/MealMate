@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    tools:context=".Dialogs.AddIngredientsDialogFragment">
+    tools:context=".Dialogs.AddIngredientsDialog">
 
     <TextView
         android:id="@+id/add_ingredients_header"

@@ -1,5 +1,13 @@
+/*
+ * "AddItemDialog.java"
+ * Layout:  "fragment_add_item_dialog.xml"
+ *
+ * DialogFragment used to add a grocery item to list of grocery items
+ *  used for both grocery list and for adding ingredients in New Recipe form
+ *
+ * Last Modified: 04.01.2020 06:45am
+ */
 package com.srg.mealmate.Dialogs;
-
 
 import android.os.Bundle;
 
@@ -23,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class AddItemDialogFragment extends DialogFragment {
+public class AddItemDialog extends DialogFragment {
     private View view;
     private Spinner spinner;
     private ArrayList<GroceryItem> items;
@@ -32,15 +40,16 @@ public class AddItemDialogFragment extends DialogFragment {
     private String[] unitOptions;
 
 
-    public AddItemDialogFragment() {
+    public AddItemDialog() {
         // Required empty public constructor
     }
 
 
-    public static AddItemDialogFragment newInstance(/*HashMap hashMap, */
+    public static AddItemDialog newInstance(/*HashMap hashMap, */
                                                     ArrayList<GroceryItem> list,
                                                     HashMap itemHash){
-        AddItemDialogFragment frag = new AddItemDialogFragment();
+        // create new instance and pass list of grocery items and hashMap
+        AddItemDialog frag = new AddItemDialog();
 
         Bundle bundle = new Bundle();
         // bundle.putSerializable("hashMap", hashMap);
@@ -60,7 +69,6 @@ public class AddItemDialogFragment extends DialogFragment {
         view = inflater.inflate(R.layout.fragment_add_item_dialog, container, false);
 
         Bundle bundle = getArguments();
-        //itemMap = (HashMap<String, Double>) bundle.getSerializable("hashMap");
         items = (ArrayList<GroceryItem>) bundle.getSerializable("items");
         itemHash = (HashMap<String, Double>) bundle.getSerializable("hashmap");
 
@@ -74,6 +82,7 @@ public class AddItemDialogFragment extends DialogFragment {
 
 
     private void initSpinner(){
+        // set spinner, use unitOptions that gets data from string-array resource
         spinner = view.findViewById(R.id.spinner_units);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.unit_item, unitOptions);
@@ -86,6 +95,7 @@ public class AddItemDialogFragment extends DialogFragment {
     private void initOnClickListeners(){
         Button btn_add, btn_cancel;
 
+        // attempt to add the item
         btn_add = view.findViewById(R.id.btn_item_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +125,7 @@ public class AddItemDialogFragment extends DialogFragment {
                     }
 
                     if(itemHash.containsKey(name)){
+                        // if item is already in grocery list
                         Toast.makeText(getActivity(),
                                 "Already in List",
                                 Toast.LENGTH_SHORT)
@@ -132,12 +143,13 @@ public class AddItemDialogFragment extends DialogFragment {
                         dismiss();
                         ((MainActivity) getActivity()).showEditDialog(index, items, itemHash);
                     } else {
+                        // add the item
                         itemHash.put(name, quantity);
                         items.add(new GroceryItem(quantity, units, name, false, price));
-                        //((MainActivity) getActivity()).addItem(quantity, units, name);
                         dismiss();
                     }
                 } else{
+                    // one of the fields is empty, cannot add item
                     Toast.makeText(getActivity(),
                             "Please fill all fields",
                             Toast.LENGTH_SHORT).show();
@@ -168,13 +180,16 @@ public class AddItemDialogFragment extends DialogFragment {
         return false;
     }
 
+
     private boolean isEmpty(EditText et){
         // check if EditText is empty or only contains whitespace
         // returns true if EditText is empty, false if not empty/whitespace
         return et.getText().toString().trim().length() == 0;
     }
 
+
     private boolean isValidInput(String string){
+        // check for non alpha characters
         string = string.replaceAll("\\s+", "");
         char[] chars = string.toCharArray();
 

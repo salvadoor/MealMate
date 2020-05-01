@@ -44,9 +44,9 @@
             android:id="@+id/upload_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:src="@drawable/image_48"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/image_48" />
 
         <Button
             android:id="@+id/btn_choose_img"

@@ -1,3 +1,10 @@
+/*
+ * "SaveRecipeDialog.java"
+ * Layout:  "fragment_save_recipe_dialog.xml"
+ *
+ * DialogFragment used to save a recipe to a user folder
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 
@@ -21,19 +28,19 @@ import java.util.ArrayList;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class SaveRecipeDialogFragment extends DialogFragment {
+public class SaveRecipeDialog extends DialogFragment {
     private View view;
     private String recipeID;
     private Spinner spinner;
     private ArrayList<String> folder = new ArrayList<>();
 
 
-    public SaveRecipeDialogFragment() {
+    public SaveRecipeDialog() {
         // Required empty public constructor
     }
 
-    public static SaveRecipeDialogFragment newInstance(String id){
-        SaveRecipeDialogFragment frag = new SaveRecipeDialogFragment();
+    public static SaveRecipeDialog newInstance(String id){
+        SaveRecipeDialog frag = new SaveRecipeDialog();
         Bundle bundle = new Bundle();
         bundle.putString("recipeID", id);
         frag.setArguments(bundle);
@@ -59,6 +66,7 @@ public class SaveRecipeDialogFragment extends DialogFragment {
 
 
     private void initSpinner(){
+        // set spinner to show user's recipe folders
         spinner = view.findViewById(R.id.spinner_folders);
 
         ArrayListStringIO.setFilename("recipe_folders");
@@ -75,14 +83,13 @@ public class SaveRecipeDialogFragment extends DialogFragment {
     private void initOnClickListeners(){
         Button btn_save, btn_cancel;
 
+        // svae the recipe to the selected folder
         btn_save = view.findViewById(R.id.btn_save);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String folderName = spinner.getSelectedItem()
-                        .toString()
-                        .replaceAll("\\s+", "");
+                String folderName = spinner.getSelectedItem().toString();
 
                 ArrayListStringIO.setFilename(folderName + "_folder");
                 ArrayList<String> recipes = ArrayListStringIO.readList(getActivity());
@@ -100,6 +107,7 @@ public class SaveRecipeDialogFragment extends DialogFragment {
                     }
 
                 }
+                // end testing
 
                 dismiss();
             }

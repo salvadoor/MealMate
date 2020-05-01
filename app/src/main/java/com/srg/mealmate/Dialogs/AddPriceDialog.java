@@ -1,3 +1,12 @@
+/*
+ * "AddPriceDialog.java"
+ * Layout:  "dialog_add_price.xml"
+ *
+ * DialogFragment used to add pricing for a grocery item
+ *
+ * pricing data saved as price per unit,
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 import android.os.Bundle;
@@ -27,6 +36,7 @@ public class AddPriceDialog extends DialogFragment {
     }
 
     public static AddPriceDialog newInstance(GroceryItem groceryItem){
+        // pass the GroceryItem to the new instance
         AddPriceDialog frag = new AddPriceDialog();
 
         Bundle bundle = new Bundle();
@@ -47,17 +57,10 @@ public class AddPriceDialog extends DialogFragment {
         Bundle bundle = getArguments();
         item = (GroceryItem) bundle.getSerializable("groceryItem");
 
-        // init_getGrocery();
         init_fields();
         init_OnClickListeners();
 
         return view;
-    }
-
-
-    private void init_getGrocery(){
-        DoubleValueIO.setFilename(item.getName() + item.getUnits() + "__grocery");
-        // grocery = DoubleValueIO.readDouble(getActivity());
     }
 
 
@@ -68,6 +71,7 @@ public class AddPriceDialog extends DialogFragment {
 
 
     private void init_fields(){
+        // initialize the text fields
         TextView unitsTV = view.findViewById(R.id.item_units);
         unitsTV.setText(item.getUnits());
 
@@ -80,6 +84,7 @@ public class AddPriceDialog extends DialogFragment {
         // set OnClick for save and delete buttons
         Button btn_add, btn_cancel;
 
+        // add price
         btn_add = view.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,11 +102,12 @@ public class AddPriceDialog extends DialogFragment {
                     Double unitPrice = totalPrice / actualQuantity; //price per unit of measure
                     setGroceryPrice(unitPrice);
                     Double itemPrice = unitPrice * item.getQuantity();
+                    // round to 2 decimal places
                     itemPrice = Math.round(itemPrice * 100) / 100.0;
                     item.setPrice(itemPrice);
                     Toast.makeText(getActivity(), "New price entered", Toast.LENGTH_SHORT).show();
                     dismiss();
-                } catch (Exception e){
+                } catch (Exception e){ // mainly to catch exception with parseDouble
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                     // do a toast
                 }

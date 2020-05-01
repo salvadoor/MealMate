@@ -1,3 +1,10 @@
+/*
+ * "AddIngredientsDialog.java"
+ * Layout:  "fragment_add_meal_dialog.xml"
+ *
+ * DialogFragment used to add meal to meal plan
+ *
+ */
 package com.srg.mealmate.Dialogs;
 
 import android.os.Bundle;
@@ -17,7 +24,7 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.MealPlan;
 import com.srg.mealmate.Services.Classes.Recipe;
-// import com.srg.mealmate.Services.Classes.Recipe1;
+// import com.srg.mealmate.Services.Classes.Recipe1; // older version of Recipe class
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class AddMealDialogFragment extends DialogFragment {
+public class AddMealDialog extends DialogFragment {
     private static final String TAG = "AddMealPlanDialog";
     private String[] days;
           //  {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -40,13 +47,14 @@ public class AddMealDialogFragment extends DialogFragment {
     private View view;
 
 
-    public AddMealDialogFragment() {
+    public AddMealDialog() {
         // Required empty public constructor
     }
 
 
-    public static AddMealDialogFragment newInstance(Recipe recipe){
-        AddMealDialogFragment frag = new AddMealDialogFragment();
+    public static AddMealDialog newInstance(Recipe recipe){
+        // pass recipe to the new instance
+        AddMealDialog frag = new AddMealDialog();
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", recipe);
         frag.setArguments(bundle);
