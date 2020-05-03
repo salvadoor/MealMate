@@ -6,7 +6,6 @@
  * upon login/register, call userSignedIn() from parent, MainActivity
  *  and redirect to Account Settings
  *
- * Last Modified: 01.23.2020 12:13pm
  */
 package com.srg.mealmate.MainScreens;
 

@@ -1,3 +1,11 @@
+/*
+ * "NutritionFragment.java"
+ * Layout:  "fragment_nutrition.xml"
+ *
+ * Fragment used to display basic nutrition for a recipe
+ *
+ * Last Modified: 04.17.2020
+ */
 package com.srg.mealmate.SecondaryScreens;
 
 import android.os.Bundle;
@@ -47,6 +55,7 @@ public class NutritionFragment extends Fragment {
         StringBuilder basic_nutrition = new StringBuilder();
 
         if(nutrition.size()<1){
+            // if no nutrition data for this recipe
             basic_nutrition.append("No Nutrition Details Available");
         } else{
             nutritionKeys = getResources().getStringArray(R.array.nutrition);

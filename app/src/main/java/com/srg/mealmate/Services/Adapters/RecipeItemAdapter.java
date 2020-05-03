@@ -4,7 +4,7 @@
  * Custom RecycleView Adapter
  * Create and bind views for recipe search results
  *
- * Last Modified: 02.12.2020 04:05pm
+ * Last Modified: 04.22.2020 12:15am
  */
 package com.srg.mealmate.Services.Adapters;
 
@@ -29,7 +29,6 @@ import com.srg.mealmate.MainScreens.MealPlanFragment;
 import com.srg.mealmate.R;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.Recipe;
-import com.srg.mealmate.Services.Classes.Recipe1;
 
 import java.util.ArrayList;
 
@@ -115,6 +114,7 @@ public class RecipeItemAdapter extends RecyclerView.Adapter<RecipeItemAdapter.Vi
                         Toast.makeText(mContext, "Removed " + recipes.get(index).getTitle(), Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "Removed " + recipes.get(index).getId());
                         Log.d(TAG, "listIndex = " + listIndex);
+                        // attempt to remove selected item
                         if(listIndex==-1){
                             SavedRecipesFragment.removal = recipes.get(index).getId();
                         } else{

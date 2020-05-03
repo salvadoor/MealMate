@@ -1,13 +1,11 @@
 /*
- * "GroceryItemAdapter.java"
+ * "InstructionAdapter.java"
  *
  * Custom RecycleView Adapter
- * Create and bind views for grocery items
+ * Create and bind views for instructions
+ * Used in NewRecipeFragment
  *
- * TO DO:
- *  change dialog strings from hard-coded strings to resource strings
- *
- * Last Modified: 02.12.2020 04:11pm
+ * Last Modified: 04.22.2020 012:05pm
  */
 package com.srg.mealmate.Services.Adapters;
 
@@ -24,12 +22,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Classes.GroceryItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class InstructionAdapter extends RecyclerView.Adapter<InstructionAdapter.ViewHolder> {

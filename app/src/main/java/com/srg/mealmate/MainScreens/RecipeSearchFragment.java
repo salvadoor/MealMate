@@ -1,3 +1,11 @@
+/*
+ * "RecipeSearchFragment.java"
+ * Layout:  "fragment_recipe_search.xml"
+ *
+ * Fragment used to search for recipes
+ * search by keyword and/or category
+ *
+ */
 package com.srg.mealmate.MainScreens;
 
 
@@ -26,7 +34,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
-import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.Classes.RecipeSearchMapping;
 import com.srg.mealmate.Services.FileHelpers.RecipeSearchMapIO;
 
@@ -109,6 +116,7 @@ public class RecipeSearchFragment extends Fragment {
 
 
     private void refreshSearchMap(){
+        //remake searchMap and load recipes
         db.collection("recipes")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -185,6 +193,7 @@ public class RecipeSearchFragment extends Fragment {
         searchString = searchString.toLowerCase();
 
         for(int i=1; i < searchMap.size(); i++){
+            // loop through items in searchMap
             Log.d("searchRecipes", "Category: " + searchCategory);
             Log.d("searchMap", "name: " + searchMap.get(i).getName() + ", category: " + searchMap.get(i).getCategory());
             String recipeName = searchMap.get(i).getName().toLowerCase(); // get lower-cased recipe name
@@ -203,6 +212,7 @@ public class RecipeSearchFragment extends Fragment {
 
 
     private void retrieveRecipe(String name){
+        // retrieve recipe by recipe name
         Log.d("retrieveRecipe v2", name);
 
         db.collection("recipes")

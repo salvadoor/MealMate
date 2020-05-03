@@ -1,3 +1,12 @@
+/*
+ * "MealPlanFragment.java"
+ * Layout:  "fragment_meal_plan.xml"
+ *
+ * Fragment used to manage meal plans
+ * Allow navigation of meal plans by week
+ * use Calendar to keep track of weeks
+ *
+ */
 package com.srg.mealmate.MainScreens;
 
 
@@ -26,14 +35,12 @@ import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.MealPlan;
 import com.srg.mealmate.Services.Classes.Recipe;
-import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.FileHelpers.MealPlanIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 
 
 public class MealPlanFragment extends Fragment implements IOnFocusListenable {

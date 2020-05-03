@@ -1,13 +1,24 @@
 <resources>
     <string name="app_name">  MealMate</string>
-    <string name="email_holder">  Select Account Settings to SignIn or Register</string>
 
-
+    <!-- Recipe Search -->
     <string name="search_hint">Enter Search Phrase Here</string>
     <string name="search_btn_text">SEARCH</string>
     <string name="category"> Category</string>
 
+
+    <!-- General/multi-purpose -->
     <string name="placeholder">Placeholder</string>
+
+    <string name="nav_previous">Prev</string>
+    <string name="nav_next">Next</string>
+
+    <string name="btn_add"> Add </string>
+    <string name="btn_cancel"> Cancel</string>
+    <string name="btn_save"> Save</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_remove"> Remove</string>
+    <string name="btn_continue">Continue</string>
 
 
     <!-- Menu Items and Navigation-->
@@ -27,8 +38,10 @@
     <string name="nav_view_recipes"> View Saved Recipes</string>
     <string name="nav_add_ingredients">Add Ingredients</string>
 
+    <string name="email_holder">  Select Account Settings to SignIn or Register</string>
     <string name="nav_open_drawer">Open Navigation Drawer</string>
     <string name="nav_close_drawer">Close Navigation Drawer</string>
+
 
     <!-- Saved Recipes -->
     <string name="select_favorites">Favorites</string>
@@ -43,19 +56,6 @@
     <string name="remove_label">Remove</string>
 
 
-    <!-- General button text -->
-    <string name="btn_add"> Add </string>
-    <string name="btn_cancel"> Cancel</string>
-    <string name="btn_save"> Save</string>
-    <string name="btn_delete">Delete</string>
-    <string name="btn_remove"> Remove</string>
-    <string name="btn_continue">Continue</string>
-
-    <!-- Text for weekly views-->
-    <string name="nav_previous">Prev</string>
-    <string name="nav_next">Next</string>
-
-
     <!-- Login/Register -->
     <string name="ask_username">Enter Username</string>
     <string name="hint_username">myEmail@email.com</string>
@@ -63,6 +63,7 @@
     <string name="hint_pwd">**********</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
+
 
     <!-- Recipe Details -->
     <string name="ingredients_subheader">Ingredients</string>
@@ -74,16 +75,19 @@
     <string name="basic_nutrition">Basic Nutrition</string>
     <string name="add_to_plan">Add to Meal Plan</string>
 
+
     <!-- Meal Plan -->
     <string name="nav_add_meal">Add to Meal Plan</string>
     <string name="ask_meal_plan"> Select Meal Plan</string>
     <string name="ask_meal_plan_day"> Select Day in Meal Plan</string>
     <string name="add_ingredients_prompt">Check off ingredients to add to Grocery List or Continue</string>
 
+
     <!-- GroceryList -->
     <string name="nav_new_grocery">Add New Grocery Item</string>
     <string name="grocery_item_outline">Quantity(Units) - Grocery Item</string>
     <string name="btn_add_new_item">ADD NEW GROCERY ITEM</string>
+
 
     <!-- Edit item -->
     <string name="btn_save_changes">Save Changes</string>
@@ -91,6 +95,7 @@
 
     <string name="edit_label">Edit </string>
     <string name="units_label">Units: </string>
+
 
     <!-- Create new grocery item -->
     <string name="ask_item_name">Enter Item Name</string>
@@ -132,6 +137,7 @@
     <string name="reauthenticate">Re-Authentication</string>
     <string name="reauth_instructions">Please re-enter your password</string>
 
+
     <!-- About Information -->
     <string name="app_info">Assistant for Planning Meals</string>
     <string name="last_updated">Last Updated April 24th, 2020</string>
@@ -154,8 +160,5 @@
     <string name="createUser_failure">createUserWithEmail:failure</string>
     <string name="signIn_success">signInWithEmail:success</string>
     <string name="signIn_failure">signInWithEmail:failure</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

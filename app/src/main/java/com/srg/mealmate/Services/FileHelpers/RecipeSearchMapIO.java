@@ -1,3 +1,10 @@
+/*
+ * "RecipeSearchMapIO.java"
+ *
+ * reading/writing list of RecipeSearchMaps from file
+ *
+ * Last Modified: 04.15.2020
+ */
 package com.srg.mealmate.Services.FileHelpers;
 
 import android.content.Context;

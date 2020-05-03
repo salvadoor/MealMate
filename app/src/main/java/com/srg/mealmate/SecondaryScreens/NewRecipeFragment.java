@@ -1,4 +1,11 @@
-
+/*
+ * "NewRecipeFragment.java"
+ * Layout:  "fragment_recipe_new.xml"
+ *
+ * Fragment used to add a new user recipe
+ *
+ * Last Modified: 04.22.2020
+ */
 package com.srg.mealmate.SecondaryScreens;
 
 import android.content.Intent;
@@ -29,7 +36,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -68,6 +74,7 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
     private Button btn_add, btn_choose_img;
     private ImageView btn_new_ingredient, btn_new_instruction;
 
+    // variables used for uploading image and getting download url
     private int PICK_IMAGE_REQUEST = 111;
     private ImageView iv;
     Uri filePath;
@@ -267,7 +274,6 @@ public class NewRecipeFragment extends Fragment implements IOnFocusListenable {
 
 
     private void getImageDownload(){
-
         storageRef.child(uploadPath)
                 .getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {

@@ -5,7 +5,7 @@
  * draws all other screens for application via Fragments
  * 
  *
- * Last Modified: 02.12.2020 05:25pm
+ * Last Modified: 04.24.2020 08:45pm
  */
 package com.srg.mealmate;
 
@@ -56,7 +56,6 @@ import com.srg.mealmate.SecondaryScreens.RecipeDetailsFragment;
 import com.srg.mealmate.SecondaryScreens.SavedRecipesFragment;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
-// import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
@@ -159,8 +158,6 @@ public class MainActivity extends AppCompatActivity
         if (frags.get(0) != null) {
             // set Fragment
             setFragment(frags.get(0));
-            //frag2 = null;
-            //frag3 = null;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -177,24 +174,7 @@ public class MainActivity extends AppCompatActivity
         } else if(frags.size()>1){
             int last = frags.size() - 1;
             attachFragment();
-        }
-        /*
-        else if(frag!=null && frag2!=null) {
-            // re-attach frag on back when in frag2
-            attachFragment(frag, frag2);
-            if(frag3!=null){
-                // if there are 3 fragments, set current Fragment
-                    // as frag2 and frag as frag3 then discard frag3
-                frag2 = frag;
-                frag = frag3;
-                frag3 = null;
-            } else{
-                frag2 = null;
-            }
-
-        }
-        */
-        else { // normal back button function
+        } else { // normal back button function
             super.onBackPressed();
         }
     }
@@ -224,16 +204,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        /*
-        if(frag2!=null){
-            if(frag2 instanceof IOnFocusListenable) {
-                ((IOnFocusListenable) frag2).onWindowFocusChanged(hasFocus);
-            }
-        } else if(frag instanceof IOnFocusListenable) {
-            ((IOnFocusListenable) frag).onWindowFocusChanged(hasFocus);
-        }
 
-         */
         if(frags.size()>0) {
             if (frags.get(frags.size() - 1) instanceof IOnFocusListenable) {
                 ((IOnFocusListenable) frags.get(frags.size() - 1)).onWindowFocusChanged(hasFocus);
@@ -438,6 +409,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public void newRecipe(){
+        // inflate NewRecipeFragment
         frags.add(new NewRecipeFragment());
 
         detachFragment(R.string.btn_new_recipe);
@@ -445,6 +417,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public void viewNutrition(HashMap<String, Double> nutrition){
+        // pass bundle and inflate NutritionFragment
         Bundle bundle = new Bundle();
         bundle.putSerializable("nutrition", nutrition);
 

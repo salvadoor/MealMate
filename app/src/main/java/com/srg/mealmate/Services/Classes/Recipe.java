@@ -1,3 +1,12 @@
+/*
+ * "Recipe.java"
+ *
+ * Contains all information for a recipe
+ *  includes name, source, image download url,
+ *      ingredients, and instructions
+ *
+ * Last Modified: 04.20.2020
+ */
 package com.srg.mealmate.Services.Classes;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,12 +43,10 @@ public class Recipe implements Serializable {
         this.imageURL = imageURL;
         this.ingredients = ingredients;
         this.nutrition = nutrition;
-
-        //this.ingredients = adaptIngredients(ingredients);
-        //adaptIngredients(ingredients);
     }
 
     public Recipe(QueryDocumentSnapshot recipe_doc){
+        // Convert Firebase result to new Recipe object
         this.title = recipe_doc.getString("title");
         this.source = recipe_doc.getString("source");
         this.id = recipe_doc.getId();
@@ -48,11 +55,10 @@ public class Recipe implements Serializable {
         this.imageURL = recipe_doc.getString("imageURL");
         this.ingredients = (ArrayList<HashMap>) recipe_doc.get("ingredients");
         this.nutrition = (HashMap) recipe_doc.get("nutrition");
-
-        //adaptIngredients((ArrayList<HashMap>) recipe_doc.get("ingredients"));
     }
 
     public Recipe(DocumentSnapshot recipe_doc){
+        // Convert Firebase result to new Recipe object
         this.title = recipe_doc.getString("title");
         this.source = recipe_doc.getString("source");
         this.id = recipe_doc.getId();
@@ -97,6 +103,7 @@ public class Recipe implements Serializable {
     }
 
     public ArrayList<GroceryItem> toGroceryItems(){
+        // convert ingredients to GroceryItems
         ArrayList<GroceryItem> items = new ArrayList<>();
 
         for(HashMap hash : this.ingredients){
@@ -109,18 +116,4 @@ public class Recipe implements Serializable {
         return items;
     }
 
-
-    private void adaptIngredients(ArrayList<HashMap> iMap){
-        this.ingredients = new ArrayList<>();
-
-        for(HashMap item : iMap){
-
-            String name = item.get("name").toString();
-            Double amount = Double.parseDouble(item.get("amount").toString());
-            String units = item.get("units").toString();
-
-            //this.ingredients.add(new GroceryItem(amount, units, name));
-        }
-
-    }
 }

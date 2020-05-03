@@ -1,3 +1,10 @@
+/*
+ * "MealPlanIO.java"
+ *
+ * reading/writing a MealPlan from file
+ *
+ * Last Modified: 04.15.2020
+ */
 package com.srg.mealmate.Services.FileHelpers;
 
 import android.content.Context;
@@ -33,11 +40,6 @@ public class MealPlanIO {
             }
         }
 
-        /* debugging
-        for(int i=0; i<items.size(); i++){
-            Log.d("item", items.get(i).getName());
-        }
-        */
 
         try{
             FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);

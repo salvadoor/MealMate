@@ -1,3 +1,10 @@
+/*
+ * "SettingsFragment.java"
+ * Layout:  "fragment_settings.xml"
+ *
+ * Fragment used to access user settings
+ *
+ */
 package com.srg.mealmate.MainScreens;
 
 
@@ -33,9 +40,6 @@ import static android.content.Context.ACTIVITY_SERVICE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingsFragment extends Fragment {
     private FirebaseUser user;
     private FirebaseAuth auth;
@@ -67,6 +71,7 @@ public class SettingsFragment extends Fragment {
     private void setListeners(){
         Button btn_logout, btn_reset_pwd, btn_del_account, btn_del_data;
 
+        // log out
         btn_logout = view.findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +80,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        // sned reset password email
         btn_reset_pwd = view.findViewById(R.id.btn_reset_pwd);
         btn_reset_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +104,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        // delete application data and close app
         btn_del_data = view.findViewById(R.id.btn_del_data);
         btn_del_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +117,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        // delete user account
         btn_del_account = view.findViewById(R.id.btn_del_account);
         btn_del_account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,8 +127,5 @@ public class SettingsFragment extends Fragment {
         });
 
     }
-
-
-
 
 }

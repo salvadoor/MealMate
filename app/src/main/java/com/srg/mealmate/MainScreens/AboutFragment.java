@@ -1,3 +1,10 @@
+/*
+ * "AboutFragment.java"
+ * Layout:  "fragment_about.xml"
+ *
+ * Fragment used to show about info for app
+ *
+ */
 package com.srg.mealmate.MainScreens;
 
 
@@ -12,9 +19,6 @@ import android.view.ViewGroup;
 import com.srg.mealmate.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AboutFragment extends Fragment {
 
 

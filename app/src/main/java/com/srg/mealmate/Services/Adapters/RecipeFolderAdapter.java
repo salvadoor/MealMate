@@ -1,3 +1,12 @@
+/*
+ * "RecipeFolderAdapter.java"
+ *
+ * Custom RecycleView Adapter
+ * Create and bind views for Recipe folders
+ * Used in SaveFoldersFragment
+ *
+ * Last Modified: 04.01.2020 01:00pm
+ */
 package com.srg.mealmate.Services.Adapters;
 
 import android.content.Context;
@@ -47,9 +56,6 @@ public class RecipeFolderAdapter extends RecyclerView.Adapter<RecipeFolderAdapte
             @Override
             public void onClick(View view) {
                 //Log.d(TAG, "onClick:clicked on: " + items.get(position).getName());
-
-                // go to view of all recipe in folder
-                // loadSavedRecipes(folders.get(position));
                 ((MainActivity) mContext).viewSavedRecipes(folders.get(position));
             }
         });

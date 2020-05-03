@@ -3,7 +3,7 @@
  *
  * Data Structure for items in grocery list
  *
- * Last Modified: 02.14.2020 12:11pm
+ * Last Modified: 04.22.2020 06:15pm
  */
 package com.srg.mealmate.Services.Classes;
 
@@ -18,12 +18,6 @@ public class GroceryItem implements Serializable {
     private double price = 0; // price per unit
 
 
-/* for testing
-    public static final GroceryItem[] items = {
-        new GroceryItem(2, "Avacados"),
-        new GroceryItem(1, "Apple")
-    };
-*/
     public GroceryItem(double quantity, String units, String name){
         this.quantity = quantity;
         this.units = units;
@@ -32,6 +26,7 @@ public class GroceryItem implements Serializable {
     }
 
     public GroceryItem(double quantity, String units, String name, Boolean checked){
+        // Constructor with Boolean passed
         this.quantity = quantity;
         this.units = units;
         this.name = name;
@@ -39,6 +34,7 @@ public class GroceryItem implements Serializable {
     }
 
     public GroceryItem(double quantity, String units, String name, Boolean isChecked, double price) {
+        // Constructor with Boolean and Double passed
         this.isChecked = isChecked;
         this.quantity = quantity;
         this.units = units;
@@ -85,6 +81,8 @@ public class GroceryItem implements Serializable {
     }
 
     public HashMap getHash(){
+        // get HashMap for the GroceryItem
+        // Used for easier usage with firestore
         HashMap ingredient = new HashMap();
 
         ingredient.put("name", this.name);
@@ -94,9 +92,10 @@ public class GroceryItem implements Serializable {
         return ingredient;
     }
 
+
     public String getGroceryDetailString(){
+        // return a string of the GroceryItem's details
         StringBuilder full_details = new StringBuilder();
-        String units;
 
         if(this.quantity%1!=0){
             full_details.append(this.quantity);
@@ -112,7 +111,7 @@ public class GroceryItem implements Serializable {
         full_details.append("  -  ")
                 .append(this.name);
 
-        if(price>0){
+        if(price>0){ // onyl show price if nonzero value
             full_details.append("\n Price: $")
                     .append(price);
         }

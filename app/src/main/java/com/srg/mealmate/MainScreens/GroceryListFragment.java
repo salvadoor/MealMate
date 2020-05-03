@@ -7,7 +7,6 @@
  * use ArrayList of GroceryItem objects for lists
  * use Calendar to keep track of weeks
  *
- * Last Modified: 02.12.2020 05:25pm
  */
 package com.srg.mealmate.MainScreens;
 
@@ -22,7 +21,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,12 +30,9 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Adapters.GroceryItemAdapter;
 import com.srg.mealmate.MainActivity;
-import com.srg.mealmate.Services.FileHelpers.Preferences;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.FileHelpers.GroceryListIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
-
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

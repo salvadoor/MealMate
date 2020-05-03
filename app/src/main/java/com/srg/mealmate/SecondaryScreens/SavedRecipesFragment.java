@@ -1,3 +1,11 @@
+/*
+ * "SavedRecipesFragment.java"
+ * Layout:  "fragment_saved_recipes.xml"
+ *
+ * Fragment used to display saved recipes in a folder
+ *
+ * Last Modified: 04.14.2020
+ */
 package com.srg.mealmate.SecondaryScreens;
 
 import android.os.Bundle;
@@ -25,12 +33,10 @@ import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Adapters.RecipeItemAdapter;
 import com.srg.mealmate.Services.Classes.Recipe;
-import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class SavedRecipesFragment extends Fragment implements IOnFocusListenable {
@@ -84,6 +90,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
     private void init_OnClickListener(){
         Button btn_new = view.findViewById(R.id.btn_new_recipe);
 
+        //btn_new only visible if in the MY RECIPES folder
         if(!folderName.equals("MY RECIPES")){
             btn_new.setVisibility(View.GONE);
             return;
@@ -118,6 +125,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
 
 
     private void loadSavedRecipes(){
+        // load Recipes that are saved to the folder
         Log.d(TAG, "loading recipes from folder");
         ArrayListStringIO.setFilename(folderName+"_folder");
         folder = ArrayListStringIO.readList(getActivity());
@@ -134,6 +142,7 @@ public class SavedRecipesFragment extends Fragment implements IOnFocusListenable
 
 
     private void retrieveRecipe(String id){
+        // retrieve recipe by id
         db.collection("recipes")
                 .document(id)
                 .get()

@@ -1,6 +1,7 @@
 /*
  * "MealPlan.java"
  *
+ * Contains all weeks and days in the Meal Plan
  *
  * Last Modified: 04.11.2020 09:00pm
  */

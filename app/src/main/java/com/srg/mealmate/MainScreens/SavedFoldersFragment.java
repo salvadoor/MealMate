@@ -1,3 +1,9 @@
+/*
+ * "SavedFoldersFragment.java"
+ * Layout:  "fragment_saved_folders.xml"
+ *
+ * Fragment used to show user's saved folders for organizing recipes
+ */
 package com.srg.mealmate.MainScreens;
 
 
@@ -13,10 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
-import com.srg.mealmate.Services.Classes.Recipe1;
 import com.srg.mealmate.Services.Adapters.RecipeFolderAdapter;
 import com.srg.mealmate.Services.FileHelpers.ArrayListStringIO;
 import com.srg.mealmate.Services.IOnFocusListenable;
@@ -26,10 +30,7 @@ import java.util.ArrayList;
 
 public class SavedFoldersFragment extends Fragment implements IOnFocusListenable {
     private static final String TAG = "SavedFoldersFragment";
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> folders = new ArrayList<>();
-    private ArrayList<String> folder = new ArrayList<>();
-    private ArrayList<Recipe1> results;
     private View view;
     private RecipeFolderAdapter adapter;
 
@@ -45,7 +46,7 @@ public class SavedFoldersFragment extends Fragment implements IOnFocusListenable
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_saved_folders, container, false);
 
-        // TESTING-------------------------------------
+
         ArrayListStringIO.setFilename("recipe_folders");
 
         loadFolders();
@@ -56,7 +57,6 @@ public class SavedFoldersFragment extends Fragment implements IOnFocusListenable
         initRecyclerView();
 
         init_click_listeners();
-        //-----------------------------------------------
 
         return view;
     }

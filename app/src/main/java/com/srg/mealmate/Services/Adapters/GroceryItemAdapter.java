@@ -4,10 +4,7 @@
  * Custom RecycleView Adapter
  * Create and bind views for grocery items
  *
- * TO DO:
- *  change dialog strings from hard-coded strings to resource strings
- *
- * Last Modified: 02.12.2020 04:11pm
+ * Last Modified: 04.20.2020 04:11pm
  */
 package com.srg.mealmate.Services.Adapters;
 
@@ -77,6 +74,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         Log.d(TAG, "onBindViewHolder:called");
         Boolean checked = items.get(position).getChecked();
 
+        // set proper checkbox icon
         if (checked) {
             holder.checkBox.setImageResource(R.drawable.checked_box);
         } else {

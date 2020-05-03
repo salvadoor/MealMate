@@ -10,10 +10,7 @@
  *  view nutrition detail for recipe
  *  add recipe to meal plan
  *
- * TO DO:
- *  setup buttons and listeners
- *
- * Last Modified: 02.13.2020 11:42pm
+ * Last Modified: 04.10.2020
  */
 package com.srg.mealmate.SecondaryScreens;
 
@@ -36,7 +33,6 @@ import com.srg.mealmate.MainActivity;
 import com.srg.mealmate.R;
 import com.srg.mealmate.Services.Classes.GroceryItem;
 import com.srg.mealmate.Services.Classes.Recipe;
-// import com.srg.mealmate.Services.Classes.Recipe1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +42,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecipeDetailsFragment extends Fragment {
     private View view;
-    private Recipe recipe; // Recipe1 recipe;
+    private Recipe recipe;
     private ArrayList<HashMap> ingredients;
     private PopupMenu popupMenu;
 
@@ -144,18 +140,7 @@ public class RecipeDetailsFragment extends Fragment {
             str.append(item.getGroceryDetailString());
             str.append("\n");
         }
-        /*
-        ingredients = recipe.getIngredients();
 
-        for(int i=0; i<ingredients.size(); i++){
-            ingredient_string = getIngredientDetailString(recipe.getIngredients().get(i));
-            str.append(ingredient_string);
-
-            if(i!=ingredients.size()-1){
-                str.append("\n");
-            }
-        }
-        */
         return str.toString();
     }
 

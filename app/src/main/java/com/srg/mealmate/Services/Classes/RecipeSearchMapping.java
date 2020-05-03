@@ -1,3 +1,11 @@
+/*
+ * "RecipeSearchMapping.java"
+ *
+ * contains name and category for a Recipe
+ * used for searching recipes using substring and/or category
+ *
+ * Last Modified: 04.15.2020
+ */
 package com.srg.mealmate.Services.Classes;
 
 import java.io.Serializable;
