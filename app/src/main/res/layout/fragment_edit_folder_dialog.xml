@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_edit_folder_dialog.xml"
+     Used to edit a folder
+
+    User can currently delete the folder
+    * future versions will add option to rename a folder or share it with other users
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

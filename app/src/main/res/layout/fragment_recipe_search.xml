@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_recipe_search.xml"
+    Used to search for and view recipes
 
+    Contains field for keyword serahc, dropdown menu for category filter,
+        Recyclerview with resulting Recipes
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_grocery_list.xml"
+    Used to display and manage grocery lists
 
+    contains weekly navigation menu, recycler view for Grocery Items, and add button
+-->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

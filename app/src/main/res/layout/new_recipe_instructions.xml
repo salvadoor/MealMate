@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "new_recipe_instructions.xml"
+    Used for New Recipe fragment
+
+    shows recipe instructions and allows user to add new one
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

@@ -3,8 +3,6 @@
     "instruction_step.xml"
     Used repeatedly for RecyclerView
 
-    Layout Contains:
-
     Last Modified: 04.21.2020 03:21pm
 -->
 <TextView

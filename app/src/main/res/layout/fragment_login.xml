@@ -9,7 +9,6 @@
         label and inout field for password
         login and register buttons
 
-     Last Modified: 01.23.2019 12:13pm
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

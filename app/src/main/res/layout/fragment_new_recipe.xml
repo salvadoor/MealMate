@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_new_recipe.xml"
+    Used to create a new recipe
+
+    input name, select category, use buttons to select an image, add ingredients,
+        and add instructions
+-->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

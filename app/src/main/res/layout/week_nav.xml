@@ -4,8 +4,6 @@
 
      Navigation layout for meal plans and grocery lists;
      displays prev button, current week, next button, and divider
-
-     Last Modified: 02.13.2020 02:20pm
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

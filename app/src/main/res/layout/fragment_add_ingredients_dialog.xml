@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_add_ingredients_dialog.xml"
+     Used to select which ingredients of a recipe to add to grocery list
+
+    Contains RecyclerView of Grocery Items
+-->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

@@ -6,9 +6,6 @@
         recipe1 image
         name of recipe1
         source of recipe1
-        divider to visually separate it from other results
-
-     Last Modified: 02.13.2020 11:31pm
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"

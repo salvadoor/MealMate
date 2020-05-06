@@ -16,7 +16,6 @@
     All TextViews contain placeholder text that is changed to recipe1
         info when layout is inflated
 
-     Last Modified: 02.12.2020 08:03pm
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

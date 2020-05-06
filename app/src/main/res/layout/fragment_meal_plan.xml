@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_meal_plan.xml"
+    Used to show and manage meal plans
+
+    Contains weekly navigation menu, recycler views that show recipes under
+        the corresponding day of the week
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

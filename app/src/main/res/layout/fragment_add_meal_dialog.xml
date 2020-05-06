@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_add_meal_dialog.xml"
+     Used to add a recipe to a Meal Plan
+
+    Spinner to select which mealplan to add recipe to
+    Spinner to select day of the week in selected meal plan
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

@@ -6,8 +6,6 @@
      Layout Contains:
         used instead of default spinner layout
         customized text size, 20sp
-
-     Last Modified: 02.13.2020 01:09pm
 -->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    "fragment_add_item_dialog.xml"
+     Used to add a new Grocery Item
+
+     Layout contains EditText for grocery name and quantity input
+     Spinner for selecting unit of measurement from dropdown menu
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
